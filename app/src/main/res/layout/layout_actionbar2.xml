@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="@dimen/dimension_0"
+        app:layout_constraintDimensionRatio="3.6:0.9">
+        <View
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="3.6:0.4"/>
+        <View
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="3.6:0.11"/>
+
+        <!--    btnActionBarLeft-->
+        <ImageView
+            android:id="@+id/btnActionBarLeft"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginStart="@dimen/dimension_16"
+
+            android:src="@drawable/back_app"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            app:layout_constraintBottom_toTopOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="parent" />
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="@dimen/dimension_0"
+    android:layout_height="@dimen/dimension_0"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:layout_constraintDimensionRatio="1.2:0.4"
+    app:strokeColor="@color/app_color"
+    app:strokeWidth="@dimen/dimension_2"
+    app:cardCornerRadius="@dimen/dimension_10"
+    app:cardBackgroundColor="@color/app_color8"
+    app:layout_constraintBottom_toBottomOf="@+id/btnActionBarLeft"
+    app:layout_constraintEnd_toStartOf="@+id/btnActionBarRight"
+    app:layout_constraintStart_toEndOf="@+id/cvLogo"
+    app:layout_constraintTop_toTopOf="@+id/btnActionBarLeft">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+        <ImageView
+            android:id="@+id/Clock"
+            android:layout_width="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="@dimen/dimension_0"
+            android:layout_marginVertical="@dimen/dimension_10"
+            android:layout_marginStart="@dimen/dimension_8"
+            android:src="@drawable/ic_clock"/>
+
+        <TextView
+            android:id="@+id/tvCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ellipsize="none"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/digital_numbers_regular"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Clock"
+            android:includeFontPadding="true"
+            android:scrollHorizontally="false"
+            android:layout_marginStart="@dimen/dimension_10"
+            app:layout_constraintHorizontal_bias="0"
+            android:singleLine="true"
+            android:text="10:00"
+            android:textColor="@color/app_color"
+            android:textSize="@dimen/text_size_18"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+
+
+        <!--    cvLogo-->
+        <ImageView
+            android:id="@+id/cvLogo"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginStart="@dimen/dimension_16"
+
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:cardElevation="@dimen/dimension_0"
+            android:src="@drawable/back_app"
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            app:layout_constraintBottom_toTopOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!--    btnActionBarCenter-->
+        <ImageView
+            android:id="@+id/btnActionBarCenter"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/btnActionBarLeft"
+            app:layout_constraintEnd_toStartOf="@+id/btnActionBarCenter1"
+            app:layout_constraintStart_toEndOf="@+id/btnActionBarLeft"
+            app:layout_constraintTop_toTopOf="@+id/btnActionBarLeft" />
+        <ImageView
+            android:id="@+id/btnActionBarCenter1"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/btnActionBarLeft"
+            app:layout_constraintEnd_toStartOf="@+id/btnActionBarCenter2"
+            app:layout_constraintStart_toEndOf="@+id/btnActionBarCenter"
+            app:layout_constraintTop_toTopOf="@+id/btnActionBarLeft" />
+        <!--    btnActionBarCenter-->
+        <ImageView
+            android:id="@+id/btnActionBarCenter2"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/btnActionBarLeft"
+            app:layout_constraintEnd_toStartOf="@+id/btnActionBarRight"
+            app:layout_constraintStart_toEndOf="@+id/btnActionBarCenter1"
+            app:layout_constraintTop_toTopOf="@+id/btnActionBarLeft" />
+
+        <!--    btnActionBarNextToRight-->
+        <ImageView
+            android:id="@+id/btnActionBarNextToRight"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginEnd="@dimen/dimension_5"
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/view2"
+            app:layout_constraintEnd_toStartOf="@+id/btnActionBarRight" />
+
+        <!--    btnActionBarRight-->
+        <ImageView
+            android:id="@+id/btnActionBarRight"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginEnd="@dimen/dimension_16"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/view2"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/btnActionBarNextToRight1"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginEnd="@dimen/dimension_8"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/btnActionBarRight1"
+            app:layout_constraintTop_toTopOf="@+id/btnActionBarRight1"
+
+            app:layout_constraintEnd_toStartOf="@+id/btnActionBarRight1" />
+
+        <ImageView
+            android:id="@+id/btnActionBarRight1"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            android:layout_marginVertical="@dimen/dimension_8"
+            android:layout_marginEnd="@dimen/dimension_16"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/btnActionBarRight"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnActionBarRight" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

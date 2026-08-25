@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Shape ngoài cùng -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/dimension_50" />
+
+            <solid android:color="#664A42" />
+
+
+        </shape>
+    </item>
+
+    <!-- Shape thứ hai, nằm bên trong shape đầu -->
+    <item
+        android:left="@dimen/dimension_6"
+        android:top="@dimen/dimension_6"
+        android:right="@dimen/dimension_6"
+        android:bottom="@dimen/dimension_6">
+
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/dimension_44" />
+
+            <solid android:color="@color/app_color2" />
+
+        </shape>
+    </item>
+
+    <!-- Shape thứ ba, nằm trong cùng -->
+    <item
+        android:left="@dimen/dimension_12"
+        android:top="@dimen/dimension_12"
+        android:right="@dimen/dimension_12"
+        android:bottom="@dimen/dimension_12">
+
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/dimension_38" />
+            <stroke android:color="#DFC1B1" android:width="@dimen/dimension_1"/>
+
+            <solid android:color="#EAD8CE" />
+        </shape>
+    </item>
+
+</layer-list>

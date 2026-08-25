@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mater"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimension_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="@dimen/dimension_2"
+            app:cardBackgroundColor="@color/app_color2"
+            app:cardCornerRadius="@dimen/dimension_15"
+            app:strokeColor="@color/app_color"
+            app:strokeWidth="@dimen/dimension_3" >
+
+  <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mater3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dimension_3"
+      android:layout_marginBottom="@dimen/dimension_8"
+            android:layout_marginHorizontal="@dimen/dimension_3"
+            android:elevation="@dimen/dimension_1"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/dimension_12"
+            app:layout_constraintBottom_toBottomOf="@+id/mater2"
+            app:layout_constraintEnd_toEndOf="@+id/mater2"
+            app:layout_constraintStart_toStartOf="@+id/mater2"
+            app:layout_constraintTop_toTopOf="@+id/mater2"
+            app:strokeColor="@color/app_color4"
+            app:strokeWidth="@dimen/dimension_0">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contrainColor"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                app:layout_constraintDimensionRatio="3.22:0.6"
+                android:id="@+id/tvTitle"
+                style="@style/single_marquee"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimension_0"
+                android:fontFamily="@font/pacifico_regular"
+                android:gravity="center"
+                android:textColor="@color/app_color"
+                app:outerStrokeWidth="@dimen/dimension_1_8"
+                android:background="@color/app_color8"
+                android:paddingBottom="@dimen/dimension_7"
+                app:outerStrokeColor="@color/app_color"
+                android:text="@string/choose_color"
+                android:textSize="@dimen/text_size_28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ir.kotlin.quyhcolorpicker.QuylhColorPicker
+                android:id="@+id/colorPickerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_150"
+                android:layout_marginHorizontal="@dimen/dimension_30"
+                android:layout_marginVertical="@dimen/dimension_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimension_6"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dimension_5"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/colorPickerView">
+
+                <ir.kotlin.quyhcolorpicker.QuylhHueSlider
+                    android:id="@+id/hueSlider"
+                    android:paddingHorizontal="@dimen/dimension_6"
+                    android:layout_marginHorizontal="@dimen/dimension_22"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimension_34" />
+
+                <!--                btnDone-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/bg"
+                    android:layout_marginTop="@dimen/dimension_16"
+                    android:paddingBottom="@dimen/dimension_20"
+                    android:layout_marginHorizontal="@dimen/dimension_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/txtContent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/btnCancle"
+                        android:layout_width="@dimen/dimension_0"
+                        android:layout_height="@dimen/dimension_0"
+                        android:layout_marginHorizontal="@dimen/dimension_5"
+                        app:layout_constraintDimensionRatio="1.28:0.44"
+                        app:layout_constraintEnd_toStartOf="@+id/btnSave"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/app_color2"
+                        app:strokeWidth="@dimen/dimension_1">
+
+                        <ImageView
+                            android:id="@+id/imgCancleFor"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/btn_chossecolor" />
+
+                        <TextView
+                            android:id="@+id/txtCancle"
+                            style="@style/single_marquee"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/pacifico_regular"
+                            android:gravity="center"
+                            app:outerStrokeColor="@color/app_color"
+                            android:text="@string/cancel"
+                            android:paddingBottom="@dimen/dimension_3"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/text_size_16" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/btnSave"
+                        android:layout_width="@dimen/dimension_0"
+                        android:layout_height="@dimen/dimension_0"
+                        android:layout_marginHorizontal="@dimen/dimension_5"
+                        app:layout_constraintDimensionRatio="1.28:0.44"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btnCancle"
+                        app:layout_constraintTop_toTopOf="@+id/btnCancle"
+                        app:strokeColor="@color/app_color2"
+                        app:strokeWidth="@dimen/dimension_1">
+
+
+                        <ImageView
+                            android:id="@+id/imgSaveFor"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/btn_chossecolor2" />
+
+                        <TextView
+                            android:id="@+id/txtSave"
+                            style="@style/single_marquee"
+                            android:layout_width="@dimen/dimension_0"
+                            android:layout_height="@dimen/dimension_0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/imgSaveFor"
+                            app:layout_constraintTop_toTopOf="@+id/imgSaveFor"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgSaveFor"
+                            android:fontFamily="@font/pacifico_regular"
+                            android:gravity="center"
+                            android:text="@string/done"
+                            app:outerStrokeWidth="@dimen/dimension_3"
+                            android:paddingBottom="@dimen/dimension_3"
+                            app:outerStrokeColor="@color/app_color"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/text_size_16"  />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

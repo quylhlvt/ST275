@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnlBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="240">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        android:paddingHorizontal="@dimen/dimension_1"
+        android:layout_weight="40"
+        android:weightSum="2"
+        android:elevation="@dimen/dimension_2"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/btnBackgroundImage"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/frame_select_add"
+            app:strokeWidth="@dimen/dimension_0"
+            android:layout_weight="1">
+
+
+
+            <TextView
+                android:id="@+id/btnBackgroundImageTv"
+                style="@style/single_marquee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:translationY="@dimen/dimension_5_minus"
+                android:text="@string/image"
+                android:fontFamily="@font/pacifico_regular"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/text_size_20"
+                tools:ignore="NestedWeights" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/btnBackgroundColor"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+
+
+            <TextView
+                android:id="@+id/btnBackgroundColorTv"
+                style="@style/single_marquee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/color"
+                android:translationY="@dimen/dimension_5_minus"
+                android:fontFamily="@font/pacifico_regular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20" />
+
+        </FrameLayout>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_marginTop="@dimen/dimension_4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        android:paddingHorizontal="@dimen/dimension_1"
+        android:layout_weight="200">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/tabImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvBackgroundImage"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/dimension_16"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="@dimen/dimension_0"
+                android:layout_marginTop="@dimen/dimension_13"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="5"
+                tools:itemCount="30"
+                tools:listitem="@layout/item_background_image" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvBackgroundColor"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/dimension_13"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimension_12"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="5"
+            tools:listitem="@layout/item_background_color" />
+    </FrameLayout>
+
+</LinearLayout>

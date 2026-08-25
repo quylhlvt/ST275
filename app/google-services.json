@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "718879524422",
+    "project_id": "st279-anime-oc-maker",
+    "storage_bucket": "st279-anime-oc-maker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718879524422:android:4708890ca21a7e6178ac47",
+        "android_client_info": {
+          "package_name": "com.anime.oc.characters.avatar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQtNvOurVpy2cBaxE9giwFFj5UndmSUwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

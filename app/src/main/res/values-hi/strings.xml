@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- values-hi/strings.xml -->
+<resources>
+    <string name="size_slider">आकार</string>
+    <string name="app_name">Anime OC Maker: Avatar Creator</string>
+    <string name="next">आगे\u00A0</string>
+    <string name="language">भाषा</string>
+    <string name="title_1">\u00A0अपने विचारों को एनीमे के जादू में बदलें\u00A0</string>
+    <string name="title_2">\u00A0शानदार OC? लोड हो रहा है...\u00A0</string>
+    <string name="title_3">\u00A0कुछ प्यारा बनाने के लिए तैयार हैं?\u00A0</string>
+    <string name="not_select_lang">कृपया एक भाषा चुनें</string>
+    <string name="pony_maker">एनीमे मेकर</string>
+
+    <string name="permission">अनुमति</string>
+    <string name="storage">स्टोरेज\u00A0</string>
+    <string name="continue_per">जारी रखें</string>
+    <string name="notification">सूचना\u00A0</string>
+    <string name="granted_notification">सूचना की अनुमति दी गई</string>
+    <string name="granted_storage">स्टोरेज की अनुमति दी गई</string>
+    <string name="allow">\u00A0अनुमति दें</string>
+    <string name="to_access">आपके डिवाइस की फ़ोटो तक पहुँचने के लिए\u00A0</string>
+    <string name="to_access_13">आपके डिवाइस की सूचनाओं तक पहुँचने के लिए\u00A0</string>
+    <string name="go_to_setting_message">ऐप को इस अनुमति की आवश्यकता है</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="add_image">छवि जोड़ें</string>
+    <string name="text">टेक्स्ट</string>
+    <string name="type_your_content">अपना कंटेंट लिखें</string>
+    <string name="loading">लोड हो रहा है</string>
+    <string name="haven_t_saved_it_yet_do_you_want_to_exit">अभी तक सेव नहीं किया गया, क्या आप बाहर निकलना चाहते हैं?</string>
+    <string name="no">नहीं</string>
+    <string name="yes">हाँ</string>
+    <string name="null_edt">कृपया टेक्स्ट दर्ज करें</string>
+    <string name="choose_color">रंग चुनें</string>
+    <string name="do_you_want_to_reset_all">क्या आप सब कुछ रीसेट करना चाहते हैं?</string>
+    <string name="reset">रीसेट</string>
+    <string name="exit">बाहर निकलें</string>
+    <string name="rate_us">हमें रेट करें</string>
+    <string name="share_app">ऐप साझा करें</string>
+    <string name="image_has_been_saved_successfully">छवि सफलतापूर्वक सेव हो गई!</string>
+    <string name="download">डाउनलोड</string>
+    <string name="my_avatar">मेरा एनीमे</string>
+    <string name="design">मेरा डिज़ाइन</string>
+    <string name="no_item_here">यहाँ कोई आइटम नहीं है</string>
+    <string name="add_to_whatsapp">WhatsApp में जोड़ें</string>
+    <string name="add_to_telegram">Telegram में जोड़ें</string>
+    <string name="share">साझा करें</string>
+    <string name="no_app_found_to_handle_this_action">इस क्रिया को संभालने के लिए कोई ऐप नहीं मिला</string>
+    <string name="download_success">%s एल्बम में सफलतापूर्वक डाउनलोड किया गया</string>
+    <string name="delete">हटाएं</string>
+    <string name="are_you_sure_want_to_delete_this_item">क्या आप इस आइटम को हटाना चाहते हैं?</string>
+    <string name="please_select_an_image">कृपया एक छवि चुनें</string>
+    <string name="limit_3_items">स्टिकर बनाने के लिए कम से कम 3 आइटम आवश्यक हैं</string>
+    <string name="limit_30_items">अधिकतम 30 आइटम ही जोड़े जा सकते हैं</string>
+    <string name="invalid_action_msg">ऐप इंस्टॉल नहीं है</string>
+    <string name="invalid_action">त्रुटि</string>
+    <string name="download_failed_please_try_again_later">डाउनलोड विफल, कृपया बाद में फिर से प्रयास करें!</string>
+    <string name="rate">रेट करें</string>
+    <string name="privacy_policy"><![CDATA[गोपनीयता और नीति]]></string>
+
+    <string name="zero_star_title">क्या आपको यह ऐप पसंद है?</string>
+    <string name="zero_star">अपना अनुभव बताएं</string>
+
+    <string name="one_star_title">ओह नहीं!</string>
+
+    <string name="two_star_title">ओह नहीं!</string>
+
+    <string name="three_star_title">ओह नहीं!</string>
+    <string name="three_star">कृपया हमें अपनी प्रतिक्रिया दें</string>
+
+    <string name="four_star_title">हम भी आपसे प्यार करते हैं!</string>
+    <string name="four_star">आपकी प्रतिक्रिया के लिए धन्यवाद</string>
+
+    <string name="five_star_title">हम भी आपसे प्यार करते हैं!</string>
+    <string name="five_star">आपकी प्रतिक्रिया के लिए धन्यवाद</string>
+
+    <string name="rate_us_0">आपने अभी तक रेट नहीं किया है!</string>
+    <string name="have_rated">हमारे ऐप को रेट करने के लिए धन्यवाद</string>
+    <string name="cosplay">एनीमे कॉसप्ले</string>
+    <string name="cosplay2">कॉसप्ले</string>
+    <string name="random">रैंडम</string>
+    <string name="my_creation">मेरी रचना</string>
+    <string name="category">श्रेणी</string>
+    <string name="image">छवि</string>
+    <string name="color">रंग</string>
+    <string name="successful">सफल</string>
+    <string name="successfully">सफलतापूर्वक</string>
+    <string name="try_again">फिर से प्रयास करें</string>
+    <string name="no_internet">इंटरनेट नहीं है</string>
+    <string name="internet">इंटरनेट</string>
+    <string name="please_connect_to_the_internet_to_download_more_data">अधिक डेटा डाउनलोड करने के लिए इंटरनेट से जुड़ें</string>
+    <string name="unstable_connection_please_check_your_network_connection">अस्थिर कनेक्शन, कृपया अपना नेटवर्क कनेक्शन जांचें</string>
+    <string name="ok">ठीक है</string>
+    <string name="please_wait_a_few_seconds_for_data_to_load">डेटा लोड होने के लिए कुछ सेकंड प्रतीक्षा करें।</string>
+    <string name="create_package_name">पैकेज नाम बनाएँ</string>
+    <string name="enter_your_package_name">अपना पैकेज नाम दर्ज करें</string>
+    <string name="please_enter_your_package_name">कृपया अपना पैकेज नाम दर्ज करें!</string>
+    <string name="this_action_may_contain_advertising">इस क्रिया में विज्ञापन हो सकते हैं</string>
+    <string name="instruction">निर्देश</string>
+    <string name="tvCosplay1">कॉसप्ले मोड में,</string>
+    <string name="tvCosplay2">खिलाड़ियों को रैंडम तरीके से</string>
+    <string name="tvCosplay3">एक रेफरेंस इमेज दी जाती है</string>
+    <string name="tvCosplay4">जिसका पालन करना होता है। आपका काम सही</string>
+    <string name="tvCosplay5">हेयरस्टाइल, कपड़े, रंग और एक्सेसरीज़ चुनकर उस कैरेक्टर को जितना संभव हो उतना सटीक बनाना है।</string>
+    <string name="tvCosplay6">हर सही मैच आपके</string>
+    <string name="tvCosplay7">प्रतिशत स्कोर (%) को बढ़ाता है।</string>
+    <string name="tvCosplay8">आपका कैरेक्टर जितना अधिक रैंडम इमेज जैसा दिखेगा, आपका अंतिम स्कोर उतना ही अधिक होगा। सबसे अच्छा कॉसप्ले परिणाम पाने के लिए छोटी-छोटी बातों पर ध्यान दें।</string>
+    <string name="save">सहेजें</string>
+    <string name="error">त्रुटि</string>
+    <string name="errorcontent">यह आइटम अब उपलब्ध नहीं है।</string>
+    <string name="image_not_found">चित्र नहीं मिला</string><string name="facebook_not_available">Facebook इंस्टॉल नहीं है या यह चित्र प्राप्त नहीं कर सकता</string><string name="instagram_not_available">Instagram इंस्टॉल नहीं है या यह चित्र प्राप्त नहीं कर सकता</string><string name="share_failed">चित्र शेयर नहीं किया जा सका। कृपया फिर से प्रयास करें।</string>
+    <string name="facebook_share">Facebook पर शेयर करें</string><string name="instagram_share">Instagram पर शेयर करें</string>
+    <string name="bubbles">बुलबुले</string>
+    <string name="edit">संपादित करें</string>
+    <string name="cat_random">रैंडम एनीमे</string>
+    <string name="font">फ़ॉन्ट</string>
+    <string name="not_matched">मेल नहीं हुआ</string>
+    <string name="cosplay_complete">कॉसप्ले पूरा हुआ!</string>
+    <string name="you_lose">आप हार गए!</string>
+    <string name="victory">विजय</string>
+    <string name="done">पूर्ण</string>
+    <string name="please_wait">कृपया प्रतीक्षा करें...</string>
+</resources>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80545454"
+        android:weightSum="800"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layout_marginHorizontal="@dimen/dimension_15">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:strokeWidth="@dimen/dimension_3"
+                    app:strokeColor="@color/app_color"
+                    app:cardBackgroundColor="@color/app_color2"
+                    app:cardCornerRadius="@dimen/dimension_15">
+                      <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:strokeWidth="@dimen/dimension_0"
+                          android:layout_marginHorizontal="@dimen/dimension_3"
+                          android:layout_marginTop="@dimen/dimension_3"
+                          android:layout_marginBottom="@dimen/dimension_8"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/dimension_12">
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/contrainColor"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        style="@style/single_marquee"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="3.22:0.6"
+                        android:fontFamily="@font/pacifico_regular"
+                        android:gravity="center"
+                        android:background="@color/app_color8"
+
+                        android:paddingHorizontal="@dimen/dimension_5"
+                        android:text="@string/loading"
+                        app:outerStrokeColor="@color/app_color"
+                        app:outerStrokeWidth="@dimen/dimension_5"
+                        android:paddingBottom="@dimen/dimension_5"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/text_size_28"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        />
+                    <TextView
+                        android:id="@+id/txtContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dimension_40"
+                        android:layout_marginVertical="@dimen/dimension_25"
+                        android:fontFamily="@font/pacifico_regular"
+                        android:gravity="center"
+                        android:text="@string/haven_t_saved_it_yet_do_you_want_to_exit"
+                        android:textSize="@dimen/text_size_20"
+                        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                        android:textColor="@color/app_color2"
+                        />
+
+                    <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/dimension_7"
+                    android:layout_height="@dimen/dimension_50"
+                    android:indeterminateTint="#0C55A2"
+                    app:layout_constraintBottom_toTopOf="@+id/txtPlease"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+                    <TextView
+                        android:id="@+id/txtPlease"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/dimension_5"
+                        android:layout_marginHorizontal="@dimen/dimension_40"
+                        android:fontFamily="@font/pacifico_regular"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="@string/please_wait"
+                        android:textSize="@dimen/text_size_20"
+                        app:layout_constraintBottom_toTopOf="@+id/bgEnd"
+                        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                        android:textColor="@color/app_color2"
+                        />
+
+
+                    <LinearLayout
+                        android:id="@+id/bgEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dimension_25"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtPlease">
+
+
+                        <!--                btnDone-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/dimension_10"
+                            app:layout_constraintTop_toBottomOf="@+id/txtContent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnYes"
+                                android:layout_width="@dimen/dimension_0"
+                                android:layout_height="@dimen/dimension_0"
+                                android:layout_marginHorizontal="@dimen/dimension_8"
+                                android:background="@drawable/btn_dialog_base"
+                                app:layout_constraintDimensionRatio="1.28:0.44"
+                                app:layout_constraintEnd_toStartOf="@+id/btnNo"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeColor="@color/app_color2"
+                                app:strokeWidth="@dimen/dimension_1">
+
+                                <TextView
+                                    android:id="@+id/txtYes"
+                                    style="@style/single_marquee"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="@dimen/dimension_2"
+                                    android:fontFamily="@font/pacifico_regular"
+                                    android:gravity="center"
+                                    android:text="@string/yes"
+                                    android:paddingBottom="@dimen/dimension_3"
+                                    android:textColor="@color/app_color"
+                                    android:textSize="@dimen/text_size_16"
+                                    app:outerStrokeColor="@color/app_color"
+                                    app:outerStrokeWidth="@dimen/dimension_3" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnNo"
+                                android:layout_width="@dimen/dimension_0"
+                                android:layout_height="@dimen/dimension_0"
+                                android:layout_marginHorizontal="@dimen/dimension_8"
+                                android:background="@drawable/btn_dialog_base2"
+                                app:layout_constraintDimensionRatio="1.28:0.44"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/btnYes"
+                                app:layout_constraintTop_toTopOf="@+id/btnYes"
+                                app:strokeColor="@color/app_color2"
+                                app:strokeWidth="@dimen/dimension_1">
+
+
+                                <TextView
+                                    android:id="@+id/txtNo"
+                                    style="@style/single_marquee"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="@dimen/dimension_2"
+                                    android:fontFamily="@font/pacifico_regular"
+                                    android:gravity="center"
+                                    android:paddingBottom="@dimen/dimension_3"
+                                    android:text="@string/no"
+                                    android:textColor="@color/app_color"
+                                    android:textSize="@dimen/text_size_16"
+                                    app:outerStrokeColor="@color/app_color"
+                                    app:outerStrokeWidth="@dimen/dimension_3" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnOk"
+                                android:layout_width="@dimen/dimension_0"
+                                android:layout_height="@dimen/dimension_0"
+                                android:layout_marginHorizontal="@dimen/dimension_90"
+                                android:background="@drawable/btn_dialog_base"
+                                app:layout_constraintDimensionRatio="1.28:0.44"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/btnNo"
+                                app:strokeColor="@color/app_color2"
+                                app:strokeWidth="@dimen/dimension_3">
+
+
+                                <TextView
+                                    android:id="@+id/txtOk"
+                                    style="@style/single_marquee"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:paddingBottom="@dimen/dimension_3"
+                                    android:fontFamily="@font/pacifico_regular"
+                                    android:gravity="center"
+                                    android:text="@string/ok"
+                                    android:textColor="@color/app_color"
+                                    android:textSize="@dimen/text_size_16"
+                                    app:outerStrokeColor="@color/app_color"
+                                    app:outerStrokeWidth="@dimen/dimension_3" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                      </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
+
+
+
+
+        </FrameLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToOutline="false"
+    android:clipToPadding="false"
+    android:layout_marginBottom="@dimen/dimension_8">
+
+    <View
+    android:layout_width="match_parent"
+        android:background="@drawable/bg_shadown_item_lang"
+    android:layout_height="@dimen/dimension_0"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintDimensionRatio="3.28:0.6"/>
+    <!-- Container chính — flat ConstraintLayout, không lồng -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/flMain"
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        android:elevation="@dimen/dimension_20"
+        android:paddingBottom="@dimen/dimension_2"
+
+        app:layout_constraintDimensionRatio="3.28:0.6"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/top5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="3.28:0.05"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/top18"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="3.28:0.11"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/top20"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintDimensionRatio="3.28:0.15"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/bottom6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="3.28:0.06" />
+        <View
+            android:id="@+id/bottom18"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="3.28:0.12" />
+
+        <View
+            android:id="@+id/bottom20"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="3.28:0.16" />
+
+
+        <ImageView
+            android:id="@+id/imgLangFor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/frame_unselect_language" />
+
+        <ImageView
+            android:id="@+id/imvFlag"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            android:layout_marginStart="@dimen/dimension_12"
+            android:src="@drawable/ic_flag_english"
+            app:layout_constraintBottom_toTopOf="@+id/bottom18"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@+id/imgLangFor"
+            app:layout_constraintTop_toBottomOf="@+id/top18" />
+
+        <ImageView
+            android:id="@+id/btnRadio"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            android:layout_marginEnd="@dimen/dimension_16"
+            android:src="@drawable/ic_select_lang"
+            app:layout_constraintBottom_toTopOf="@+id/bottom20"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@+id/imgLangFor"
+            app:layout_constraintTop_toBottomOf="@+id/top20" />
+
+        <TextView
+            android:id="@+id/tvLang"
+            style="@style/single_marquee"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            android:layout_marginStart="@dimen/dimension_16"
+            android:layout_marginBottom="@dimen/dimension_1"
+            android:fontFamily="@font/pacifico_regular"
+            android:gravity="start|center_vertical"
+            android:text="@string/language"
+            android:textColor="@color/app_color"
+            android:textSize="@dimen/text_size_20"
+            app:layout_constraintBottom_toTopOf="@+id/bottom6"
+            app:layout_constraintEnd_toStartOf="@+id/btnRadio"
+            app:layout_constraintStart_toEndOf="@+id/imvFlag"
+            app:layout_constraintTop_toBottomOf="@+id/top5"
+            app:outerStrokeColor="@color/app_color"
+            app:outerStrokeWidth="@dimen/dimension_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

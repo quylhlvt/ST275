@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scvText"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginStart="@dimen/dimension_16"
+    android:visibility="gone">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        app:layout_constraintDimensionRatio="3.6:0.18"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/view"/>
+    <ScrollView
+        android:elevation="@dimen/dimension_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+             <View
+                 android:elevation="-1dp"
+                 android:id="@+id/view1"
+                 android:layout_marginEnd="@dimen/dimension_16"
+                 app:layout_constraintTop_toTopOf="parent"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/dimension_0"
+                 app:layout_constraintDimensionRatio="3.28:0.4"/>
+            <TextView
+                style="@style/single_marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pacifico_regular"
+                android:gravity="center"
+                android:text="@string/text"
+                android:id="@+id/txtText"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/text_size_16"
+                app:outerStrokeColor="@color/stroker_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:outerStrokeWidth="@dimen/dimension_0_4" />
+            <EditText
+                android:elevation="@dimen/dimension_0"
+                android:id="@+id/edtText"
+                android:layout_marginEnd="@dimen/dimension_16"
+                android:layout_width="match_parent"
+                android:shadowColor="@color/transparent"
+                app:layout_constraintDimensionRatio="3.28:0.4"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:paddingHorizontal="@dimen/dimension_12"
+                android:layout_height="@dimen/dimension_0"
+                app:layout_constraintTop_toBottomOf="@+id/txtText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/bg_8_solid_white"
+                android:ellipsize="end"
+                android:fontFamily="@font/itim_regular"
+                android:hint="@string/type_your_content"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:textColorHint="#99868686"
+                android:textSize="@dimen/text_size_14" />
+            <TextView
+                style="@style/single_marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pacifico_regular"
+                android:gravity="center"
+                android:text="@string/font"
+                android:id="@+id/txtFont"
+                android:layout_marginTop="@dimen/dimension_8"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/text_size_16"
+                app:outerStrokeColor="@color/stroker_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtText"
+             />
+            <androidx.recyclerview.widget.RecyclerView
+                app:layout_constraintTop_toBottomOf="@+id/txtFont"
+                android:id="@+id/rcvFont"
+
+                android:layout_width="match_parent"
+                app:layout_constraintDimensionRatio="3.45:0.36"
+                android:layout_height="@dimen/dimension_0"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_font" />
+            <TextView
+                style="@style/single_marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pacifico_regular"
+                android:gravity="center"
+                android:text="@string/color"
+                android:id="@+id/txtColor"
+                android:layout_marginTop="@dimen/dimension_8"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/text_size_16"
+                app:outerStrokeColor="@color/stroker_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rcvFont"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_0"
+                android:orientation="horizontal"
+                app:layout_constraintDimensionRatio="3.45:0.36"
+                app:layout_constraintTop_toBottomOf="@+id/txtColor"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_text_color" />
+
+            <Space
+                app:layout_constraintTop_toBottomOf="@+id/rcvTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_30" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    <View
+        android:id="@+id/constraint2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="3.6:0.36"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        android:layout_marginTop="@dimen/dimension_8"/>
+
+    <ImageView
+        android:id="@+id/btnDoneText"
+        android:layout_width="@dimen/dimension_0"
+        android:elevation="@dimen/dimension_2"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_height="@dimen/dimension_0"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dimension_16"
+        app:layout_constraintTop_toTopOf="@+id/constraint2"
+        app:layout_constraintBottom_toBottomOf="@+id/constraint2"
+        android:src="@drawable/ic_done_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

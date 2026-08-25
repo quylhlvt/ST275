@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_bg_lang"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.anime.oc.characters.avatar.ui.main.createPony.ChoosePonyFragment">
+
+    <FrameLayout
+        android:id="@+id/layoutActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/actionBar"
+            layout="@layout/layout_actionbar" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleChoose"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        app:layout_constraintTop_toBottomOf="@+id/layoutActionBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="@dimen/dimension_1"
+        android:layout_marginTop="@dimen/dimension_5"
+        app:spanCount="2"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:layout_marginHorizontal="@dimen/dimension_8"
+        tools:listitem="@layout/item_choose" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

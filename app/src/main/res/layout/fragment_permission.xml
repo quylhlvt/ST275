@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_bg_lang"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.anime.oc.characters.avatar.ui.onboarding.permission.PermissionFragment">
+    <FrameLayout
+        android:id="@+id/layoutActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/dimension_1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/actionBar"
+            layout="@layout/layout_actionbar" />
+    </FrameLayout>
+    <View
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        app:layout_constraintDimensionRatio="3.6:0.8"/>
+
+    <ImageView
+        android:id="@+id/imgPermission"
+        android:layout_width="@dimen/dimension_0"
+        android:layout_height="@dimen/dimension_0"
+        android:layout_marginHorizontal="@dimen/dimension_65"
+        app:layout_constraintDimensionRatio="2.26:1.78"
+        android:adjustViewBounds="true"
+        android:src="@drawable/img_permission"
+        app:layout_constraintBottom_toTopOf="@+id/txtPermission"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+    <TextView
+        android:id="@+id/txtPermission"
+        android:layout_width="@dimen/dimension_0"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimension_20"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dimension_10"
+
+        android:fontFamily="@font/pacifico_regular"
+        android:textSize="@dimen/text_size_16"
+        android:textColor="@color/app_color2"
+        app:outerStrokeWidth="@dimen/dimension_2"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimension_30"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/tvContinue">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimension_20"
+            android:orientation="vertical">
+
+            <!-- btnStorage-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintDimensionRatio="3.28:0.56"
+                android:id="@+id/btnStorage"
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_0"
+                android:background="@drawable/bg_frame_permission">
+
+                <TextView
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dimension_20"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/dimension_10"
+                    style="@style/single_marquee"
+                    android:text="@string/storage"
+                    android:textColor="@color/app_color"
+                    android:fontFamily="@font/pacifico_regular"
+                    android:textSize="@dimen/text_size_20" />
+
+                <ImageView
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/swPermission"
+                    android:layout_width="@dimen/dimension_0"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="@dimen/dimension_14"
+                    app:layout_constraintDimensionRatio="5.6:3.2"
+                    android:layout_marginEnd="@dimen/dimension_16"
+                    android:src="@drawable/switch_on" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+<Space
+    android:id="@+id/space"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimension_0"
+    app:layout_constraintDimensionRatio="3.28:0.08"
+    app:layout_constraintTop_toBottomOf="@+id/btnStorage"/>
+
+            <!-- btnNotification-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btnNotification"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_0"
+
+                android:background="@drawable/bg_frame_permission"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="3.28:0.56"
+                app:layout_constraintTop_toBottomOf="@+id/space">
+
+                <TextView
+                    style="@style/single_marquee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dimension_20"
+                    android:fontFamily="@font/pacifico_regular"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/dimension_10"
+                    android:text="@string/notification"
+                    android:textColor="@color/app_color"
+                    android:textSize="@dimen/text_size_20"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/swNotification"
+                    android:layout_width="@dimen/dimension_0"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="@dimen/dimension_14"
+                    android:layout_marginEnd="@dimen/dimension_16"
+                    android:src="@drawable/switch_off"
+                    app:layout_constraintDimensionRatio="5.6:3.2"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tvContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimension_12"
+        android:layout_marginBottom="@dimen/dimension_200"
+        android:gravity="center"
+        android:fontFamily="@font/pacifico_regular"
+        android:text="@string/continue_per"
+        android:textSize="@dimen/text_size_24"
+        android:textColor="@color/app_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

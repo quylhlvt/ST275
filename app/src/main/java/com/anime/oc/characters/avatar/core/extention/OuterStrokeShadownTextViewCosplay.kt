@@ -1,0 +1,100 @@
+package com.anime.oc.characters.avatar.core.extention
+
+import android.content.Context
+import android.graphics.*
+import android.graphics.Paint.Join
+import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
+import com.anime.oc.characters.avatar.R
+import ir.kotlin.quyhcolorpicker.dp
+class OuterStrokeShadownTextViewCosplay : AppCompatTextView {
+
+    private var outerStrokeWidth = 0f
+    private var outerStrokeColor: Int = Color.WHITE
+    private var outerStrokeJoin: Join = Join.ROUND
+    private var strokeMiter = 5f
+    private var extraPadding = 0
+    private var isDrawingStroke = false
+
+    constructor(context: Context) : super(context) { init(null) }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) { init(attrs) }
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) { init(attrs) }
+
+    private fun init(attrs: AttributeSet?) {
+        if (attrs == null) return
+        val a = context.obtainStyledAttributes(attrs, R.styleable.OuterStrokeTextView)
+        try {
+            outerStrokeWidth = a.getDimension(R.styleable.OuterStrokeTextView_outerStrokeWidth, 0f)
+            outerStrokeColor = a.getColor(R.styleable.OuterStrokeTextView_outerStrokeColor, Color.WHITE)
+            outerStrokeJoin = when (a.getInt(R.styleable.OuterStrokeTextView_outerStrokeJoinStyle, 2)) {
+                0 -> Join.MITER
+                1 -> Join.BEVEL
+                else -> Join.ROUND
+            }
+        } finally {
+            a.recycle()
+        }
+        if (outerStrokeWidth > 0f) {
+            extraPadding = (outerStrokeWidth * dp(2)).toInt()
+        }
+    }
+    fun setOuterStrokeColor(color: Int) {
+        outerStrokeColor = color
+        invalidate()
+    }
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (extraPadding > 0) {
+            setPadding(paddingLeft + extraPadding, paddingTop, paddingRight + extraPadding, paddingBottom)
+            extraPadding = 0
+        }
+        if (outerStrokeWidth > 0f) {
+            // ✅ Bỏ post{} để set ngay lập tức
+            setLayerType(LAYER_TYPE_SOFTWARE, null)
+        }
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        if (outerStrokeWidth <= 0f) {
+            super.onDraw(canvas)
+            return
+        }
+
+        val offscreen = Bitmap.createBitmap(
+            width.coerceAtLeast(1),
+            height.coerceAtLeast(1),
+            Bitmap.Config.ARGB_8888
+        )
+        val offCanvas = Canvas(offscreen)
+        super.onDraw(offCanvas)
+
+        val strokePaint = Paint().apply {
+            isAntiAlias = true
+            colorFilter = PorterDuffColorFilter(outerStrokeColor, PorterDuff.Mode.SRC_IN)
+        }
+
+        val sw = outerStrokeWidth  // ✅ sw càng lớn stroke càng dày
+
+        // ✅ 8 hướng offset = stroke đều ra ngoài
+        listOf(
+            -sw to -sw,  0f to -sw,  sw to -sw,
+            -sw to  0f,               sw to  0f,
+            -sw to  sw,  0f to  sw,  sw to  sw,
+        ).forEach { (dx, dy) ->
+            canvas.drawBitmap(offscreen, dx, dy, strokePaint)
+        }
+
+        // ✅ Fill đè lên sau cùng
+        super.onDraw(canvas)
+        offscreen.recycle()
+    }
+    override fun invalidate() {
+        if (isDrawingStroke) return          // ✅ chặn loop
+        super.invalidate()
+    }
+
+    override fun postInvalidate() {
+        if (isDrawingStroke) return          // ✅ chặn thêm postInvalidate
+        super.postInvalidate()
+    }
+}
