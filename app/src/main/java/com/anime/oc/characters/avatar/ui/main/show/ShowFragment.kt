@@ -66,7 +66,7 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
     private val pendingLoads = AtomicInteger(0)
     private var timerJob: Job? = null
     private var starAnimator: ValueAnimator? = null
-    private val totalSeconds = 1 * 60
+    private val totalSeconds = 10 * 60
     private var remainingSeconds = totalSeconds
 
     private var remainingSecondsOnPause: Int = totalSeconds
