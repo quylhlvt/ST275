@@ -99,7 +99,7 @@ class PermissionFragment : BaseFragment<FragmentPermissionBinding, PermissionVie
                 super.onNativeAdLoaded(nativeAd)
                 binding.nativeAds.visible()
                 val adView =
-                    LayoutInflater.from(requireContext()).inflate(R.layout.ads_native_medium_btn_bottom_2, null) as NativeAdView
+                    LayoutInflater.from(requireContext()).inflate(R.layout.ads_native_big_btn_top, null) as NativeAdView
                 binding.nativeAds.removeAllViews()
                 binding.nativeAds.addView(adView)
                 Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)

@@ -244,9 +244,9 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
             // Action bar
             actionBar.btnActionBarLeft.onClick { confirmExit() }
             actionBar.btnActionBarCenter1.onClick { confirmReset() }
-            actionBar.btnActionBarRightText.onClick {showInter {
+            actionBar.btnActionBarRightText.onClick {
                 handleSave()
-            }}
+            }
 
             // Background tabs
             lnlBackground.btnBackgroundImage.onClick {
@@ -1013,14 +1013,16 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
                 hideLoadingSafe()
 
                 if (savedImagePath != null) {
+                    showInter {
                     findNavController().navigate(
                         R.id.action_addCharacterFragment_toSuccessFragment,
                         Bundle().apply {
                             putString("imagePath", savedImagePath)
+                            putString("avatarUrl", arguments?.getString("avatarUrl").orEmpty())
                             putString("idEdit", "")
                             putInt("imageType", 0)
                         }
-                    )
+                    )}
                 } else {
                     Toast.makeText(requireContext(), "Lưu thất bại!", Toast.LENGTH_SHORT).show()
                 }

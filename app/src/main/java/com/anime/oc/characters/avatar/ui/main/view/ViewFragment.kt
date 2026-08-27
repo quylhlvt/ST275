@@ -209,7 +209,7 @@ class ViewFragment : BaseFragment<FragmentViewBinding, ViewViewModel>(
             "click_share_${socialName}_$dataName",
             avatarPath
         )
-        Log.d("click_share", "click_share_${socialName}_$dataName -- ${avatarPath}")
+        Log.d("LogEvenA", "click_share_${socialName}_$dataName -- ${avatarPath}")
     }
     private fun shareToSocialApp(app: SocialShareManager.SocialApp) {
         val path = currentImagePath.takeIf { it.isNotBlank() } ?: imagePath

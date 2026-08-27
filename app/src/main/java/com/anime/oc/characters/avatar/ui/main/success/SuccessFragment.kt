@@ -195,7 +195,7 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
             "click_share_${socialName}_$dataName",
             avatarUrl
         )
-        Log.d("logevenfb", "click_share_${socialName}_$dataName -- ${avatarUrl}")
+        Log.d("LogEvenA", "click_share_${socialName}_$dataName -- ${avatarUrl}")
 
     }
     private fun shareToSocialApp(app: SocialShareManager.SocialApp) {

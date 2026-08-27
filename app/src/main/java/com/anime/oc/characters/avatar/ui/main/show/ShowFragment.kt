@@ -74,6 +74,7 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
 
     private var remainingSecondsOnPause: Int = totalSeconds
     private var hasNavigatedToSuccess = false
+    private var scrollPartAfterRandom = false
 
     // ── INFLATE ───────────────────────────────────────────────────────────────
 
@@ -348,7 +349,10 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
             if (!checkOnlineNetworkOrShowDialog()) {                              // ← guard
                 when (type) {
                     "none" -> viewModel.selectNone()
-                    "dice" -> viewModel.selectDiceCurrent()
+                    "dice" -> {
+                        scrollPartAfterRandom = true
+                        viewModel.selectDiceCurrent()
+                    }
                     else   -> viewModel.selectPath(idx)
                 }
             }
@@ -533,9 +537,6 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
         if (state.hasMultipleColors) {
 //            binding.imgChangColor.visible()
             adapterColor.submitList(state.currentColors)
-            binding.rcvColor.post {
-                binding.rcvColor.smoothScrollToPosition(state.currentColorIndex)
-            }
             if (navPos < arrShowColor.size && arrShowColor[navPos]) {
                 binding.llColor.animate().alpha(1f).setDuration(150).withStartAction {
                     binding.llColor.visibility = View.VISIBLE
@@ -559,8 +560,11 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
         adapterPart.listThumb = thumb
         adapterPart.setPos(state.currentPathIndex)
         adapterPart.submitList(state.currentPaths)
-        binding.rcvPart.post {
-            binding.rcvPart.smoothScrollToPosition(state.currentPathIndex.coerceAtLeast(0))
+        if (scrollPartAfterRandom) {
+            scrollPartAfterRandom = false
+            binding.rcvPart.post {
+                binding.rcvPart.scrollToPosition(state.currentPathIndex.coerceAtLeast(0))
+            }
         }
     }
 
