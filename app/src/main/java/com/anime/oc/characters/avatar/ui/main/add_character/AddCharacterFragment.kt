@@ -54,6 +54,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.oc.characters.avatar.core.custom.DrawView
 import com.anime.oc.characters.avatar.core.extention.InternetExtension
 import com.anime.oc.characters.avatar.core.extention.setMaterialCardViewActionBar1
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.data.datalocal.manager.CharacterImageManager
 import com.anime.oc.characters.avatar.ui.main.add_character.adapter.BackgroundImageAdapter
 import com.anime.oc.characters.avatar.ui.main.add_character.adapter.SpeechAdapter
@@ -65,9 +66,11 @@ import com.anime.oc.characters.avatar.utils.DataLocal
 import com.anime.oc.characters.avatar.utils.key.ValueKey
 import com.anime.oc.characters.avatar.databinding.FragmentAddCharacterBinding
 import com.anime.oc.characters.avatar.ui.main.add_character.adapter.SpeechCategoryAdapter
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -108,7 +111,11 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
     private val imagepath: String by lazy {
         arguments?.getString("imagePath") ?: ""
     }
-
+    private fun initNativeCollab() {
+        Admob.getInstance().loadNativeCollapNotBanner(
+            requireContext(), getString(R.string.native_cl_bg), binding.flNativeCollab
+        )
+    }
     private fun buttonNavigationList() = arrayListOf(
         binding.btnBackground,
         binding.btnSticker,
@@ -161,12 +168,14 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
 
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
 
     // ── Observe ───────────────────────────────────────────────────────────────
@@ -235,7 +244,9 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
             // Action bar
             actionBar.btnActionBarLeft.onClick { confirmExit() }
             actionBar.btnActionBarCenter1.onClick { confirmReset() }
-            actionBar.btnActionBarRightText.onClick {handleSave()}
+            actionBar.btnActionBarRightText.onClick {showInter {
+                handleSave()
+            }}
 
             // Background tabs
             lnlBackground.btnBackgroundImage.onClick {
@@ -348,6 +359,7 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
 
     // ── Init ──────────────────────────────────────────────────────────────────
     override fun initView() {
+        initNativeCollab()
         requireActivity().hideNavigation(true)
 
         setupKeyboardListener()

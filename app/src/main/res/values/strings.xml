@@ -122,4 +122,6 @@
     <string name="victory">Victory</string>
     <string name="done">Done</string>
     <string name="please_wait">Please wait...</string>
+    <string name="please_watch_full_ads">Please Watch Full Ads</string>
+    <string name="load_ads_fail">Load Ads Fail</string>
 </resources>

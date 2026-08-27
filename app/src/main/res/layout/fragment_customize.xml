@@ -127,16 +127,18 @@
 
 
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imgRandom"-->
-<!--                android:layout_width="@dimen/dimension_40"-->
-<!--                android:layout_height="@dimen/dimension_0"-->
-<!--                android:layout_marginEnd="@dimen/dimension_16"-->
-<!--                android:visibility="gone"-->
-<!--                android:src="@drawable/ic_ramdom_cus"-->
-<!--                app:layout_constraintDimensionRatio="1:1"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent" />-->
+            <ImageView
+                android:id="@+id/imgRandom"
+                android:layout_width="@dimen/dimension_40"
+                android:layout_height="@dimen/dimension_0"
+                android:layout_marginEnd="@dimen/dimension_16"
+                android:src="@drawable/ic_dice"
+                android:visibility="gone"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintBottom_toTopOf="@+id/view5"
+                app:layout_constraintEnd_toStartOf="@+id/view7"
+                app:layout_constraintTop_toBottomOf="@+id/view4"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <!-- Container màu ở giữa — y hệt llColor trong Activity -->
 <!--            <ImageView-->
@@ -514,5 +516,10 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <com.anime.oc.characters.avatar.utils.BlockableFrameLayout
+            android:id="@+id/flNativeCollab"
+            android:elevation="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

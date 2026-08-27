@@ -6,10 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/img_bg_lang"
     tools:context="com.anime.oc.characters.avatar.ui.main.cosplay.CosplayFragment">
+    <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+          app:layout_constraintDimensionRatio="3.6:0.44"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/dimension_82"/>
     <com.google.android.material.card.MaterialCardView
         android:layout_width="@dimen/dimension_0"
         android:layout_height="@dimen/dimension_0"
         android:id="@+id/material"
+        android:layout_marginBottom="@dimen/dimension_16"
         app:layout_constraintDimensionRatio="1:1"
         android:layout_margin="@dimen/dimension_16"
         app:cardCornerRadius="@dimen/dimension_20"
@@ -17,9 +25,10 @@
         app:cardBackgroundColor="@color/app_color2"
         app:strokeWidth="@dimen/dimension_3"
         app:layout_constraintTop_toBottomOf="@+id/layoutActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/view1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0">
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -66,11 +75,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension_0"
-        android:layout_marginTop="@dimen/dimension_50"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/contrain"
+        android:layout_marginTop="@dimen/dimension_16"
         app:layout_constraintDimensionRatio="3.6:0.44"
         app:layout_constraintTop_toBottomOf="@+id/material"
-        app:layout_constraintVertical_bias="0.0">
+        >
 
         <View
             android:id="@+id/view2"
@@ -249,5 +258,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+    <FrameLayout
+            android:id="@+id/flNativeCollab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+        <include layout="@layout/ads_shimmer_collap_native" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

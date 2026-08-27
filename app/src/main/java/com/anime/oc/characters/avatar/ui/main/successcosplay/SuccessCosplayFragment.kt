@@ -19,7 +19,10 @@ import com.anime.oc.characters.avatar.core.extention.select
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.ui.main.cosplay.CosplayViewModel
 import com.anime.oc.characters.avatar.R
+import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
+import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentSuccessCosplayBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
@@ -42,7 +45,11 @@ class SuccessCosplayFragment : BaseFragment<FragmentSuccessCosplayBinding, Succe
             }
         )
     }
-
+    private fun initNativeCollab() {
+        loadNativeCollabAds(
+            getString(R.string.native_cl_cosplaySuccess), binding.flNativeCollab
+        )
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +57,7 @@ class SuccessCosplayFragment : BaseFragment<FragmentSuccessCosplayBinding, Succe
     ): FragmentSuccessCosplayBinding = FragmentSuccessCosplayBinding.inflate(inflater, container, false)
 
     override fun initView() {
+        initNativeCollab()
         binding.apply {
 
             txtShow.isSelected = true
@@ -140,13 +148,18 @@ class SuccessCosplayFragment : BaseFragment<FragmentSuccessCosplayBinding, Succe
 
     private fun FragmentSuccessCosplayBinding.setupActionBarListeners() {
         actionBar.btnActionBarRight.onClick {
+            showInter {
                 findNavController().navigate(R.id.action_successCosplay_to_home)
+            }
         }
     }
 
     private fun FragmentSuccessCosplayBinding.setupNavigationListeners() {
         btnTryAgain.onClick {
-
+            if (!isInternetAvailable(requireContext())) {
+                showUnstableNetworkDialog(); return@onClick
+            }
+            showInter {
                 val cosplayEntry = runCatching {
                     findNavController().getBackStackEntry(R.id.cosplay)
                 }.getOrNull()
@@ -159,7 +172,7 @@ class SuccessCosplayFragment : BaseFragment<FragmentSuccessCosplayBinding, Succe
 
                 viewModelActivity.shouldRestartShow = true  // ← báo ShowFragment reset
                 popBack()
-
+            }
         }
     }
 

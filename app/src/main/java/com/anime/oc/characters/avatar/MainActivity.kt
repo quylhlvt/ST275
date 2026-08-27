@@ -23,6 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.DialogbaseBinding
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicInteger
@@ -282,9 +283,9 @@ class MainActivity : AppCompatActivity() , LoadingController{
                 if (!navController.popBackStack()) finish()
             }
         })
-//        Admob.getInstance().setTimeLimitShowAds(30000)
-//        Admob.getInstance().setTimeCountdownNativeCollab(18000)
-//        Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
+        Admob.getInstance().setTimeLimitShowAds(3000)
+        Admob.getInstance().setTimeCountdownNativeCollab(20000)
+        Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
 
         window.decorView.post {
             preloadHomeDrawables {

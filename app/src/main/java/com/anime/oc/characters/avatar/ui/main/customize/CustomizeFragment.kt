@@ -35,7 +35,11 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.anime.oc.characters.avatar.R
+import com.anime.oc.characters.avatar.core.extention.showInter
+import com.anime.oc.characters.avatar.core.extention.showRewardAds1
 import com.anime.oc.characters.avatar.databinding.FragmentCustomizeBinding
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -72,6 +76,11 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
     private var holdActionJob: Job? = null
 
     // ── INFLATE ───────────────────────────────────────────────────────────────
+    private fun initNativeCollab() {
+        Admob.getInstance().loadNativeCollapNotBanner(
+            requireContext(), getString(R.string.native_cl_custom), binding.flNativeCollab
+        )
+    }
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -98,27 +107,33 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
             !InternetExtension.isInternetAvailable(requireContext()) -> {
                 showUnstableNetworkDialog(); true
             }
+
             !InternetExtension.isNetworkConnected(requireContext()) -> {
                 showUnstableNetworkDialog(); true
             }
+
             else -> false
         }
     }
+
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
-    override fun initView() {
 
+    override fun initView() {
+        initNativeCollab()
         applyTabletLayout()
 
         binding.apply {
-            txtReset.isSelected =true
+            txtReset.isSelected = true
         }
         binding.actionBar.apply {
             setImageActionBar(btnActionBarLeft, R.drawable.back_app)
@@ -177,9 +192,11 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                     isFlipped = isFlipped
                 )
             }
+
             savedSelections != null -> {
                 viewModel.initWithSelections(resolvedIndex, savedSelections)
             }
+
             else -> {
                 viewModel.initNew(resolvedIndex)
             }
@@ -283,8 +300,9 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                         adapterPart.setPos(idx)
                         viewModel.selectNone()
                     }
+
                     "dice" -> viewModel.selectDiceCurrent()
-                    else   -> {
+                    else -> {
                         adapterPart.setPos(idx)
                         viewModel.selectPath(idx)
                     }
@@ -309,20 +327,26 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                     llColor.animate().alpha(1f).setDuration(200).start()
                 }
             }
-//            imgRandom.onClick {
-//                if (!checkOnlineNetworkOrShowDialog()) {
-//                    showConfirmDialog(
-//                        message = getString(R.string.watch_a_short_ad_to_generate_a_random_chibi),
-//                        title = getString(R.string.random_chibi_dialog),
-//                        yesText = getString(R.string.watch_ad),
-//                        noText = getString(R.string.cancel),
-//                        onYes = {viewModel.randomizeAll()
-//
-//                        },
-//                        onNo = { hideLoadingSafe() }
-//                    )
-//                }
-//            }
+            imgRandom.onClick {
+                if (!checkOnlineNetworkOrShowDialog()) {
+                    showConfirmDialog(
+                        message = getString(R.string.watch_a_short_ad_to_generate_a_random_chibi),
+                        title = getString(R.string.random_chibi_dialog),
+                        yesText = getString(R.string.watch_ad),
+                        noText = getString(R.string.cancel),
+                        onYes = {showRewardAds1(
+                            onRewardSuccess = {
+                                if (!checkOnlineNetworkOrShowDialog()) {
+                                    viewModel.randomizeAll()
+                                }
+                            },
+                            onAdClosed = {}
+                        )
+                        },
+                        onNo = { hideLoadingSafe() }
+                    )
+                }
+            }
             actionBar.btnActionBarCenter.setOnClickListener {
                 viewModel.toggleFlip()
             }
@@ -338,22 +362,24 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                         applyTransformsToAllLayers(viewModel.state.value)
                         updateScaleControls()
                         closeScalePanel()
-                        // RecyclerView keeps its own scroll state; resetting the selected
-                        // nav index does not move the list (and StateFlow may not re-emit).
-                        binding.rcvNav.stopScroll()
-                        binding.rcvNav.post {
-                            binding.rcvNav.scrollToPosition(0)
+                        showInter {
+                            // RecyclerView keeps its own scroll state; resetting the selected
+                            // nav index does not move the list (and StateFlow may not re-emit).
+                            binding.rcvNav.stopScroll()
+                            binding.rcvNav.post {
+                                binding.rcvNav.scrollToPosition(0)
+                            }
                         }
                     }
                 )
             }
-            actionBar.btnActionBarLeft.onClick {  confirmExit()}
+            actionBar.btnActionBarLeft.onClick { confirmExit() }
             actionBar.btnActionBarRightText.onClick { if (canSave) performSave() }
             actionBar.btnActionBarRightText.setOnClickListener {
                 if (!canSave) return@setOnClickListener
                 if (checkOnlineNetworkOrShowDialog()) return@setOnClickListener
 
-                    performSave()
+                performSave()
 
             }
         }
@@ -659,11 +685,13 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
         val requested = change(viewModel.getTransform(index))
         val maxX = binding.rlCharacter.width.coerceAtLeast(1) * MAX_TRANSLATION_X_FRACTION
         val maxY = binding.rlCharacter.height.coerceAtLeast(1) / 2f
-        viewModel.updateTransform(index, requested.copy(
-            scale = requested.scale.coerceIn(MIN_LAYER_SCALE, MAX_LAYER_SCALE),
-            translationX = requested.translationX.coerceIn(-maxX, maxX),
-            translationY = requested.translationY.coerceIn(-maxY, maxY)
-        ))
+        viewModel.updateTransform(
+            index, requested.copy(
+                scale = requested.scale.coerceIn(MIN_LAYER_SCALE, MAX_LAYER_SCALE),
+                translationX = requested.translationX.coerceIn(-maxX, maxX),
+                translationY = requested.translationY.coerceIn(-maxY, maxY)
+            )
+        )
         applyTransformsToAllLayers(viewModel.state.value)
         updateScaleControls()
     }
@@ -683,7 +711,7 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
         val canMoveDown = hasLayer && transform.translationY < maxY - TRANSFORM_EPSILON
 
         binding.imgScale.isEnabled = hasLayer
-        binding.imgScale.setImageResource (if (hasLayer) R.drawable.ic_scale_cus else R.drawable.ic_scale_cus_none)
+        binding.imgScale.setImageResource(if (hasLayer) R.drawable.ic_scale_cus else R.drawable.ic_scale_cus_none)
         binding.scalePlus.isEnabled = canScaleUp
         binding.scalePlus.alpha = if (canScaleUp) 1f else 0.4f
         binding.scaleMinus.isEnabled = canScaleDown
@@ -727,12 +755,14 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                     }
                     true
                 }
+
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     holdActionJob?.cancel()
                     holdActionJob = null
                     performClick()
                     true
                 }
+
                 else -> false
             }
         }
@@ -765,6 +795,7 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
             }
 
             val result = viewModel.onSaveComplete(savedPath)
+            val avatarUrl = result?.first?.avatar.orEmpty()
             result?.let { (template, selections) ->
                 sharedViewModel.saveCharacterWithSelections(
                     character = template,
@@ -800,6 +831,7 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
             }
         }
     }
+
     private fun renderLayersToBitmap(): Bitmap? {
         val root = binding.rlCharacter
         if (root.width == 0 || root.height == 0) return null
@@ -814,25 +846,28 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
     // ── BASE OVERRIDES ────────────────────────────────────────────────────────
 
     override fun bindViewModel() {}
+
     //--------------------------------Backpress
     override fun onBackPressed(): Boolean {
         confirmExit()
-       return true
+        return true
     }
+
     // ── COMPANION ─────────────────────────────────────────────────────────────
     private fun confirmExit() {
         showConfirmDialog(
             message = getString(R.string.haven_t_saved_it_yet_do_you_want_to_exit),
             title = getString(R.string.exit),
             onYes = {
-
+                showInter {
                     hideLoadingSafe()
                     findNavController().navigateUp()
-
+                }
             },
             onNo = { hideLoadingSafe() }
         )
     }
+
     companion object {
         private const val MIN_LAYER_SCALE = 0.3f
         private const val MAX_LAYER_SCALE = 2f

@@ -110,38 +110,38 @@
 
             <!-- btnNotification-->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btnNotification"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension_0"
+                    android:id="@+id/btnNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimension_0"
 
-                android:background="@drawable/bg_frame_permission"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="3.28:0.56"
-                app:layout_constraintTop_toBottomOf="@+id/space">
+                    android:background="@drawable/bg_frame_permission"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="3.28:0.56"
+                    app:layout_constraintTop_toBottomOf="@+id/space">
 
                 <TextView
-                    style="@style/single_marquee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dimension_20"
-                    android:fontFamily="@font/pacifico_regular"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="@dimen/dimension_10"
-                    android:text="@string/notification"
-                    android:textColor="@color/app_color"
-                    android:textSize="@dimen/text_size_20"
-                    app:layout_constraintStart_toStartOf="parent" />
+                        style="@style/single_marquee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dimension_20"
+                        android:fontFamily="@font/pacifico_regular"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/dimension_10"
+                        android:text="@string/notification"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/text_size_20"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                 <ImageView
-                    android:id="@+id/swNotification"
-                    android:layout_width="@dimen/dimension_0"
-                    android:layout_height="match_parent"
-                    android:layout_marginVertical="@dimen/dimension_14"
-                    android:layout_marginEnd="@dimen/dimension_16"
-                    android:src="@drawable/switch_off"
-                    app:layout_constraintDimensionRatio="5.6:3.2"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                        android:id="@+id/swNotification"
+                        android:layout_width="@dimen/dimension_0"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="@dimen/dimension_14"
+                        android:layout_marginEnd="@dimen/dimension_16"
+                        android:src="@drawable/switch_off"
+                        app:layout_constraintDimensionRatio="5.6:3.2"
+                        app:layout_constraintEnd_toEndOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -153,14 +153,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimension_12"
-        android:layout_marginBottom="@dimen/dimension_200"
+        android:layout_marginBottom="@dimen/dimension_8"
         android:gravity="center"
         android:fontFamily="@font/pacifico_regular"
         android:text="@string/continue_per"
         android:textSize="@dimen/text_size_24"
         android:textColor="@color/app_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/native_ads"        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+    <FrameLayout
+            android:id="@+id/native_ads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
+        <include layout="@layout/ads_native_big_btn_top_shimmer" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

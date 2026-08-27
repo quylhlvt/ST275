@@ -23,7 +23,12 @@ import com.anime.oc.characters.avatar.core.helper.LanguageHelper
 import com.anime.oc.characters.avatar.core.helper.SharedPreferencesManager
 import com.anime.oc.characters.avatar.utils.LanguageManager
 import com.anime.oc.characters.avatar.R
+import com.anime.oc.characters.avatar.core.extention.gone
 import com.anime.oc.characters.avatar.databinding.FragmentLanguageBinding
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdView
+import com.lvt.ads.callback.NativeCallback
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -113,6 +118,31 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding, LanguageViewModel
     ): FragmentLanguageBinding = FragmentLanguageBinding.inflate(inflater, container, false)
 
     override fun initView() {
+        Admob.getInstance().loadNativeAd(
+            requireContext(),
+            getString(R.string.native_language),
+            object : NativeCallback() {
+                override fun onNativeAdLoaded(nativeAd: NativeAd?) {
+                    super.onNativeAdLoaded(nativeAd)
+                    if (!isAdded) return
+
+                    Log.d("LanguageNativeAd", "Native ad loaded: ${nativeAd != null}")
+                    val adView = LayoutInflater.from(requireContext())
+                        .inflate(R.layout.ads_native_big_btn_top, null) as NativeAdView
+                    binding.nativeAds.visible()
+                    binding.nativeAds.removeAllViews()
+                    binding.nativeAds.addView(adView)
+                    Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
+
+                }
+
+                override fun onAdFailedToLoad() {
+                    super.onAdFailedToLoad()
+                    Log.e("LanguageNativeAd", "Native ad failed to load")
+                    binding.nativeAds.gone()
+                }
+            }
+        )
         binding.apply {
             actionBar.btnActionBarLeft.invisible()
             actionBar.btnActionBarRight.setImageResource(R.drawable.select_language)

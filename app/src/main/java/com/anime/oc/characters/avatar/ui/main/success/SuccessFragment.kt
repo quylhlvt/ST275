@@ -2,8 +2,10 @@ package com.anime.oc.characters.avatar.ui.main.success
 
 import android.Manifest
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -17,10 +19,13 @@ import com.anime.oc.characters.avatar.core.base.BaseFragment
 import com.anime.oc.characters.avatar.core.extention.checkPermissions
 import com.anime.oc.characters.avatar.core.extention.goToSettings
 import com.anime.oc.characters.avatar.core.extention.loadImage
+import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
+import com.anime.oc.characters.avatar.core.extention.logEventSocial
 import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.core.extention.onClick1
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.core.extention.visible
 import com.anime.oc.characters.avatar.core.helper.PermissionRequestHelper
 import com.anime.oc.characters.avatar.databinding.FragmentSuccessBinding
@@ -43,13 +48,19 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
     private var currentImagePath: String = ""
     private var isReturningFromExternalScreen = false
     private val imagePath: String by lazy { arguments?.getString("imagePath") ?: "" }
+    private val avatarUrl: String by lazy { arguments?.getString("avatarUrl") ?: "" }
+
     private val imageType: Int    by lazy { arguments?.getInt("imageType", 0) ?: 0 }
     private val idEdit: String    by lazy { arguments?.getString("idEdit") ?: "" }
 
     companion object {
         private const val EXTERNAL_SCREEN_RESTORE_DELAY_MS = 500L
     }
-
+    private fun initNativeCollab() {
+        loadNativeCollabAds(
+            getString(R.string.native_success), binding.flNativeCollab
+        )
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -109,7 +120,7 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
     }
 
     override fun initView() {
-
+        initNativeCollab()
         currentImagePath = imagePath
         binding.apply {
             setImageActionBar(actionBar.btnActionBarLeft, R.drawable.back_app)
@@ -139,51 +150,54 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
 
             // Home
             actionBar.btnActionBarRight.onClick1 {
+                showInter {
                     findNavController().navigate(
                         R.id.action_success_to_home, null,
                         androidx.navigation.NavOptions.Builder()
                             .setPopUpTo(R.id.homeFragment, true).build()
                     )
+                }
             }
             // Share
             actionBar.btnActionBarNextToRight.onClick( 1500) { shareImage() }
 
             // MyCreation
             btnBottomLeft.onClick1 {
+                showInter {
                     findNavController().navigate(
                         R.id.action_success_to_myPony, null,
                         androidx.navigation.NavOptions.Builder()
                             .setPopUpTo(R.id.homeFragment, false).build()
                     )
-
+                }
             }
 
             // Download
             btnBottomRight.onClick1 { downloadImage() }
             btnBottomLeftSocial.onClick1 {
-//                logSocialShareEvent("facebook")
+                logSocialShareEvent("facebook")
                 shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
             }
             btnBottomRightSocial.onClick1 {
-//                logSocialShareEvent("instagram")
+                logSocialShareEvent("instagram")
                 shareToSocialApp(SocialShareManager.SocialApp.INSTAGRAM)
             }
         }
     }
-//    private fun logSocialShareEvent(socialName: String) {
-//        val dataName = Uri.parse(avatarUrl).pathSegments
-//            .dropLast(1)
-//            .lastOrNull()
-//            .orEmpty()
-//
-//        logEventSocial(
-//            "click_share_$socialName",
-//            "click_share_${socialName}_$dataName",
-//            avatarUrl
-//        )
-//        Log.d("logevenfb", "click_share_${socialName}_$dataName -- ${avatarUrl}")
-//
-//    }
+    private fun logSocialShareEvent(socialName: String) {
+        val dataName = Uri.parse(avatarUrl).pathSegments
+            .dropLast(1)
+            .lastOrNull()
+            .orEmpty()
+
+        logEventSocial(
+            "click_share_$socialName",
+            "click_share_${socialName}_$dataName",
+            avatarUrl
+        )
+        Log.d("logevenfb", "click_share_${socialName}_$dataName -- ${avatarUrl}")
+
+    }
     private fun shareToSocialApp(app: SocialShareManager.SocialApp) {
         val path = currentImagePath.takeIf { it.isNotBlank() } ?: imagePath
         when (socialShareManager.shareImage(path, app)) {

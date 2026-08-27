@@ -12,13 +12,13 @@
     <string name = "native_category" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name = "native_cl_custom" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name = "native_cl_bg" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name = "native_cl_success" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name = "native_cl_randon" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name = "native_success" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name = "native_cl_random" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name = "native_cl_cosplaySuccess" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name = "native_cl_cosplayCustom" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name = "native_cl_cosplayPlay" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name = "native_cl_cosplay" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name = "native_creation" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-    <string name = "native_cl_creation" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name = "native_my_lib" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name = "native_cl_myLib" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name = "native_cl_detail" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name = "native_all" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name = "reward_random" translatable="false">ca-app-pub-3940256099942544/5224354917</string>

@@ -18,6 +18,8 @@ import com.anime.oc.characters.avatar.core.extention.toLanguage
 import com.anime.oc.characters.avatar.core.helper.SharedPreferencesManager
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.FragmentSplashBinding
+import com.lvt.ads.callback.InterCallback
+import com.lvt.ads.util.Admob
 import com.tencent.mmkv.MMKV
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -33,7 +35,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
     private val mainViewModel: ViewModelActivity by activityViewModels()
     private var pendingNavigate = false
     private var navigateJob: Job? = null
-
+    var interCallBack: InterCallback? = null
     private var progressAnimator: ValueAnimator? = null
     private var currentOverlayFraction = 1f
     private var hasNavigated = false
@@ -50,16 +52,16 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
         ResourcesCompat.getFont(requireContext(), R.font.baloo2_extrabold)
 
 
-//        interCallBack = object : InterCallback() {
-//            override fun onNextAction() {
-//                super.onNextAction()
+        interCallBack = object : InterCallback() {
+            override fun onNextAction() {
+                super.onNextAction()
                 viewModel.triggerNavigate()
-//            }
-//        }
+            }
+        }
 
-//        Admob.getInstance().loadSplashInterAds(
-//            requireActivity(), getString(R.string.inter_splash), 30000, 3000, interCallBack
-//        )
+        Admob.getInstance().loadSplashInterAds(
+            requireActivity(), getString(R.string.inter_splash), 30000, 3000, interCallBack
+        )
     }
 
     override fun viewListener() {}

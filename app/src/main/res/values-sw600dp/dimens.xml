@@ -2,8 +2,11 @@
 <resources>
     <dimen name="text_size_8">12sp</dimen>
     <dimen name="text_size_9">13.5sp</dimen>
+    <dimen name="text_size_10">15sp</dimen>
+    <dimen name="text_size_11">16.5sp</dimen>
     <dimen name="text_size_12">17sp</dimen>
     <dimen name="text_size_14">21sp</dimen>
+    <dimen name="text_size_15">22.5sp</dimen>
     <dimen name="text_size_16">24sp</dimen>
     <dimen name="text_size_18">27sp</dimen>
     <dimen name="text_size_20">30sp</dimen>

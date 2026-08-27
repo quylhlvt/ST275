@@ -386,6 +386,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+            android:id="@+id/flNativeCollab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+        <include layout="@layout/ads_shimmer_collap_native" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

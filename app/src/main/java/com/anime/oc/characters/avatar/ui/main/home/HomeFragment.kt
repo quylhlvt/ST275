@@ -21,7 +21,11 @@ import com.anime.oc.characters.avatar.core.extention.toSettingFromHome
 import com.anime.oc.characters.avatar.core.helper.RateHelper
 import com.anime.oc.characters.avatar.utils.state.RateState
 import com.anime.oc.characters.avatar.R
+import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentHomeBinding
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
@@ -39,12 +43,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun initView() {
+        Admob.getInstance().loadNativeAll(requireContext(), getString(R.string.native_all))
+        initNativeCollab()
         binding.rcvMain.adapter = HomeMenuAdapter(::onHomeMenuClick)
         binding.actionBar.apply {
             setImageActionBar(btnActionBarRight, R.drawable.ic_settings)
         }
     }
-
+    private fun initNativeCollab() {
+        loadNativeCollabAds(
+            getString(R.string.native_cl_home), binding.flNativeCollab
+        )
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("PERF2", "HomeFragment onViewCreated: ${System.currentTimeMillis()}")
@@ -57,12 +67,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
 
     override fun viewListener() {
@@ -76,7 +88,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             HomeMenuAction.COSPLAY -> navigateWithCheck(R.id.action_home_to_cosplay)
             HomeMenuAction.RANDOM -> navigateWithCheck(R.id.action_home_to_random)
             HomeMenuAction.MY_ALBUM -> {
-                findNavController().navigate(R.id.action_home_to_myPony)
+                showInter {
+                findNavController().navigate(R.id.action_home_to_myPony)}
             }
         }
     }

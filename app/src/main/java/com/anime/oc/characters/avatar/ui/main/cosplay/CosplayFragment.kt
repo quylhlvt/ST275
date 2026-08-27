@@ -27,8 +27,11 @@ import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.core.extention.changeText
+import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentCosplayBinding
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -55,14 +58,27 @@ class CosplayFragment : BaseFragment<FragmentCosplayBinding, CosplayViewModel>(
     private fun checkOnlineNetworkOrShowDialog(templateIndex: Int): Boolean {
         if (!isOnlineTemplate(templateIndex)) return false
         return when {
-            !InternetExtension.isInternetAvailable(requireContext()) -> { showUnstableNetworkDialog(); true }
-            !InternetExtension.isNetworkConnected(requireContext()) -> { showUnstableNetworkDialog(); true }
+            !InternetExtension.isInternetAvailable(requireContext()) -> {
+                showUnstableNetworkDialog(); true
+            }
+
+            !InternetExtension.isNetworkConnected(requireContext()) -> {
+                showUnstableNetworkDialog(); true
+            }
+
             else -> false
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBackPressHandler()
+    }
+
+    private fun initNativeCollab() {
+        loadNativeCollabAds(
+            getString(R.string.native_cl_cosplay), binding.flNativeCollab
+        )
     }
 
     private fun setupBackPressHandler() {
@@ -78,18 +94,23 @@ class CosplayFragment : BaseFragment<FragmentCosplayBinding, CosplayViewModel>(
 
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
+
     override fun setupPreViews() {
         super.setupPreViews()
         Glide.with(binding.imageGif).asGif().load(R.drawable.gif).into(binding.imageGif)
     }
+
     override fun initView() {
+        initNativeCollab()
         binding.imvImage.gone()
         binding.imageGif.visible()
         binding.setupActionBar()
@@ -146,10 +167,11 @@ class CosplayFragment : BaseFragment<FragmentCosplayBinding, CosplayViewModel>(
                 )
                 val currentIndex = viewModel.randomItem.value?.templateIndex ?: -1
                 if (currentIndex >= 0 && checkOnlineNetworkOrShowDialog(currentIndex)) return@onClick
-                showLoading()
-                viewModel.randomize(isOnline = isOnline)
+                showInter {
+                    showLoading()
+                    viewModel.randomize(isOnline = isOnline)
+                }
             }
-
             actionBar.btnActionBarRight.onClick {
                 showGuide.visible()
             }

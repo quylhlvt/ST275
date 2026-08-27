@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.base.BackPressHandler
 import com.anime.oc.characters.avatar.core.base.BaseFragment
+import com.anime.oc.characters.avatar.core.extention.gone
 import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.core.extention.toHome
 import com.anime.oc.characters.avatar.core.extention.toPermission
+import com.anime.oc.characters.avatar.core.extention.visible
 import com.anime.oc.characters.avatar.databinding.FragmentIntroBinding
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,11 +38,11 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroViewModel>(
             OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-//                if (position == 1) {
-//                    binding.nativeAds.gone()
-//                } else {
-//                    binding.nativeAds.visible()
-//                }
+                if (position == 1) {
+                    binding.nativeAds.gone()
+                } else {
+                    binding.nativeAds.visible()
+                }
             }
         })
 //        binding.viewPager2.registerOnPageChangeCallback(object :
@@ -62,7 +66,12 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroViewModel>(
     ): FragmentIntroBinding = FragmentIntroBinding.inflate(inflater, container, false)
 
     override fun initView() {
-
+        Admob.getInstance().loadNativeAd(
+            requireContext(),
+            getString(R.string.native_intro),
+            binding.nativeAds,
+            R.layout.ads_native_medium_btn_bottom_2
+        )
         binding.viewPager2.adapter = introAdapter
         binding.dotsIndicator.attachTo(binding.viewPager2)
         setOnChangeViewPager2()

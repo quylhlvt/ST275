@@ -33,6 +33,9 @@ import com.anime.oc.characters.avatar.utils.share.SocialShareManager
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
+import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
+import com.anime.oc.characters.avatar.core.extention.logEventSocial
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -111,9 +114,13 @@ class ViewFragment : BaseFragment<FragmentViewBinding, ViewViewModel>(
         )
         requireActivity().window.decorView.isEnabled = true
     }
-
+    private fun initNativeCollab() {
+        loadNativeCollabAds(
+            getString(R.string.native_cl_detail), binding.flNativeCollab
+        )
+    }
     override fun initView() {
-
+        initNativeCollab()
         currentImagePath = imagePath
         binding.apply {
             setImageActionBar(actionBar.btnActionBarLeft, R.drawable.back_app)
@@ -143,13 +150,16 @@ class ViewFragment : BaseFragment<FragmentViewBinding, ViewViewModel>(
 
     override fun viewListener() {
         binding.apply {
-            actionBar.btnActionBarLeft.onClick { findNavController().navigateUp() }
+            actionBar.btnActionBarLeft.onClick { showInter {
+                findNavController().navigateUp()
+            } }
+
 
             when (imageType) {
                 1 -> {
                     actionBar.btnActionBarRight.onClick1 { confirmDelete() }
                     actionBar.btnActionBarNextToRight.onClick1 {
-                        navigateToEdit()
+                        showInter {  navigateToEdit()}
                     }
                     btnBottomLeft.onClick(1500) { shareImage() }
                     btnBottomRight.onClick1 { downloadImage() }
@@ -194,11 +204,11 @@ class ViewFragment : BaseFragment<FragmentViewBinding, ViewViewModel>(
             .lastOrNull()
             .orEmpty()
 //
-//        logEventSocial(
-//            "click_share_$socialName",
-//            "click_share_${socialName}_$dataName",
-//            avatarPath
-//        )
+        logEventSocial(
+            "click_share_$socialName",
+            "click_share_${socialName}_$dataName",
+            avatarPath
+        )
         Log.d("click_share", "click_share_${socialName}_$dataName -- ${avatarPath}")
     }
     private fun shareToSocialApp(app: SocialShareManager.SocialApp) {

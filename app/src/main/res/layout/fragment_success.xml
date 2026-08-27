@@ -24,7 +24,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension_0"
-        android:layout_marginBottom="@dimen/dimension_40"
+        android:layout_marginBottom="@dimen/dimension_82"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutActionBar">
 
@@ -241,9 +241,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+            android:id="@+id/flNativeCollab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-
-
-
-
+        <include layout="@layout/ads_shimmer_collap_native" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

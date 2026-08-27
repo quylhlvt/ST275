@@ -26,6 +26,12 @@ import com.anime.oc.characters.avatar.core.helper.StringHelper
 import com.anime.oc.characters.avatar.utils.key.RequestKey
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.FragmentPermissionBinding
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdView
+import com.lvt.ads.callback.InterCallback
+import com.lvt.ads.callback.NativeCallback
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.system.exitProcess
 
@@ -37,14 +43,17 @@ class PermissionFragment : BaseFragment<FragmentPermissionBinding, PermissionVie
     // outside and return an empty result. Track that request across onResume.
     private var pendingPermissionRequest = false
     private var pendingStorageRequest = false
-
+    private var inter: InterstitialAd? = null
     override fun viewListener() {
         binding.swPermission.onClick(1500) { handlePermissionRequest(isStorage = true) }
         binding.swNotification.onClick(1500) { handlePermissionRequest(isStorage = false) }
         binding.tvContinue.onClick(1000) {
-
+            Admob.getInstance().showInterAds(requireActivity(), inter, object : InterCallback() {
+                override fun onNextAction() {
+                    super.onNextAction()
                     handleContinue()}
-
+            })
+        }
     }
     private fun isNetworkAvailable(): Boolean {
         val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE)
@@ -59,14 +68,14 @@ class PermissionFragment : BaseFragment<FragmentPermissionBinding, PermissionVie
         }
     }
     private fun updateContinueMargin() {
-//        val marginPx = if (!isNetworkAvailable()) {
-//            200.dp(requireContext())
-//        } else {
-//            10.dp(requireContext())
-//        }
-//        val params = binding.tvContinue.layoutParams as? ViewGroup.MarginLayoutParams
-//        params?.bottomMargin = marginPx  // hoặc topMargin tuỳ layout
-//        binding.tvContinue.layoutParams = params
+        val marginPx = if (!isNetworkAvailable()) {
+            resources.getDimensionPixelSize(R.dimen.dimension_200)
+        } else {
+            resources.getDimensionPixelSize(R.dimen.dimension_10)
+        }
+        val params = binding.tvContinue.layoutParams as? ViewGroup.MarginLayoutParams
+        params?.bottomMargin = marginPx  // hoặc topMargin tuỳ layout
+        binding.tvContinue.layoutParams = params
     }
     override fun inflateBinding(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -74,6 +83,28 @@ class PermissionFragment : BaseFragment<FragmentPermissionBinding, PermissionVie
 
     override fun initView() {
         updateContinueMargin()
+        Admob.getInstance().loadInterAds(requireContext(), getString(R.string.inter_per), object : InterCallback() {
+            override fun onAdLoadSuccess(interstitialAd: InterstitialAd?) {
+                super.onAdLoadSuccess(interstitialAd)
+                inter = interstitialAd
+            }
+        })
+        Admob.getInstance().loadNativeAd(requireContext(), getString(R.string.native_per), object : NativeCallback() {
+            override fun onAdFailedToLoad() {
+                super.onAdFailedToLoad()
+                binding.nativeAds.gone()
+            }
+
+            override fun onNativeAdLoaded(nativeAd: NativeAd?) {
+                super.onNativeAdLoaded(nativeAd)
+                binding.nativeAds.visible()
+                val adView =
+                    LayoutInflater.from(requireContext()).inflate(R.layout.ads_native_medium_btn_bottom_2, null) as NativeAdView
+                binding.nativeAds.removeAllViews()
+                binding.nativeAds.addView(adView)
+                Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
+            }
+        })
         binding.setupActionBar()
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             binding.btnStorage.visible()

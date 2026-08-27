@@ -26,7 +26,10 @@ import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentRandomBinding
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -50,7 +53,11 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
         return viewModelActivity.templates.value.getOrNull(templateIndex)
             ?.id?.startsWith("online_") == true
     }
-
+    private fun initNativeCollab() {
+        Admob.getInstance().loadNativeCollapNotBanner(
+            requireContext(), getString(R.string.native_cl_random), binding.flNativeCollab
+        )
+    }
     private fun checkOnlineNetworkOrShowDialog(templateIndex: Int): Boolean {
         if (!isOnlineTemplate(templateIndex)) return false
         return when {
@@ -90,12 +97,14 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
 
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
 
     override fun setupPreViews() {
@@ -104,6 +113,7 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
     }
 
     override fun initView() {
+        initNativeCollab()
         binding.imvImage.gone()
         binding.imageGif.visible()
         setSaveButtonEnabled(false)
@@ -138,7 +148,9 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
 
                     if (currentIndex < 0 || !checkOnlineNetworkOrShowDialog(currentIndex)) {
                         showLoading()
-                        viewModel.randomize(isOnline = isOnline)
+                        showInter {
+                            viewModel.randomize(isOnline = isOnline)
+                        }
                     }
                 }
 
@@ -162,7 +174,9 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
                     isEdit = false,
                     savedSelections = item.selections
                 )
-                findNavController().navigate(R.id.action_random_to_custom, args)
+                showInter {
+                    findNavController().navigate(R.id.action_random_to_custom, args)
+                }
             }
         }
     }

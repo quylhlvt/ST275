@@ -38,8 +38,12 @@ import com.anime.oc.characters.avatar.ui.main.myPony.adapter.MyDesignAdapter
 import com.anime.oc.characters.avatar.ui.onboarding.permission.PermissionViewModel
 import com.anime.oc.characters.avatar.utils.share.whatsapp.WhatsappSharingFragment
 import com.anime.oc.characters.avatar.R
+import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentMyPonyBinding
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -68,19 +72,31 @@ class MyPonyFragment : WhatsappSharingFragment<FragmentMyPonyBinding, MyPonyView
         resetSelection()
     }
     // ── INIT ──────────────────────────────────────────────────────────────────
-
+    private fun initNativeCollab() {
+        loadNativeCollabAds(
+            getString(R.string.native_cl_myLib), binding.flNativeCollab
+        )
+    }
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
 
     override fun initView() {
-
+        initNativeCollab()
+        Admob.getInstance().loadNativeAd(
+            requireContext(),
+            getString(R.string.native_my_lib),
+            binding.nativeAds,
+            R.layout.ads_native_collap_banner_2
+        )
         binding.apply {
             tvWhatApp.isSelected = true
             tvTelegram.isSelected = true
@@ -153,7 +169,7 @@ class MyPonyFragment : WhatsappSharingFragment<FragmentMyPonyBinding, MyPonyView
             onItemTick = { position -> toggleSelection(position, true) }
             onEditClick = { idEdit ->
                 if (ensureEditItemExists(idEdit)) {
-                    navigateToEdit(idEdit)
+                    showInter {navigateToEdit(idEdit)}
                 }
             }
             onDeleteClick = { path -> confirmDelete(arrayListOf(path), true) }
@@ -402,7 +418,7 @@ class MyPonyFragment : WhatsappSharingFragment<FragmentMyPonyBinding, MyPonyView
 //        } else {
 //            navigateToView(path, type, idEdit)
 //        }
-        navigateToView(path, type, idEdit)
+        showInter { navigateToView(path, type, idEdit)}
     }
 // MyAvatarAdapter — long click gọi về Fragment
 

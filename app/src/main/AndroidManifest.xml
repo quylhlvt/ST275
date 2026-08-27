@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<!--    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>-->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     <queries>
         <package android:name="org.telegram.messenger" />
         <package android:name="org.telegram.messenger.web" />
@@ -41,12 +41,12 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/app_id" />
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"-->
-<!--            android:value="true" />-->
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"-->
-<!--            android:value="true" />-->
+        <meta-data
+            android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"
+            android:value="true" />
         <activity
             android:name="com.anime.oc.characters.avatar.MainActivity"
             android:screenOrientation="portrait"

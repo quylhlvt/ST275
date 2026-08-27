@@ -39,7 +39,10 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.anime.oc.characters.avatar.R
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentShowBinding
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -84,7 +87,11 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
         return viewModelActivity.templates.value
             .getOrNull(templateIndex)?.id?.startsWith("online_") == true
     }
-
+    private fun initNativeCollab() {
+        Admob.getInstance().loadNativeCollapNotBanner(
+            requireContext(), getString(R.string.native_cl_cosplayPlay), binding.flNativeCollab
+        )
+    }
     private fun checkOnlineNetworkOrShowDialog(): Boolean {
         if (!isOnlineTemplate()) return false
         return when {
@@ -101,15 +108,17 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
 
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
     override fun initView() {
-
+        initNativeCollab()
         binding.apply {
             txtTittle.isSelected = true
             txtNextDialog.isSelected = true
@@ -262,8 +271,9 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
         val bitmap = renderLayersToBitmap()
         if (bitmap != null) viewModelActivity.userResultBitmap = bitmap
         viewModelActivity.cosplayPercent = viewModel.state.value.matchPercent
-
-        findNavController().navigate(R.id.action_show_to_successCosplay)
+        showInter {
+            findNavController().navigate(R.id.action_show_to_successCosplay)
+        }
 
     }
     private fun renderLayersToBitmap(): Bitmap? {
@@ -288,7 +298,9 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
     override fun viewListener() {
         binding.apply {
             actionBar.cvLogo.onClick {
-                popBack()
+                showInter {
+                    popBack()
+                }
             }
 //            actionBar.btnActionBarRight.onClick { navigateToSuccess() }
 

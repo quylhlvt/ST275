@@ -21,8 +21,12 @@ import com.anime.oc.characters.avatar.ui.main.customize.CustomizeFragment
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
+import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
+import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentChoosePonyBinding
+import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
+import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
@@ -37,6 +41,11 @@ class ChoosePonyFragment : BaseFragment<FragmentChoosePonyBinding, ChoosePonyVie
     private val mainViewModel: ViewModelActivity by activityViewModels()
     private lateinit var adapter: ChoosePonyAdapter
     private var isFirstLoad = true
+    private fun initNativeCollab() {
+        loadNativeCollabAds(
+            getString(R.string.native_cl_category), binding.flNativeCollab
+        )
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,16 +54,24 @@ class ChoosePonyFragment : BaseFragment<FragmentChoosePonyBinding, ChoosePonyVie
 
     override fun onFragmentStart() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
+        initNativeCollab()
     }
 
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
-
+        (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
+        binding.flNativeCollab.removeAllViews()
     }
     override fun initView() {
 
-
+        initNativeCollab()
+        Admob.getInstance().loadNativeAd(
+            requireContext(),
+            getString(R.string.native_category),
+            binding.nativeAds,
+            R.layout.ads_native_collap_banner_2
+        )
         setImageActionBar(binding.actionBar.btnActionBarLeft, R.drawable.back_app)
         setTextActionBar(binding.actionBar.tvCenter, getString(R.string.category))
 
@@ -105,13 +122,15 @@ class ChoosePonyFragment : BaseFragment<FragmentChoosePonyBinding, ChoosePonyVie
                     return
                 }
         }
-        findNavController().safeNavigate(
-            R.id.action_createPony_to_custom,
-            bundleOf(
-                CustomizeFragment.ARG_TEMPLATE_INDEX to correctIndex,
-                CustomizeFragment.ARG_TEMPLATE_ID to character.id
+        showInter {
+            findNavController().safeNavigate(
+                R.id.action_createPony_to_custom,
+                bundleOf(
+                    CustomizeFragment.ARG_TEMPLATE_INDEX to correctIndex,
+                    CustomizeFragment.ARG_TEMPLATE_ID to character.id
+                )
             )
-        )
+        }
     }
     override fun viewListener() {
         binding.actionBar.btnActionBarLeft.setOnClickListener { navigateBack() }
