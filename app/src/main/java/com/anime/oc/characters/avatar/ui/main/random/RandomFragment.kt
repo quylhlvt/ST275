@@ -16,6 +16,7 @@ import com.anime.oc.characters.avatar.core.extention.InternetExtension
 import com.anime.oc.characters.avatar.core.extention.gone
 import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.core.extention.popBack
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.select
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.visible
@@ -43,21 +44,24 @@ import kotlin.collections.forEach
 
 @AndroidEntryPoint
 class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
-    FragmentRandomBinding::inflate,
-    RandomViewModel::class.java
+    FragmentRandomBinding::inflate, RandomViewModel::class.java
 ) {
-    private var count = 0
+
+    // RandomFragment được tạo mới mỗi lần điều hướng từ Home, nên bộ đếm này
+    // tự reset cho mỗi lượt vào màn và vẫn được giữ khi quay lại từ Customize.
+    private var randomClickCount = 0
 
     // Thêm hàm này vào RandomFragment
     private fun isOnlineTemplate(templateIndex: Int): Boolean {
-        return viewModelActivity.templates.value.getOrNull(templateIndex)
-            ?.id?.startsWith("online_") == true
+        return viewModelActivity.templates.value.getOrNull(templateIndex)?.id?.startsWith("online_") == true
     }
+
     private fun initNativeCollab() {
         Admob.getInstance().loadNativeCollapNotBanner(
             requireContext(), getString(R.string.native_cl_random), binding.flNativeCollab
         )
     }
+
     private fun checkOnlineNetworkOrShowDialog(templateIndex: Int): Boolean {
         if (!isOnlineTemplate(templateIndex)) return false
         return when {
@@ -80,19 +84,15 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
 
     private fun setupBackPressHandler() {
         requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
+            viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     popBack()
                 }
-            }
-        )
+            })
     }
 
     override fun inflateBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): FragmentRandomBinding = FragmentRandomBinding.inflate(inflater, container, false)
 
     override fun onFragmentStart() {
@@ -104,7 +104,7 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
-        binding.flNativeCollab.removeAllViews()
+//        binding.flNativeCollab.removeAllViews()
     }
 
     override fun setupPreViews() {
@@ -138,36 +138,30 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
             }
             // ✅ Nút random — check internet nếu template online
             random.onClick {
-                count++
+                randomClickCount++
+                val isOnline = isNetworkConnected(requireContext()) && isInternetAvailable(requireContext())
+                val currentIndex = viewModel.randomItem.value?.templateIndex ?: -1
 
-                val action = {
-                    val isOnline = isNetworkConnected(requireContext()) &&
-                            isInternetAvailable(requireContext())
-
-                    val currentIndex = viewModel.randomItem.value?.templateIndex ?: -1
-
-                    if (currentIndex < 0 || !checkOnlineNetworkOrShowDialog(currentIndex)) {
-                        showLoading()
-                        showInter {
-                            viewModel.randomize(isOnline = isOnline)
-                        }
+                if (currentIndex < 0 || !checkOnlineNetworkOrShowDialog(currentIndex)) {
+                    showLoading()
+                    val randomizeAction = {
+                        viewModel.randomize(isOnline = isOnline)
                     }
-                }
 
-                if (count > 1) {
-
-                    action()
-
+                    if (randomClickCount == 1) {
+                        randomizeAction()
+                    } else {
+                        showInter(randomizeAction)
+                    }
                 } else {
-                    action()
+                    return@onClick
                 }
             }
             btnEdit.onClick {
                 if (!btnEdit.isEnabled) return@onClick
                 val item = viewModel.randomItem.value ?: return@onClick
                 if (checkOnlineNetworkOrShowDialog(item.templateIndex)) return@onClick
-                val templateId = viewModelActivity.templates.value
-                    .getOrNull(item.templateIndex)?.id ?: ""
+                val templateId = viewModelActivity.templates.value.getOrNull(item.templateIndex)?.id ?: ""
                 val args = CustomizeFragment.newArgs(
                     templateIndex = item.templateIndex,
                     templateId = templateId,
@@ -175,7 +169,7 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
                     savedSelections = item.selections
                 )
                 showInter {
-                    findNavController().navigate(R.id.action_random_to_custom, args)
+                    findNavController().safeNavigate(R.id.action_random_to_custom, args)
                 }
             }
         }
@@ -185,8 +179,7 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isDataReady.collect { ready ->
                 if (ready && viewModel.randomItem.value == null) {
-                    val isOnline =
-                        isNetworkConnected(requireContext()) && isInternetAvailable(requireContext())
+                    val isOnline = isNetworkConnected(requireContext()) && isInternetAvailable(requireContext())
                     viewModel.randomize(isOnline = isOnline)
                 }
             }
@@ -232,8 +225,7 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
                         async {
                             runCatching {
                                 Glide.with(requireContext()).asBitmap().load(path)
-                                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                                    .override(800).submit().get()
+                                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE).override(800).submit().get()
                             }.getOrNull()
                         }
                     }.awaitAll()
@@ -241,8 +233,10 @@ class RandomFragment : BaseFragment<FragmentRandomBinding, RandomViewModel>(
                 bitmaps = loaded.filterNotNull()
                 if (bitmaps.size == paths.size) break
 
-                val hasNetwork = InternetExtension.isNetworkConnected(requireContext()) &&
-                        InternetExtension.isInternetAvailable(requireContext())
+                val hasNetwork =
+                    InternetExtension.isNetworkConnected(requireContext()) && InternetExtension.isInternetAvailable(
+                        requireContext()
+                    )
                 if (!hasNetwork) {
                     waitingForNetwork = true
                     if (!networkDialogShown) {

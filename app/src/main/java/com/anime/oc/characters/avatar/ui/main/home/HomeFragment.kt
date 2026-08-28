@@ -16,6 +16,7 @@ import com.anime.oc.characters.avatar.core.base.BackPressHandler
 import com.anime.oc.characters.avatar.core.base.BaseFragment
 import com.anime.oc.characters.avatar.core.extention.InternetExtension
 import com.anime.oc.characters.avatar.core.extention.onClick
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.toSettingFromHome
 import com.anime.oc.characters.avatar.core.helper.RateHelper
@@ -74,7 +75,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
-        binding.flNativeCollab.removeAllViews()
+//        binding.flNativeCollab.removeAllViews()
     }
 
     override fun viewListener() {
@@ -89,7 +90,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             HomeMenuAction.RANDOM -> navigateWithCheck(R.id.action_home_to_random)
             HomeMenuAction.MY_ALBUM -> {
                 showInter {
-                findNavController().navigate(R.id.action_home_to_myPony)}
+                    findNavController().safeNavigate(R.id.action_home_to_myPony)
+                }
             }
         }
     }
@@ -106,7 +108,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 showLoadingDataDialog()
             }
 
-            else -> findNavController().navigate(destination)
+            else -> findNavController().safeNavigate(destination)
         }
     }
 

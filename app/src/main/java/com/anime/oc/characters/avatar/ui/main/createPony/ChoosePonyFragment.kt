@@ -57,14 +57,12 @@ class ChoosePonyFragment : BaseFragment<FragmentChoosePonyBinding, ChoosePonyVie
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = false
         initNativeCollab()
     }
-
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
-        binding.flNativeCollab.removeAllViews()
+//        binding.flNativeCollab.removeAllViews()
     }
     override fun initView() {
-
         initNativeCollab()
         Admob.getInstance().loadNativeAd(
             requireContext(),

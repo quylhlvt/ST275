@@ -120,4 +120,7 @@
     <string name="victory">Victoire</string>
     <string name="done">Terminé</string>
     <string name="please_wait">Veuillez patienter...</string>
+    <string name="please_watch_full_ads">Veuillez regarder la publicité jusqu’au bout</string>
+    <string name="load_ads_fail">Échec du chargement de la publicité</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Regardez une courte publicité pour générer un personnage d’anime aléatoire</string>
 </resources>

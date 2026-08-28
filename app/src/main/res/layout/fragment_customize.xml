@@ -23,6 +23,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension_0"
+        android:elevation="@dimen/dimension_16"
         android:layout_gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutActionBar"
@@ -55,6 +56,51 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            android:elevation="@dimen/dimension_18"
+            app:layout_constraintDimensionRatio="3.6:0.56"
+            app:layout_constraintBottom_toTopOf="@+id/frame_rando_all"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_0"
+                app:layout_constraintDimensionRatio="3.6:0.08"
+                android:id="@+id/view17"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_0"
+                app:layout_constraintDimensionRatio="3.6:0.08"
+                android:id="@+id/view18"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <View
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="@dimen/dimension_0"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1.6:5.6"
+                android:id="@+id/view19"/>
+            <View
+                android:layout_width="@dimen/dimension_0"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="1.6:5.6"
+                android:id="@+id/view20"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <ImageView
+                android:id="@+id/imgRandom"
+                android:src="@drawable/ic_random"
+                android:layout_width="@dimen/dimension_0"
+                android:layout_height="@dimen/dimension_0"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toTopOf="@+id/view18"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/view20"
+                app:layout_constraintTop_toBottomOf="@+id/view17"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/frame_rando_all"
             android:layout_width="@dimen/dimension_0"
@@ -126,30 +172,6 @@
                 app:layout_constraintVertical_bias="1.0" />
 
 
-
-            <ImageView
-                android:id="@+id/imgRandom"
-                android:layout_width="@dimen/dimension_40"
-                android:layout_height="@dimen/dimension_0"
-                android:layout_marginEnd="@dimen/dimension_16"
-                android:src="@drawable/ic_dice"
-                android:visibility="gone"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintBottom_toTopOf="@+id/view5"
-                app:layout_constraintEnd_toStartOf="@+id/view7"
-                app:layout_constraintTop_toBottomOf="@+id/view4"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <!-- Container màu ở giữa — y hệt llColor trong Activity -->
-<!--            <ImageView-->
-<!--                android:id="@+id/imgScale"-->
-<!--                android:layout_width="@dimen/dimension_0"-->
-<!--                android:layout_height="@dimen/dimension_0"-->
-<!--                android:src="@drawable/ic_scale_cus_none"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintDimensionRatio="1:1"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/imgRandom"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:elevation="@dimen/dimension_1"

@@ -28,6 +28,7 @@ import com.anime.oc.characters.avatar.core.extention.goToSettings
 import com.anime.oc.characters.avatar.core.extention.gone
 import com.anime.oc.characters.avatar.core.extention.invisible
 import com.anime.oc.characters.avatar.core.extention.onClick
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.toCleanSelections
 import com.anime.oc.characters.avatar.core.extention.visible
@@ -86,7 +87,7 @@ class MyPonyFragment : WhatsappSharingFragment<FragmentMyPonyBinding, MyPonyView
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
-        binding.flNativeCollab.removeAllViews()
+//        binding.flNativeCollab.removeAllViews()
     }
 
     override fun initView() {
@@ -520,7 +521,7 @@ class MyPonyFragment : WhatsappSharingFragment<FragmentMyPonyBinding, MyPonyView
 
     private fun navigateToView(path: String, type: Int, idEdit: String) {
         val action = MyPonyFragmentDirections.actionMyponyToView(path, idEdit, type)
-        findNavController().navigate(action)
+        findNavController().safeNavigate(action.actionId, action.arguments)
     }
 
     /**
@@ -570,7 +571,7 @@ class MyPonyFragment : WhatsappSharingFragment<FragmentMyPonyBinding, MyPonyView
             savedSelections = customized.selections.toCleanSelections(),
             isFlipped = customized.isFlipped
         )
-        findNavController().navigate(R.id.action_mypony_to_custom, args)
+        findNavController().safeNavigate(R.id.action_mypony_to_custom, args)
     }
 
     // ── ACTIONS ───────────────────────────────────────────────────────────────

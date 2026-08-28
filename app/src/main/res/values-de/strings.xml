@@ -124,4 +124,7 @@
     <string name="victory">Sieg</string>
     <string name="done">Fertig</string>
     <string name="please_wait">Bitte warten...</string>
+    <string name="please_watch_full_ads">Bitte sieh dir die Werbung vollständig an</string>
+    <string name="load_ads_fail">Werbung konnte nicht geladen werden</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Sieh dir eine kurze Werbung an, um einen zufälligen Anime-Charakter zu erstellen</string>
 </resources>

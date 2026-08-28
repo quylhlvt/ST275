@@ -24,6 +24,7 @@ import com.anime.oc.characters.avatar.core.base.BaseFragment
 import com.anime.oc.characters.avatar.core.extention.InternetExtension
 import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.core.extention.saveToFile
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.setMaterialCardViewActionBar1
 import com.anime.oc.characters.avatar.data.model.custom.BodyPartModel
@@ -129,7 +130,7 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
-        binding.flNativeCollab.removeAllViews()
+//        binding.flNativeCollab.removeAllViews()
     }
 
     override fun initView() {
@@ -333,9 +334,7 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                 }
             }
         }
-
         binding.apply {
-
             imgChangColor.onClick {
                 val navPos = viewModel.state.value.currentNavIndex
                 if (!viewModel.state.value.hasMultipleColors) return@onClick
@@ -354,11 +353,11 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
             imgRandom.onClick {
                 if (!checkOnlineNetworkOrShowDialog()) {
                     showConfirmDialog(
-                        message = getString(R.string.cat_random),
+                        message = getString(R.string.watch_a_short_ad_to_generate_a_random_anime),
                         title = getString(R.string.random),
-                        yesText = getString(R.string.ok),
-                        noText = getString(R.string.cancel),
-                        onYes = {
+                        yesText = getString(R.string.cancel),
+                        noText = getString(R.string.ok),
+                        onNo = {
                             showRewardAds1(
                                 onRewardSuccess = {
                                     if (!checkOnlineNetworkOrShowDialog()) {
@@ -368,7 +367,7 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                                 onAdClosed = {}
                             )
                         },
-                        onNo = { hideLoadingSafe() }
+                        onYes = { hideLoadingSafe() }
                     )
                 }
             }
@@ -868,7 +867,7 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
 
             // ✅ Navigate trực tiếp trên Main thread, KHÔNG wrap thêm withContext
             if (isAdded && !isDetached) {
-                findNavController().navigate(
+                findNavController().safeNavigate(
                     R.id.action_customizeFragment_to_addFragment,
                     Bundle().apply {
                         putString("imagePath", savedPath)

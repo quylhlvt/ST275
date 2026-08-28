@@ -44,6 +44,7 @@ import com.anime.oc.characters.avatar.core.extention.hideNavigation
 import com.anime.oc.characters.avatar.core.extention.hideSoftKeyboard
 import com.anime.oc.characters.avatar.core.extention.loadImage
 import com.anime.oc.characters.avatar.core.extention.onClick
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.setFont
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.visible
@@ -175,7 +176,7 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
-        binding.flNativeCollab.removeAllViews()
+//        binding.flNativeCollab.removeAllViews()
     }
 
     // ── Observe ───────────────────────────────────────────────────────────────
@@ -1014,15 +1015,16 @@ class AddCharacterFragment : BaseFragment<FragmentAddCharacterBinding, AddCharac
 
                 if (savedImagePath != null) {
                     showInter {
-                    findNavController().navigate(
-                        R.id.action_addCharacterFragment_toSuccessFragment,
-                        Bundle().apply {
-                            putString("imagePath", savedImagePath)
-                            putString("avatarUrl", arguments?.getString("avatarUrl").orEmpty())
-                            putString("idEdit", "")
-                            putInt("imageType", 0)
-                        }
-                    )}
+                        findNavController().safeNavigate(
+                            R.id.action_addCharacterFragment_toSuccessFragment,
+                            Bundle().apply {
+                                putString("imagePath", savedImagePath)
+                                putString("avatarUrl", arguments?.getString("avatarUrl").orEmpty())
+                                putString("idEdit", "")
+                                putInt("imageType", 0)
+                            }
+                        )
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Lưu thất bại!", Toast.LENGTH_SHORT).show()
                 }

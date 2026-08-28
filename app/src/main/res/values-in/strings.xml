@@ -120,4 +120,7 @@
     <string name="victory">Kemenangan</string>
     <string name="done">Selesai</string>
     <string name="please_wait">Harap tunggu...</string>
+    <string name="please_watch_full_ads">Harap tonton iklan sampai selesai</string>
+    <string name="load_ads_fail">Gagal memuat iklan</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Tonton iklan singkat untuk membuat karakter anime acak</string>
 </resources>

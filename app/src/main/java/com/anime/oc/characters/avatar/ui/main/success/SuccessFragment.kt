@@ -23,6 +23,7 @@ import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
 import com.anime.oc.characters.avatar.core.extention.logEventSocial
 import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.core.extention.onClick1
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
 import com.anime.oc.characters.avatar.core.extention.showInter
@@ -151,7 +152,7 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
             // Home
             actionBar.btnActionBarRight.onClick1 {
                 showInter {
-                    findNavController().navigate(
+                    findNavController().safeNavigate(
                         R.id.action_success_to_home, null,
                         androidx.navigation.NavOptions.Builder()
                             .setPopUpTo(R.id.homeFragment, true).build()
@@ -164,7 +165,7 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
             // MyCreation
             btnBottomLeft.onClick1 {
                 showInter {
-                    findNavController().navigate(
+                    findNavController().safeNavigate(
                         R.id.action_success_to_myPony, null,
                         androidx.navigation.NavOptions.Builder()
                             .setPopUpTo(R.id.homeFragment, false).build()

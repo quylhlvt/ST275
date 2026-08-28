@@ -24,6 +24,7 @@ import com.anime.oc.characters.avatar.core.extention.InternetExtension
 import com.anime.oc.characters.avatar.core.extention.gone
 import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.core.extention.popBack
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.core.extention.visible
 import com.anime.oc.characters.avatar.data.model.custom.BodyPartModel
@@ -116,7 +117,7 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
     override fun onFragmentStop() {
         if (!isAdded || isDetached) return
         (binding.flNativeCollab as? BlockableFrameLayout)?.isBlocked = true
-        binding.flNativeCollab.removeAllViews()
+//        binding.flNativeCollab.removeAllViews()
     }
     override fun initView() {
         initNativeCollab()
@@ -273,7 +274,7 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowViewModel>(
         if (bitmap != null) viewModelActivity.userResultBitmap = bitmap
         viewModelActivity.cosplayPercent = viewModel.state.value.matchPercent
         showInter {
-            findNavController().navigate(R.id.action_show_to_successCosplay)
+            findNavController().safeNavigate(R.id.action_show_to_successCosplay)
         }
 
     }

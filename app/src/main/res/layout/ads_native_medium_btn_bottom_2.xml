@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textColor="@color/native_text_color_btn"
+                        android:textColor="@color/native_text_color"
                         android:textSize="@dimen/text_size_14" />
 
                     <LinearLayout
@@ -107,7 +107,7 @@
                             android:ellipsize="end"
                             android:lines="2"
                             android:maxLines="2"
-                            android:textColor="@color/native_text_color_btn"
+                            android:textColor="@color/native_text_color"
                             android:textSize="@dimen/text_size_12" />
                     </LinearLayout>
                 </LinearLayout>

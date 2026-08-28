@@ -47,7 +47,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text=""
-                        android:textColor="@color/native_text_color_btn"
+                        android:textColor="@color/native_text_color"
                         android:textSize="@dimen/text_size_12"
                         android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
                         android:layout_weight="1"
                         android:gravity="bottom"
                         android:lines="1"
-                        android:textColor="@color/native_text_color_btn"
+                        android:textColor="@color/native_text_color"
                         android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
             </LinearLayout>
@@ -73,7 +73,7 @@
                     android:id="@+id/ad_body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/native_text_color_btn"
+                    android:textColor="@color/native_text_color"
                     android:textSize="@dimen/text_size_12" />
 
             </LinearLayout>

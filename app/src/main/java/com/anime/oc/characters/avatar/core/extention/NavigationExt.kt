@@ -4,31 +4,36 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.anime.oc.characters.avatar.R
 
 // ── Base navigate helpers ─────────────────────────────────────────────────────
 
 fun Fragment.nav(actionId: Int) {
-    try {
-        findNavController().navigate(actionId)
-    } catch (e: Exception) {
-        // Đã ở đích hoặc action không tồn tại → ignore
-    }
+    runCatching { findNavController() }
+        .onSuccess { it.safeNavigate(actionId) }
+        .onFailure { Log.e("SafeNav", "❌ Unable to find NavController: ${it.message}") }
 }
 
 /**
  * Navigate an toàn với args — không crash khi:
  * - Action không tồn tại ở destination hiện tại (double-tap, wrong destination)
  */
-fun NavController.safeNavigate(actionId: Int, args: Bundle? = null) {
+fun NavController.safeNavigate(
+    actionId: Int,
+    args: Bundle? = null,
+    navOptions: NavOptions? = null
+) {
     try {
         currentDestination?.getAction(actionId) ?: run {
             Log.w("SafeNav", "⚠️ Action $actionId not found from [${currentDestination?.label}]. Skipped.")
             return
         }
-        navigate(actionId, args)
+        navigate(actionId, args, navOptions)
     } catch (e: IllegalArgumentException) {
+        Log.e("SafeNav", "❌ ${e.message}")
+    } catch (e: IllegalStateException) {
         Log.e("SafeNav", "❌ ${e.message}")
     }
 }

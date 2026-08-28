@@ -93,7 +93,7 @@
     <string name="internet">Internet</string>
     <string name="please_connect_to_the_internet_to_download_more_data">Please connect to the internet to download more data</string>
     <string name="unstable_connection_please_check_your_network_connection">Unstable connection, please check your network connection</string>
-    <string name="ok">Okay</string>
+    <string name="ok">Ok</string>
     <string name="please_wait_a_few_seconds_for_data_to_load">Please wait a few seconds for data to load.</string>
     <string name="create_package_name">Create Package Name</string>
     <string name="enter_your_package_name">Enter your package name</string>
@@ -124,4 +124,5 @@
     <string name="please_wait">Please wait...</string>
     <string name="please_watch_full_ads">Please Watch Full Ads</string>
     <string name="load_ads_fail">Load Ads Fail</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Watch a short ad to generate a Random Anime</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.anime.oc.characters.avatar.core.base.BaseFragment
 import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.core.extention.popBack
+import com.anime.oc.characters.avatar.core.extention.safeNavigate
 import com.anime.oc.characters.avatar.core.extention.select
 import com.anime.oc.characters.avatar.core.extention.setImageActionBar
 import com.anime.oc.characters.avatar.ui.main.cosplay.CosplayViewModel
@@ -149,7 +150,7 @@ class SuccessCosplayFragment : BaseFragment<FragmentSuccessCosplayBinding, Succe
     private fun FragmentSuccessCosplayBinding.setupActionBarListeners() {
         actionBar.btnActionBarRight.onClick {
             showInter {
-                findNavController().navigate(R.id.action_successCosplay_to_home)
+                findNavController().safeNavigate(R.id.action_successCosplay_to_home)
             }
         }
     }

@@ -283,7 +283,7 @@ class MainActivity : AppCompatActivity() , LoadingController{
                 if (!navController.popBackStack()) finish()
             }
         })
-        Admob.getInstance().setTimeLimitShowAds(3000)
+        Admob.getInstance().setTimeLimitShowAds(30000)
         Admob.getInstance().setTimeCountdownNativeCollab(20000)
         Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
 

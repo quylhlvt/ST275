@@ -120,4 +120,7 @@
     <string name="victory">विजय</string>
     <string name="done">पूर्ण</string>
     <string name="please_wait">कृपया प्रतीक्षा करें...</string>
+    <string name="please_watch_full_ads">कृपया पूरा विज्ञापन देखें</string>
+    <string name="load_ads_fail">विज्ञापन लोड नहीं हो सका</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">एक रैंडम एनीमे कैरेक्टर बनाने के लिए एक छोटा विज्ञापन देखें</string>
 </resources>

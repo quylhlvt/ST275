@@ -75,15 +75,15 @@
     <color name="native_text_title">#000000</color>
     <color name="native_text_body">#000000</color>
     <color name="native_bg_hide">#ffffff</color>
-    <color name="native_bg_stroke">#1A528FD1</color>
+    <color name="native_bg_stroke">#4D528FD1</color>
     <color name="native_bg_ad1">#0C55A2</color>
-    <color name="native_bg_ad">#1A528FD1</color>
+    <color name="native_bg_ad">#4D528FD1</color>
     <color name="native_bg_btn">#0C55A2</color>
     <color name="native_btn_bg">#0C55A2</color>
     <color name="native_collap_btn_bg">#0C55A2</color>
-    <color name="native_bg">#1A528FD1</color>
+    <color name="native_bg">#4D528FD1</color>
     <color name="colorPrimary">#D6ECFC</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="native_text_color_btn">#0C55A2</color>
-    <color name="native_text_color">#0C55A2</color>
+    <color name="native_text_color">#000000</color>
 </resources>
