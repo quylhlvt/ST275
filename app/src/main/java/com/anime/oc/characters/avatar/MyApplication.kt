@@ -14,7 +14,7 @@ class MyApplication : AdsApplication() {
     override fun onCreate() {
         super.onCreate()
         val mmkvDir = File(filesDir, "mmkv_store").also { it.mkdirs() }
-        Admob.getInstance().setShowAdsDeviceTest(true)
+//        Admob.getInstance().setShowAdsDeviceTest(true)
         AppOpenManager.getInstance().disableAppResumeWithActivity(MyApplication::class.java)
 
         MMKV.initialize(this, mmkvDir.absolutePath)
