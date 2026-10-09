@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:id="@+id/ad_call_to_action"
                     android:layout_width="fill_parent"

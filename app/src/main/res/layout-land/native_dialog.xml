@@ -116,7 +116,7 @@
                         android:text="Install"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"
-                        android:textColor="@color/app_color"
+                        android:textColor="@color/white"
                         />
                 </FrameLayout>
             </LinearLayout>

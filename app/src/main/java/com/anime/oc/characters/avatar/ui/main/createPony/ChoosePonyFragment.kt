@@ -22,6 +22,7 @@ import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
+import com.anime.oc.characters.avatar.core.extention.logEvent
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
 import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentChoosePonyBinding
@@ -77,6 +78,7 @@ class ChoosePonyFragment : BaseFragment<FragmentChoosePonyBinding, ChoosePonyVie
             val number = character.id.filter { it.isDigit() }
             val eventName = "click_item_${number}"
             Log.d("logevent", "$eventName- ${character.avatar}")
+            logEvent(eventName, character.avatar)
             if (character.id.startsWith("online_")) {
                 if (!isInternetAvailable(requireContext())) {
                     showUnstableNetworkDialog(); return@ChoosePonyAdapter

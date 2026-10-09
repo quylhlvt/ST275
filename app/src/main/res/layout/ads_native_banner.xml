@@ -101,7 +101,7 @@
                         android:text="@string/loading_ads"
                         android:textSize="@dimen/text_size_8"
                         android:textStyle="bold"
-                        android:textColor="@color/app_color"
+                        android:textColor="@color/white"
                   />
 
                 </LinearLayout>

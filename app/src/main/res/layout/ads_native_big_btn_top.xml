@@ -27,7 +27,7 @@
                 android:background="@drawable/bg_btn_ads_native"
                 android:gravity="center"
                 android:text="Install"
-                android:textColor="@color/app_color"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 

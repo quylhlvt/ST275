@@ -67,7 +67,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.appcompat.widget.AppCompatButton
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/white"
                     android:id="@+id/ad_call_to_action"
 
 

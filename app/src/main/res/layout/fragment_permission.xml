@@ -157,10 +157,10 @@
         android:gravity="center"
         android:fontFamily="@font/pacifico_regular"
         android:text="@string/continue_per"
-        android:textSize="@dimen/text_size_24"
+        android:textSize="@dimen/text_size_18"
         android:textColor="@color/app_color"
-        app:layout_constraintBottom_toTopOf="@+id/native_ads"        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/native_ads"
+        app:layout_constraintEnd_toEndOf="parent" />
     <FrameLayout
             android:id="@+id/native_ads"
             android:layout_width="match_parent"

@@ -109,7 +109,7 @@
                     android:text="Install"
                     android:textSize="@dimen/text_size_14"
                     android:textStyle="bold"
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/white"
                     />
             </LinearLayout>
 

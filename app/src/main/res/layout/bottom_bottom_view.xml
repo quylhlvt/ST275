@@ -15,6 +15,6 @@
         android:includeFontPadding="false"
         android:fontFamily="@font/pacifico_regular"
         android:textColor="@color/app_color"
-        android:textSize="@dimen/text_size_24"
+        android:textSize="@dimen/text_size_18"
         tools:text="Next" />
 </FrameLayout>
