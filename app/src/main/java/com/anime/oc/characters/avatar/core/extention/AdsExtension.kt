@@ -35,7 +35,12 @@ fun Fragment.showInter(action: (() -> Unit)) {
                 )
                 return
             }
-            action()
+            // Let the SDK finish dismissing its windows before creating the next
+            // Fragment. Some failure callbacks dismiss only after onNextAction returns.
+            val originView = view ?: return
+            originView.post {
+                if (view === originView && isAdCallbackValid(originDestinationId)) action()
+            }
         }
     })
 }

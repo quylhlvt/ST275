@@ -13,6 +13,9 @@ import java.io.File
 class MyApplication : AdsApplication() {
     override fun onCreate() {
         super.onCreate()
+        // Fragment navigation must wait for the interstitial to close. The SDK's
+        // default navigates while its full-screen/loading windows still own input.
+        Admob.getInstance().setOpenActivityAfterShowInterAds(false)
         val mmkvDir = File(filesDir, "mmkv_store").also { it.mkdirs() }
 //        Admob.getInstance().setShowAdsDeviceTest(true)
         AppOpenManager.getInstance().disableAppResumeWithActivity(MyApplication::class.java)

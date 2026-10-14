@@ -45,6 +45,7 @@ import com.anime.oc.characters.avatar.databinding.FragmentCustomizeBinding
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -803,63 +804,77 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
         showLoadingSafe()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            val bitmap = renderLayersToBitmap()
-            if (bitmap == null) {
-                setSaveEnabled(true)
-                hideLoadingSafe()
-                return@launch
-            }
-            viewModelActivity.customizeBitmap = bitmap
-            val savedPath = withContext(Dispatchers.IO) {
-                bitmap.saveToFile(requireActivity(), "avatar")
-            }
-
-            if (savedPath == null) {
-                setSaveEnabled(true)
-                hideLoadingSafe()
-                return@launch
-            }
-
-            val result = viewModel.onSaveComplete(savedPath)
-            val avatarUrl = result?.first?.avatar.orEmpty()
-            result?.let { (template, selections) ->
-                sharedViewModel.saveCharacterWithSelections(
-                    character = template,
-                    selections = selections,
-                    imageSave = savedPath,
-                    isFlipped = viewModel.state.value.isFlipped
-                )
-            }
-
-            val isEdit = arguments?.getBoolean(ARG_IS_EDIT, false) ?: false
-            val savedCharacter = result?.first
-            if (savedCharacter == null) {
-                setSaveEnabled(true)
-                hideLoadingSafe()
-                return@launch
-            }
-            savedCharacter.itemEventName(if (isEdit) "edit" else "done")?.let { eventName ->
-                logEvent(eventName, savedCharacter.avatar)
-                Log.d("LogEvenA", "$eventName -- ${savedCharacter.avatar}")
-            }
-
-            if (isEdit) {
-                runCatching {
-                    findNavController()
-                        .getBackStackEntry(R.id.viewFragment)
-                        .savedStateHandle["updated_image_path"] = savedPath
+            var handingOffLoading = false
+            try {
+                val bitmap = renderLayersToBitmap()
+                if (bitmap == null) {
+                    setSaveEnabled(true)
+                    hideLoadingSafe()
+                    return@launch
                 }
-            }
+                viewModelActivity.customizeBitmap = bitmap
+                val savedPath = withContext(Dispatchers.IO) {
+                    bitmap.saveToFile(requireActivity(), "avatar")
+                }
 
-            // ✅ Navigate trực tiếp trên Main thread, KHÔNG wrap thêm withContext
-            if (isAdded && !isDetached) {
-                findNavController().safeNavigate(
-                    R.id.action_customizeFragment_to_addFragment,
-                    Bundle().apply {
-                        putString("imagePath", savedPath)
-                        putString("avatarUrl", avatarUrl)
+                if (savedPath == null) {
+                    setSaveEnabled(true)
+                    hideLoadingSafe()
+                    return@launch
+                }
+
+                val result = viewModel.onSaveComplete(savedPath)
+                val avatarUrl = result?.first?.avatar.orEmpty()
+                result?.let { (template, selections) ->
+                    sharedViewModel.saveCharacterWithSelections(
+                        character = template,
+                        selections = selections,
+                        imageSave = savedPath,
+                        isFlipped = viewModel.state.value.isFlipped
+                    )
+                }
+
+                val isEdit = arguments?.getBoolean(ARG_IS_EDIT, false) ?: false
+                val savedCharacter = result?.first
+                if (savedCharacter == null) {
+                    setSaveEnabled(true)
+                    hideLoadingSafe()
+                    return@launch
+                }
+                savedCharacter.itemEventName(if (isEdit) "edit" else "done")?.let { eventName ->
+                    logEvent(eventName, savedCharacter.avatar)
+                    Log.d("LogEvenA", "$eventName -- ${savedCharacter.avatar}")
+                }
+
+                if (isEdit) {
+                    runCatching {
+                        findNavController()
+                            .getBackStackEntry(R.id.viewFragment)
+                            .savedStateHandle["updated_image_path"] = savedPath
                     }
-                )
+                }
+
+                // Persist the image and its index before navigation.
+                if (isAdded && !isDetached) {
+                    findNavController().safeNavigate(
+                        R.id.action_customizeFragment_to_addFragment,
+                        Bundle().apply {
+                            putString("imagePath", savedPath)
+                            putString("avatarUrl", avatarUrl)
+                        }
+                    )
+                    handingOffLoading = findNavController().currentDestination?.id == R.id.addCharacterFragment
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Log.e("CustomizeFragment", "Could not save creation", e)
+                showToast(R.string.save_failed)
+            } finally {
+                if (!handingOffLoading && view != null) {
+                    setSaveEnabled(true)
+                    hideLoadingSafe()
+                }
             }
         }
     }

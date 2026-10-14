@@ -381,36 +381,34 @@ class ViewModelActivity @Inject constructor(
 
     // ── CRUD ──────────────────────────────────────────────────────────────────
 
-    fun saveCharacterWithSelections(
+    suspend fun saveCharacterWithSelections(
         character:  CustomModel,
         selections: List<SelectionIndex>,
         imageSave:  String  = "",
         isFlipped:  Boolean = false
     ) {
-        viewModelScope.launch {
-            val toSave = if (isTemplate(character.id)) {
-                character.copy(
-                    id         = UUID.randomUUID().toString(),
-                    templateId = character.id,
-                    selections = ArrayList(selections),
-                    imageSave  = imageSave,
-                    isFlipped  = isFlipped,
-                    createdAt  = System.currentTimeMillis(),
-                    updatedAt  = System.currentTimeMillis()
-                    // ✅ KHÔNG set listPath — giữ nguyên từ template
-                )
-            } else {
-                character.copy(
-                    selections = ArrayList(selections),
-                    imageSave  = imageSave,
-                    isFlipped  = isFlipped,
-                    updatedAt  = System.currentTimeMillis()
-                    // ✅ KHÔNG set listPath
-                )
-            }
-            Log.d("ViewModelActivity", "💾 Saving: id=${toSave.id}, templateId=${toSave.templateId}, imageSave=${toSave.imageSave}")
-            appDataManager.updateCustomizedCharacter(toSave)
+        val toSave = if (isTemplate(character.id)) {
+            character.copy(
+                id         = UUID.randomUUID().toString(),
+                templateId = character.id,
+                selections = ArrayList(selections),
+                imageSave  = imageSave,
+                isFlipped  = isFlipped,
+                createdAt  = System.currentTimeMillis(),
+                updatedAt  = System.currentTimeMillis()
+                // ✅ KHÔNG set listPath — giữ nguyên từ template
+            )
+        } else {
+            character.copy(
+                selections = ArrayList(selections),
+                imageSave  = imageSave,
+                isFlipped  = isFlipped,
+                updatedAt  = System.currentTimeMillis()
+                // ✅ KHÔNG set listPath
+            )
         }
+        Log.d("ViewModelActivity", "💾 Saving: id=${toSave.id}, templateId=${toSave.templateId}, imageSave=${toSave.imageSave}")
+        appDataManager.updateCustomizedCharacter(toSave)
     }
 
     fun deleteCharacter(characterId: String) {

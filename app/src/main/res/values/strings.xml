@@ -110,6 +110,7 @@
     <string name="tvCosplay8">The closer your character looks to the random image, the higher your final score will be. Pay attention to small details to achieve the best cosplay result.</string>
     <string name="save">Save</string>
     <string name="error">Error</string>
+    <string name="save_failed">Could not save your creation. Please try again.</string>
     <string name="errorcontent">This item is no longer available.</string>
     <string name="facebook_share">Facebook Share</string>
     <string name="instagram_share">Instagram Share</string>

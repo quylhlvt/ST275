@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.View
+import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -47,15 +49,14 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
         SocialShareManager(requireContext())
     }
     private var currentImagePath: String = ""
-    private var isReturningFromExternalScreen = false
     private val imagePath: String by lazy { arguments?.getString("imagePath") ?: "" }
     private val avatarUrl: String by lazy { arguments?.getString("avatarUrl") ?: "" }
 
     private val imageType: Int    by lazy { arguments?.getInt("imageType", 0) ?: 0 }
     private val idEdit: String    by lazy { arguments?.getString("idEdit") ?: "" }
 
-    companion object {
-        private const val EXTERNAL_SCREEN_RESTORE_DELAY_MS = 500L
+    private val windowFocusListener = ViewTreeObserver.OnWindowFocusChangeListener { hasFocus ->
+        if (hasFocus && isResumed && view != null) restoreSuccessInteractions()
     }
     private fun initNativeCollab() {
         loadNativeCollabAds(
@@ -70,23 +71,30 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
 
     override fun onResume() {
         super.onResume()
+        restoreSuccessInteractions()
+        val successView = binding.root
+        successView.post {
+            if (view === successView && isResumed) restoreSuccessInteractions()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.viewTreeObserver.addOnWindowFocusChangeListener(windowFocusListener)
+    }
+
+    override fun onDestroyView() {
+        view?.viewTreeObserver?.takeIf { it.isAlive }
+            ?.removeOnWindowFocusChangeListener(windowFocusListener)
+        super.onDestroyView()
+    }
+
+    private fun restoreSuccessInteractions() {
+        // Covers first entry after an ad as well as returning from sharing/settings.
         hideLoadingSafe()
         hideGlobalDialogSafe()
-        if (!isReturningFromExternalScreen || view == null) return
-
         restoreWindowInteractions()
         restoreViewInteractions()
-        binding.root.post {
-            if (!isAdded || view == null) return@post
-            restoreWindowInteractions()
-            restoreViewInteractions()
-        }
-        binding.root.postDelayed({
-            if (!isAdded || view == null) return@postDelayed
-            restoreWindowInteractions()
-            restoreViewInteractions()
-            isReturningFromExternalScreen = false
-        }, EXTERNAL_SCREEN_RESTORE_DELAY_MS)
     }
 
 
@@ -202,7 +210,7 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
     private fun shareToSocialApp(app: SocialShareManager.SocialApp) {
         val path = currentImagePath.takeIf { it.isNotBlank() } ?: imagePath
         when (socialShareManager.shareImage(path, app)) {
-            SocialShareManager.ShareResult.Started -> isReturningFromExternalScreen = true
+            SocialShareManager.ShareResult.Started -> Unit
             SocialShareManager.ShareResult.ImageNotFound -> showToast(getString(R.string.image_not_found))
             is SocialShareManager.ShareResult.AppNotAvailable -> showToast(getString(if (app == SocialShareManager.SocialApp.FACEBOOK) R.string.facebook_not_available else R.string.instagram_not_available))
             is SocialShareManager.ShareResult.Failed -> showToast(getString(R.string.share_failed))
@@ -221,7 +229,6 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or
                     Intent.FLAG_ACTIVITY_NEW_TASK)
         }
-        isReturningFromExternalScreen = true
         startActivity(Intent.createChooser(intent, getString(R.string.share)))
     }
 // ViewFragment.kt
@@ -233,7 +240,6 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding, SuccessViewModel>(
         when {
             requireContext().checkPermissions(arrayOf(permission)) -> performDownload()
             permissionViewModel.shouldGoToSettings(isStorage = true) -> {
-                isReturningFromExternalScreen = true
                 activity?.goToSettings()
             }
             else -> downloadPermissionLauncher.launch(arrayOf(permission))

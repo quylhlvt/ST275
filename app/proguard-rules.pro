@@ -21,6 +21,8 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class com.anime.oc.characters.avatar.data.model.api.** { *; }
+# Local JSON must retain field names and constructors across release builds.
+-keep class com.anime.oc.characters.avatar.data.model.custom.** { *; }
 -keep class *.R
 
 -keepclasseswithmembers class **.R$* {
