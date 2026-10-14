@@ -8,6 +8,7 @@ package com.anime.oc.characters.avatar.data.model.custom
 data class CustomizedCharacterDto(
     val id:         String                    = "",
     val templateId: String?                   = null,
+    val position:   String?                   = null,
     val avatar:     String                    = "",  // thumbnail để hiển thị
     val selections: ArrayList<SelectionIndex> = arrayListOf(),
     val imageSave:  String                    = "",  // path ảnh render đã lưu
@@ -21,6 +22,7 @@ data class CustomizedCharacterDto(
 fun CustomModel.toDto() = CustomizedCharacterDto(
     id         = id,
     templateId = templateId,
+    position   = position,
     avatar     = avatar,
     selections = ArrayList(selections),
     imageSave  = imageSave,
@@ -32,6 +34,7 @@ fun CustomModel.toDto() = CustomizedCharacterDto(
 fun CustomizedCharacterDto.toModel(templateListPath: ArrayList<BodyPartModel> = arrayListOf()) = CustomModel(
     id         = id,
     templateId = templateId,
+    position   = position,
     avatar     = avatar,
     listPath   = templateListPath,  // inject từ template khi load
     selections = ArrayList(selections),

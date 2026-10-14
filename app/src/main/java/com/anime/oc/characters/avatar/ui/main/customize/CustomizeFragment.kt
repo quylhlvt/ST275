@@ -3,7 +3,6 @@ package com.anime.oc.characters.avatar.ui.main.customize
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -39,6 +38,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.logEvent
+import com.anime.oc.characters.avatar.core.extention.itemEventName
 import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.core.extention.showRewardAds1
 import com.anime.oc.characters.avatar.databinding.FragmentCustomizeBinding
@@ -838,24 +838,10 @@ class CustomizeFragment : BaseFragment<FragmentCustomizeBinding, CustomizeViewMo
                 hideLoadingSafe()
                 return@launch
             }
-            // Khi edit, savedCharacter.id là ID của bản customized (UUID/timestamp),
-            // không phải ID template. Lấy số từ thư mục avatar, ví dụ data_2 -> 2,
-            // để event edit đồng nhất với event done lúc tạo mới.
-            val dataFolder = Uri.parse(savedCharacter.avatar)
-                .pathSegments
-                .dropLast(1)
-                .lastOrNull()
-                .orEmpty()
-            val number = dataFolder.filter { it.isDigit() }
-                .ifEmpty {
-                    savedCharacter.templateId
-                        ?.filter { it.isDigit() }
-                        .orEmpty()
-                }
-                .ifEmpty { savedCharacter.id.filter { it.isDigit() } }
-            val eventName = "click_item_${number}_${if (isEdit) "edit" else "done"}"
-            logEvent(eventName, savedCharacter.avatar)
-            Log.d("LogEvenA","${eventName} -- ${savedCharacter.avatar}")
+            savedCharacter.itemEventName(if (isEdit) "edit" else "done")?.let { eventName ->
+                logEvent(eventName, savedCharacter.avatar)
+                Log.d("LogEvenA", "$eventName -- ${savedCharacter.avatar}")
+            }
 
             if (isEdit) {
                 runCatching {

@@ -257,6 +257,7 @@ class CustomizeViewModel @Inject constructor(
         val characterToSave = editingCustomizedId
             ?.let { id -> appDataManager.getCharacterById(id) }
             ?.copy(
+                position = template.position,
                 selections = ArrayList(state.selections),
                 imageSave  = renderedImagePath,
                 isFlipped  = state.isFlipped,

@@ -91,6 +91,7 @@ object ApiTemplateMapper {
 
                 CustomModel(
                     id = "${idPrefix}_$key",
+                    position = list.firstOrNull { it.position.isNotBlank() }?.position ?: key,
                     avatar = "${base}${conn}$key/avatar.png",
                     listPath = ArrayList(bodyParts),
                     selections = arrayListOf(),

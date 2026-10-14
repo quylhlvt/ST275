@@ -64,7 +64,8 @@ data class CustomModel(
     val createdAt:  Long                       = 0L,
     val updatedAt:  Long                       = System.currentTimeMillis(),
     val level: Int = 0,
-    val layerTransforms: Map<Int, LayerTransform> = emptyMap()
+    val layerTransforms: Map<Int, LayerTransform> = emptyMap(),
+    val position: String? = null
 ) : Parcelable {
     val bodyPartCount: Int get() = listPath.size
     fun isTemplate() = id.startsWith("template_") || id.startsWith("online_")

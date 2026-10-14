@@ -23,6 +23,7 @@ import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInterne
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.core.extention.loadNativeCollabAds
 import com.anime.oc.characters.avatar.core.extention.logEvent
+import com.anime.oc.characters.avatar.core.extention.itemEventName
 import com.anime.oc.characters.avatar.core.extention.setTextActionBar
 import com.anime.oc.characters.avatar.core.extention.showInter
 import com.anime.oc.characters.avatar.databinding.FragmentChoosePonyBinding
@@ -75,10 +76,10 @@ class ChoosePonyFragment : BaseFragment<FragmentChoosePonyBinding, ChoosePonyVie
         setTextActionBar(binding.actionBar.tvCenter, getString(R.string.category))
 
         adapter = ChoosePonyAdapter { character, position ->
-            val number = character.id.filter { it.isDigit() }
-            val eventName = "click_item_${number}"
-            Log.d("logevent", "$eventName- ${character.avatar}")
-            logEvent(eventName, character.avatar)
+            character.itemEventName()?.let { eventName ->
+                Log.d("logevent", "$eventName- ${character.avatar}")
+                logEvent(eventName, character.avatar)
+            }
             if (character.id.startsWith("online_")) {
                 if (!isInternetAvailable(requireContext())) {
                     showUnstableNetworkDialog(); return@ChoosePonyAdapter
