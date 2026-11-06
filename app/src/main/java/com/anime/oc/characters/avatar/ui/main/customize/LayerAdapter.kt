@@ -38,9 +38,8 @@ class NavAdapter :
     }
 
     override fun onBind(binding: ItemBottomCustomBinding, item: BodyPartModel, position: Int) {
+        val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
         binding.apply {
-            val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
-
             bindFocus(binding, position)
             if (imvImage.tag != item.nav) {
                 imvImage.tag = item.nav
@@ -48,7 +47,6 @@ class NavAdapter :
                     .load(item.nav)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .override(256)
-                    .dontAnimate()
                     .placeholder(shimmerDrawable)
                     .into(imvImage)
             }

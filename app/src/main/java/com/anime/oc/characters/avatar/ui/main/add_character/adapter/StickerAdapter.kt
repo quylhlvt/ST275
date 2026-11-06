@@ -15,7 +15,7 @@ class StickerAdapter : BaseAdapter<SelectedAddModel, ItemStickerBinding>(ItemSti
     var currentSelected = -1
 
     override fun onBind(binding: ItemStickerBinding, item: SelectedAddModel, position: Int) {
-        val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
+        val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer1) }
         binding.apply {
             if (imvImage.tag != item.path) {
                 imvImage.tag = item.path
@@ -23,7 +23,6 @@ class StickerAdapter : BaseAdapter<SelectedAddModel, ItemStickerBinding>(ItemSti
                     .load(item.path)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .override(256)
-                    .dontAnimate()
                     .placeholder(shimmerDrawable)
                     .into(imvImage)
             }
