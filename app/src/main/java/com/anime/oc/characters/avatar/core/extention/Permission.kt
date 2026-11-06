@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.anime.oc.characters.avatar.R
 import androidx.core.net.toUri
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.anime.oc.characters.avatar.core.helper.LanguageHelper
 import com.anime.oc.characters.avatar.utils.key.RequestKey
 
@@ -25,10 +25,7 @@ fun Context.checkPermissions(listPermission: Array<String>): Boolean {
 fun Activity.requestPermission(permissions: Array<String>, requestCode: Int) {
     ActivityCompat.requestPermissions(this, permissions, requestCode)
 }
-fun Fragment.requestPermission(permissions: Array<String>, requestCode: Int) {
-    requestPermissions(permissions, requestCode)
-}
-fun Fragment.openImagePicker() {
+fun AppCompatActivity.openImagePicker() {
     val intent = Intent(Intent.ACTION_PICK)
     intent.type = "image/*"
     startActivityForResult(intent, RequestKey.PICK_IMAGE_REQUEST_CODE)

@@ -54,6 +54,13 @@ object SharedPreferencesManager {
         saveStringDataByKey(LANGUAGE_KEY, isSkipped)
     }
 
+    fun saveLanguageSelection(code: String) {
+        sharedPreferences.edit(commit = true) {
+            putString(LANGUAGE_KEY, code)
+            putBoolean(LANGUAGE_SCREEN, true)
+        }
+    }
+
     fun isLanuageScreen(): Boolean = getBooleanDataByKey(LANGUAGE_SCREEN)
     fun setLanuageScreen(isSkipped: Boolean=true) {
       saveBooleanDataByKey(

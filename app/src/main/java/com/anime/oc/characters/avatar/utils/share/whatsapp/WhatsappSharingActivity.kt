@@ -9,13 +9,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
-import com.anime.oc.characters.avatar.core.base.BaseFragment
+import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.R
 
-abstract class WhatsappSharingFragment<VB : ViewBinding, VM : ViewModel>(
+abstract class WhatsappSharingActivity<VB : ViewBinding, VM : ViewModel>(
     bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB,
     viewModelClass: Class<VM>
-) : BaseFragment<VB, VM>(bindingInflater, viewModelClass){
+) : BaseActivity<VB, VM>(bindingInflater, viewModelClass){
     companion object {
         private const val ADD_PACK_REQUEST = 200
         private const val EXTRA_STICKER_PACK_ID = "sticker_pack_id"
@@ -78,7 +78,7 @@ abstract class WhatsappSharingFragment<VB : ViewBinding, VM : ViewModel>(
     }
 
     private fun showErrorDialog() {
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(this)
             .setTitle(R.string.invalid_action)
             .setMessage(R.string.invalid_action_msg)
             .setNegativeButton("OK") { dialog, _ ->

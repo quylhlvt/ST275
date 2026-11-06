@@ -1,16 +1,13 @@
 package com.anime.oc.characters.avatar.ui.language
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.anime.oc.characters.avatar.data.model.language.LanguageModel
 import com.anime.oc.characters.avatar.utils.DataLocal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,18 +22,15 @@ class LanguageViewModel @Inject constructor( sharedPreferences: SharedPreference
     val isFirstLanguage: StateFlow<Boolean> = _isFirstLanguage.asStateFlow()
 
     fun loadLanguages(currentLang: String) {
-        viewModelScope.launch {
-            val list = DataLocal.getLanguageList().toMutableList()
-            Log.d("LANG", "List size = ${list.size}, data = $list")
-
-            val index = list.indexOfFirst { it.code == currentLang }
-            if (index != -1) {
-                val selected = list.removeAt(index)
-                list.add(0, selected.apply { if (!isFirstLanguage.value) activate = true })
-            }
-            _codeLang.value = currentLang
-            _languageList.value = list
+        val list = DataLocal.getLanguageList().map {
+            it.copy(activate = !isFirstLanguage.value && it.code == currentLang)
+        }.toMutableList()
+        val index = list.indexOfFirst { it.code == currentLang }
+        if (index >= 0) {
+            list.add(0, list.removeAt(index))
         }
+        _codeLang.value = currentLang.takeIf { index >= 0 }.orEmpty()
+        _languageList.value = list
     }
 
     fun selectLanguage(code: String) {

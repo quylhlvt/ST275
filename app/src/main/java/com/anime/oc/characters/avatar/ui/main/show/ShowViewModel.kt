@@ -29,7 +29,7 @@ class ShowViewModel @Inject constructor(
     val onComplete = _onComplete.asSharedFlow()
 
 
-    // ── INIT — gọi từ Fragment sau khi nhận args từ CosplayFragment ───────────
+    // ── INIT — gọi từ Fragment sau khi nhận args từ CosplayActivity ───────────
 
     /**
      * [templateIndex]   : index template random từ CosplayViewModel

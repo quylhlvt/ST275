@@ -2,6 +2,7 @@ package com.anime.oc.characters.avatar
 
 import android.app.Application
 import android.util.Log
+import com.anime.oc.characters.avatar.ui.onboarding.splash.SplashActivity
 import com.lvt.ads.util.Admob
 import com.lvt.ads.util.AdsApplication
 import com.lvt.ads.util.AppOpenManager
@@ -16,9 +17,10 @@ class MyApplication : AdsApplication() {
         // Fragment navigation must wait for the interstitial to close. The SDK's
         // default navigates while its full-screen/loading windows still own input.
         Admob.getInstance().setOpenActivityAfterShowInterAds(false)
+//        Admob.getInstance().setOpenShowAllAds(false)
         val mmkvDir = File(filesDir, "mmkv_store").also { it.mkdirs() }
 //        Admob.getInstance().setShowAdsDeviceTest(true)
-        AppOpenManager.getInstance().disableAppResumeWithActivity(MyApplication::class.java)
+        AppOpenManager.getInstance().disableAppResumeWithActivity(SplashActivity::class.java)
 
         MMKV.initialize(this, mmkvDir.absolutePath)
         Log.d("MyApplication", "MMKV initialized at: ${mmkvDir.absolutePath}")

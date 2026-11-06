@@ -1,83 +1,67 @@
 package com.anime.oc.characters.avatar.core.extention
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import com.anime.oc.characters.avatar.R
+import com.anime.oc.characters.avatar.core.base.BaseActivity
+import com.anime.oc.characters.avatar.core.navigation.Screen
 
-// ── Base navigate helpers ─────────────────────────────────────────────────────
+const val EXTRA_FROM_SETTINGS = "from_settings"
+const val EXTRA_OPEN_MY_CREATIONS = "open_my_creations"
 
-fun Fragment.nav(actionId: Int) {
-    runCatching { findNavController() }
-        .onSuccess { it.safeNavigate(actionId) }
-        .onFailure { Log.e("SafeNav", "❌ Unable to find NavController: ${it.message}") }
-}
-
-/**
- * Navigate an toàn với args — không crash khi:
- * - Action không tồn tại ở destination hiện tại (double-tap, wrong destination)
- */
-fun NavController.safeNavigate(
-    actionId: Int,
+/** Returns false for repeated clicks or callbacks after the source has finished. */
+fun BaseActivity<*, *>.openScreen(
+    screen: Screen,
     args: Bundle? = null,
-    navOptions: NavOptions? = null
-) {
-    try {
-        currentDestination?.getAction(actionId) ?: run {
-            Log.w("SafeNav", "⚠️ Action $actionId not found from [${currentDestination?.label}]. Skipped.")
-            return
-        }
-        navigate(actionId, args, navOptions)
-    } catch (e: IllegalArgumentException) {
-        Log.e("SafeNav", "❌ ${e.message}")
-    } catch (e: IllegalStateException) {
-        Log.e("SafeNav", "❌ ${e.message}")
-    }
+    replaceCurrent: Boolean = false,
+    resetTask: Boolean = false
+): Boolean {
+    if (!isScreenAvailable || isNavigating) return false
+    val intent = Intent(this, screen.activityClass)
+    args?.let(intent::putExtras)
+    if (resetTask) intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    markNavigating()
+    hideGlobalLoading()
+    hideGlobalDialog()
+    startActivity(intent)
+    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    if (replaceCurrent) finish()
+    return true
 }
 
-// ── Splash ────────────────────────────────────────────────────────────────────
-
-fun Fragment.toLanguage() = nav(R.id.action_splash_to_language)
-fun Fragment.toIntro()    = nav(R.id.action_splash_to_intro)
-
-// ── Intro ─────────────────────────────────────────────────────────────────────
-
-fun Fragment.toPermission() = nav(R.id.action_intro_to_permission)
-fun Fragment.toHome()       = nav(R.id.action_intro_to_home)
-
-// ── Permission ────────────────────────────────────────────────────────────────
-
-fun Fragment.toHomeFromPermission() = nav(R.id.action_permission_to_home)
-
-// ── Setting ───────────────────────────────────────────────────────────────────
-fun Fragment.toLangFromSetting() = nav(R.id.action_setting_to_language)
-
-fun Fragment.toHomeFromSetting() = nav(R.id.action_setting_to_home)
-
-// ── Language ──────────────────────────────────────────────────────────────────
-fun Fragment.toSettingFromLang() {
-    try {
-        // Pop back về Setting
-        findNavController().popBackStack()
-    } catch (e: Exception) {
-        Log.e("Navigation", "Error popping back to setting: ${e.message}")
-    }
+fun BaseActivity<*, *>.popBack(): Boolean {
+    if (!isScreenAvailable || isNavigating) return false
+    markNavigating()
+    finish()
+    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    return true
 }
-fun Fragment.toIntroFromLanguage() = nav(R.id.action_language_to_intro)
-fun Fragment.toHomeFromLanguage()  = nav(R.id.action_language_to_home)
-// Home
-fun Fragment.toSettingFromHome() = nav(R.id.action_home_to_setting)
 
+fun BaseActivity<*, *>.openHome() = openScreen(Screen.HOME, resetTask = true)
 
-
-fun Fragment.popBack(): Boolean {
-    return try {
-        findNavController().popBackStack()
-    } catch (e: Exception) {
-        Log.e("Navigation", "Error popping back: ${e.message}")
-        false
-    }
+/** Keep Home below the album and remove editors/results above it. */
+fun BaseActivity<*, *>.openMyCreations() {
+    if (!isScreenAvailable || isNavigating) return
+    markNavigating()
+    hideGlobalLoading()
+    hideGlobalDialog()
+    startActivity(Intent(this, Screen.HOME.activityClass).apply {
+        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        putExtra(EXTRA_OPEN_MY_CREATIONS, true)
+    })
+    finish()
 }
+
+fun BaseActivity<*, *>.toLanguage() = openScreen(Screen.LANGUAGE, replaceCurrent = true)
+fun BaseActivity<*, *>.toIntro() = openScreen(Screen.INTRO, replaceCurrent = true)
+fun BaseActivity<*, *>.toPermission() = openScreen(Screen.PERMISSION, replaceCurrent = true)
+fun BaseActivity<*, *>.toHome() = openScreen(Screen.HOME, replaceCurrent = true)
+fun BaseActivity<*, *>.toHomeFromPermission() = toHome()
+fun BaseActivity<*, *>.toLangFromSetting() = openScreen(Screen.LANGUAGE, Bundle().apply {
+    putBoolean(EXTRA_FROM_SETTINGS, true)
+})
+fun BaseActivity<*, *>.toHomeFromSetting() = openHome()
+fun BaseActivity<*, *>.toSettingFromLang() = popBack()
+fun BaseActivity<*, *>.toIntroFromLanguage() = openScreen(Screen.INTRO, replaceCurrent = true)
+fun BaseActivity<*, *>.toHomeFromLanguage() = openHome()
+fun BaseActivity<*, *>.toSettingFromHome() = openScreen(Screen.SETTING)

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_bg_lang"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:context="com.anime.oc.characters.avatar.ui.main.view.ViewActivity">
+
+    <FrameLayout
+        android:id="@+id/layoutActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/actionBar"
+            layout="@layout/layout_actionbar" />
+    </FrameLayout>
+    <ImageView
+        android:layout_width="@dimen/dimension_0"
+        android:layout_height="@dimen/dimension_0"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/lnlBottomSocial"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="@dimen/dimension_5"
+        app:layout_constraintTop_toBottomOf="@+id/layoutActionBar"
+        android:id="@+id/imvImage"
+        android:scaleType="centerInside"
+        android:src="@drawable/img_permission" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lnlBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        android:layout_marginHorizontal="@dimen/dimension_16"
+        android:layout_marginBottom="@dimen/dimension_82"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="3.24:0.44">
+
+
+        <FrameLayout
+            android:id="@+id/btnBottomLeft"
+            android:layout_width="@dimen/dimension_0"
+            android:background="@drawable/frame_select_success"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1.54:0.44"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+
+            <TextView
+                android:id="@+id/txtLeft"
+                style="@style/single_marquee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dimension_5"
+                android:gravity="center"
+                android:text="@string/share"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/text_size_20"
+                android:fontFamily="@font/pacifico_regular"
+                app:outerStrokeWidth="@dimen/dimension_3_5" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/btnBottomRight"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="match_parent"
+            android:background="@drawable/frame_select_success"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1.54:0.44"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+            <TextView
+                android:id="@+id/txtRight"
+                style="@style/single_marquee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/dimension_5"
+                android:text="@string/download"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/text_size_20"
+                android:fontFamily="@font/pacifico_regular"
+                app:outerStrokeWidth="@dimen/dimension_3_5"/>
+        </FrameLayout>
+        <!--        btnBottomRight-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lnlBottomSocial"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_0"
+        android:layout_marginHorizontal="@dimen/dimension_16"
+        android:layout_marginBottom="@dimen/dimension_12"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/lnlBottom"
+        app:layout_constraintDimensionRatio="3.26:0.44">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnBottomLeftSocial"
+            android:layout_width="@dimen/dimension_0"
+            android:background="@drawable/img_bg_fb"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1.54:0.44"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/iconFb"
+                android:layout_width="@dimen/dimension_0"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                android:src="@drawable/ic_fb"
+                android:layout_marginVertical="@dimen/dimension_15"
+                android:layout_marginStart="@dimen/dimension_10"/>
+
+            <TextView
+                android:id="@+id/txtLeftSocial"
+                style="@style/single_marquee"
+                android:layout_width="@dimen/dimension_0"
+                android:layout_marginBottom="@dimen/dimension_5"
+                app:layout_constraintStart_toEndOf="@+id/iconFb"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="@dimen/dimension_2"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/facebook_share"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                android:fontFamily="@font/pacifico_regular"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnBottomRightSocial"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_bg_ig"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1.54:0.44"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/iconIg"
+                android:layout_width="@dimen/dimension_0"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                android:src="@drawable/ic_ig"
+                android:layout_marginVertical="@dimen/dimension_15"
+                android:layout_marginStart="@dimen/dimension_10"/>
+
+
+            <TextView
+                android:id="@+id/txtRightSocial"
+                style="@style/single_marquee"
+                android:layout_width="@dimen/dimension_0"
+                android:layout_marginHorizontal="@dimen/dimension_2"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dimension_5"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/instagram_share"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/iconIg"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/text_size_16"
+                android:fontFamily="@font/pacifico_regular"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        btnBottomRight-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+            android:id="@+id/flNativeCollab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <include layout="@layout/ads_shimmer_collap_native" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

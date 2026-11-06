@@ -140,7 +140,7 @@ class AddCharacterViewModel @Inject constructor(
             ?.category
 
         // Keep category state local to this screen. Reusing the model instances
-        // from ViewModelActivity made a previous selection leak into a new
+        // from AppSession made a previous selection leak into a new
         // AddCharacter screen, so the first category was no longer focused.
         stickerCategoryList = categories.mapIndexed { index, category ->
             category.copy(

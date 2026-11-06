@@ -14,7 +14,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 
 fun Activity.hideNavigation(isBlack: Boolean = false) {
     // Vẽ nội dung xuyên ra sau status bar trong suốt, nhưng vẫn giữ
@@ -45,8 +45,8 @@ fun Activity.hideNavigation(isBlack: Boolean = false) {
         hide(WindowInsetsCompat.Type.navigationBars())
     }
 }
-fun Fragment.hideSoftKeyboard() {
-    val inputMethodManager = requireContext()
+fun AppCompatActivity.hideSoftKeyboard() {
+    val inputMethodManager = this
         .getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
+    inputMethodManager?.hideSoftInputFromWindow(window.decorView.windowToken, 0)
 }

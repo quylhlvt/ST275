@@ -222,7 +222,7 @@ class MyPonyViewModel @Inject constructor(
                     }
                 }
                 // ✅ KHÔNG cần gọi loadMyAvatar() nữa
-                // vì observeData() đang collect viewModelActivity.customizedCharacters
+                // vì observeData() đang collect appSession.customizedCharacters
                 // và appDataManager.customizedCharacters là cùng source
             } catch (e: Exception) {
                 Log.e(TAG, "❌ Error deleting items: ${e.message}", e)

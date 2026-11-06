@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.R
 import com.google.android.gms.ads.rewarded.RewardItem
 import com.lvt.ads.callback.InterCallback
@@ -13,53 +12,22 @@ import com.lvt.ads.callback.RewardCallback
 import com.lvt.ads.event.AdmobEvent
 import com.lvt.ads.util.Admob
 import java.util.concurrent.atomic.AtomicBoolean
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
+import kotlinx.coroutines.launch
 
 
-fun Fragment.showInter(action: (() -> Unit)) {
-    val originDestinationId = runCatching {
-        findNavController().currentDestination?.id
-    }.getOrNull()
-    val hasHandledCallback = AtomicBoolean(false)
 
-    Admob.getInstance().showInterAll(requireActivity(), object : InterCallback() {
-        override fun onNextAction() {
-            super.onNextAction()
+private fun BaseActivity<*, *>.isAdCallbackValid(): Boolean =
+    isScreenAvailable && !isNavigating
 
-            // Some ad flows can deliver a late or duplicated callback. Running an action
-            // captured by an old Fragment destination can navigate with an invalid action ID.
-            if (!hasHandledCallback.compareAndSet(false, true)) return
-            if (!isAdCallbackValid(originDestinationId)) {
-                Log.w(
-                    "AdsNavigation",
-                    "Skipped stale interstitial callback from destination $originDestinationId"
-                )
-                return
-            }
-            // Let the SDK finish dismissing its windows before creating the next
-            // Fragment. Some failure callbacks dismiss only after onNextAction returns.
-            val originView = view ?: return
-            originView.post {
-                if (view === originView && isAdCallbackValid(originDestinationId)) action()
-            }
-        }
-    })
-}
-
-private fun Fragment.isAdCallbackValid(originDestinationId: Int?): Boolean {
-    if (!isAdded || isDetached || view == null) return false
-    if (originDestinationId == null) return true
-
-    return runCatching {
-        findNavController().currentDestination?.id == originDestinationId
-    }.getOrDefault(false)
-}
-fun Fragment.showRewardAds1(
+fun BaseActivity<*, *>.showRewardAds1(
     onRewardSuccess: () -> Unit,
     onAdClosed: () -> Unit = {}
 ) {
     var earned = false
     Admob.getInstance().loadAndShowRewardAds(
-        requireActivity(),
+        this,
         getString(R.string.reward_random),
         object : RewardCallback() {
             override fun onEarnedReward(rewardItem: RewardItem?) {
@@ -67,51 +35,57 @@ fun Fragment.showRewardAds1(
             }
             override fun onAdClosed() {
                 super.onAdClosed()
-                if (earned) {
-                    onRewardSuccess()
-                } else {
-                    Toast.makeText(requireActivity(), getString(R.string.please_watch_full_ads), Toast.LENGTH_SHORT).show()
+                if (!isAdCallbackValid()) return
+                lifecycleScope.launch {
+                    lifecycle.withResumed {
+                        if (isAdCallbackValid()) {
+                            if (earned) onRewardSuccess()
+                            else Toast.makeText(this@showRewardAds1, getString(R.string.please_watch_full_ads), Toast.LENGTH_SHORT).show()
+                            onAdClosed()
+                        }
+                    }
                 }
-                onAdClosed()
             }
             override fun onAdFailedToLoad() {
                 super.onAdFailedToLoad()
-                Toast.makeText(requireActivity(), getString(R.string.load_ads_fail), Toast.LENGTH_SHORT).show()
+                if (!isAdCallbackValid()) return
+                Toast.makeText(this@showRewardAds1, getString(R.string.load_ads_fail), Toast.LENGTH_SHORT).show()
                 onAdClosed()
             }
             override fun onAdFailedToShow(codeError: Int) {
                 super.onAdFailedToShow(codeError)
-                Toast.makeText(requireActivity(), getString(R.string.load_ads_fail), Toast.LENGTH_SHORT).show()
+                if (!isAdCallbackValid()) return
+                Toast.makeText(this@showRewardAds1, getString(R.string.load_ads_fail), Toast.LENGTH_SHORT).show()
                 onAdClosed()
             }
         }
     )
 }
-fun Fragment.loadNativeCollabAds(id: String, layout: FrameLayout) {
-    Admob.getInstance().loadNativeCollap(requireActivity(), id, layout)
+fun BaseActivity<*, *>.loadNativeCollabAds(id: String, layout: FrameLayout) {
+    Admob.getInstance().loadNativeCollap(this, id, layout)
 }
 
-fun Fragment.showInterAll() {
-    Admob.getInstance().showInterAll(requireActivity(), object : InterCallback() {
+fun BaseActivity<*, *>.showInterAll() {
+    Admob.getInstance().showInterAll(this, object : InterCallback() {
         override fun onNextAction() {
             super.onNextAction()
         }
     })
 }
-fun Fragment.logEventSocial(nameEvent: String, nameEvent1: String, value: String) {
+fun BaseActivity<*, *>.logEventSocial(nameEvent: String, nameEvent1: String, value: String) {
     val bundle = Bundle()
     bundle.putString("link_${nameEvent}", value)
-    AdmobEvent.logEvent(requireActivity(), nameEvent1, bundle)
+    AdmobEvent.logEvent(this, nameEvent1, bundle)
 }
-fun Fragment.logEventSocial(nameEvent: String) {
-    AdmobEvent.logEvent(requireActivity(), nameEvent, null)
+fun BaseActivity<*, *>.logEventSocial(nameEvent: String) {
+    AdmobEvent.logEvent(this, nameEvent, null)
 }
 
-fun Fragment.logEvent(nameEvent: String, value: String) {
+fun BaseActivity<*, *>.logEvent(nameEvent: String, value: String) {
     val bundle = Bundle()
     bundle.putString("link", value)
-    AdmobEvent.logEvent(requireActivity(), nameEvent, bundle)
+    AdmobEvent.logEvent(this, nameEvent, bundle)
 }
-fun Fragment.logEvent(nameEvent: String) {
-    AdmobEvent.logEvent(requireActivity(), nameEvent, null)
+fun BaseActivity<*, *>.logEvent(nameEvent: String) {
+    AdmobEvent.logEvent(this, nameEvent, null)
 }
