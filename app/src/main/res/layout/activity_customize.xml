@@ -211,12 +211,15 @@
                     android:id="@+id/cardColor"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    app:layout_constrainedWidth="true"
                     app:cardCornerRadius="@dimen/dimension_20"
                     app:strokeWidth="@dimen/dimension_4"
                     app:strokeColor="@color/transparent"
 
                     app:cardBackgroundColor="@color/transparent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
 

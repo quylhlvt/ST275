@@ -41,7 +41,9 @@ import kotlin.math.sqrt
 open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     FrameLayout(context, attrs, defStyleAttr) {
     companion object {
-        private const val MIN_SCALE_PERCENT = 0.6f}
+        private const val MIN_SCALE_PERCENT = 0.6f
+        private const val CHARACTER_CANVAS_FRACTION = 0.95f
+    }
     private val initialScaleMap = HashMap<DrawableDraw, Float>()
     private var lastCheckedScale = -1f
     private var lastScaleValid = true
@@ -559,18 +561,16 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun addDrawImmediately(draw: DrawableDraw, position: Int) {
         setDrawPosition(draw, position)
 
-        val widthScaleFactor =  width.toFloat() / draw.drawable.intrinsicWidth *0.7f
-        val heightScaleFactor = height.toFloat() / draw.drawable.intrinsicHeight*0.7f
-        val scaleFactor = if (widthScaleFactor > heightScaleFactor) heightScaleFactor else widthScaleFactor
-
-        if (draw.isText) {
-            draw.getMatrix().postScale(scaleFactor / 1.2f, scaleFactor / 1.2f, width / 2f, height / 2f)
-        } else if (draw.isCharacter) {
-            draw.getMatrix().postScale(scaleFactor / 1.2f, scaleFactor / 1.2f, width / 2f, height / 2f)
-        } else {
-            draw.getMatrix().postScale(scaleFactor / 2f, scaleFactor / 2f, width / 2f, height / 2f)
+        val fitScale = minOf(
+            width.toFloat() / draw.drawable.intrinsicWidth,
+            height.toFloat() / draw.drawable.intrinsicHeight
+        )
+        val scaleFactor = when {
+            draw.isText -> fitScale * 0.7f / 1.2f
+            draw.isCharacter -> fitScale * CHARACTER_CANVAS_FRACTION
+            else -> fitScale * 0.7f / 2f
         }
-
+        draw.getMatrix().postScale(scaleFactor, scaleFactor, width / 2f, height / 2f)
 
         initialScaleMap[draw] = draw.currentScale
         handlingDraw = draw
