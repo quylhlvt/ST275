@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ItemBackgroundImageBinding
+import com.anime.oc.characters.avatar.utils.DataLocal
+import com.facebook.shimmer.ShimmerDrawable
 
 
 class BackgroundImageAdapter : BaseAdapter<SelectedAddModel, ItemBackgroundImageBinding>(
@@ -21,6 +23,7 @@ class BackgroundImageAdapter : BaseAdapter<SelectedAddModel, ItemBackgroundImage
 
     override fun onBind(binding: ItemBackgroundImageBinding, item: SelectedAddModel, position: Int) {
         binding.apply {
+            val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
             tvAddImage.isSelected = true
             if (currentSelected == position) {
                 materiaForcus.visible()
@@ -50,7 +53,7 @@ class BackgroundImageAdapter : BaseAdapter<SelectedAddModel, ItemBackgroundImage
                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                         .override(256)
                         .dontAnimate()
-                        .placeholder(R.color.white)
+                        .placeholder(shimmerDrawable)
                         .into(imvImage)
                 }
                 imvImage.onClick { onBackgroundImageClick(item.path, position) }

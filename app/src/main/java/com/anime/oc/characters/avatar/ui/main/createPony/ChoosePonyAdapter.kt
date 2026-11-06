@@ -7,6 +7,8 @@ import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ItemChooseBinding
+import com.anime.oc.characters.avatar.utils.DataLocal
+import com.facebook.shimmer.ShimmerDrawable
 
 class ChoosePonyAdapter(
     private val onClick: (character: CustomModel, position: Int) -> Unit
@@ -20,15 +22,15 @@ class ChoosePonyAdapter(
         items.getOrNull(position)?.id?.hashCode()?.toLong() ?: position.toLong()
 
     override fun onBind(binding: ItemChooseBinding, item: CustomModel, position: Int) {
+        val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
         if (binding.imvImage.tag != item.avatar) {
             binding.imvImage.tag = item.avatar
             Glide.with(binding.imvImage)
                 .load(item.avatar)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .format(DecodeFormat.PREFER_RGB_565)
                 .override(512)
                 .dontAnimate()
-                .placeholder(R.color.white)
+                .placeholder(shimmerDrawable)
                 .into(binding.imvImage)
         }
 

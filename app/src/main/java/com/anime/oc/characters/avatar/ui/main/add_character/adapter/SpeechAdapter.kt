@@ -7,12 +7,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ItemSpeechBinding
+import com.anime.oc.characters.avatar.utils.DataLocal
+import com.facebook.shimmer.ShimmerDrawable
 
 class SpeechAdapter  : BaseAdapter<SelectedAddModel, ItemSpeechBinding>(ItemSpeechBinding::inflate) {
     var onItemClick: ((String) -> Unit) = {}
     var currentSelected = -1
 
     override fun onBind(binding: ItemSpeechBinding, item: SelectedAddModel, position: Int) {
+        val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
         binding.apply {
             if (imvImage.tag != item.path) {
                 imvImage.tag = item.path
@@ -21,7 +24,7 @@ class SpeechAdapter  : BaseAdapter<SelectedAddModel, ItemSpeechBinding>(ItemSpee
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .override(256)
                     .dontAnimate()
-                    .placeholder(R.color.white)
+                    .placeholder(shimmerDrawable)
                     .into(imvImage)
             }
             root.onClick {

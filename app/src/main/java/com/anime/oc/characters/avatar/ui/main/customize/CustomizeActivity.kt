@@ -64,6 +64,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
     private var visibleNavIndices: List<Int> = emptyList()
     private val adapterNav by lazy { NavAdapter() }
     private val adapterColor by lazy { ColorAdapter() }
+    private var colorNavIndex = -1
     private val adapterPart by lazy { PartAdapter() }
 
     private val pendingLoads = mutableMapOf<ImageView, String>()
@@ -341,6 +342,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
                     llColor.visibility = View.VISIBLE
                     llColor.alpha = 0f
                     llColor.animate().alpha(1f).setDuration(200).start()
+                    ensurePositionVisible(rcvColor, viewModel.state.value.currentColorIndex)
                 }
             }
             imgRandom.onClick {
@@ -582,6 +584,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
 //        binding.imgChangColor.isVisible = state.hasMultipleColors
 
         // ── Color ──────────────────────────────────────────────────────────────
+        val colorSelectionChanged = adapterColor.posColor != state.currentColorIndex
         adapterColor.setPos(state.currentColorIndex)
 
         // Khởi tạo arrShowColor khi data load lần đầu
@@ -591,15 +594,21 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         }
 
         val navPos = state.currentNavIndex
+        val colorNavChanged = colorNavIndex != navPos
+        colorNavIndex = navPos
 
         if (state.hasMultipleColors) {
-            if (adapterColor.items != state.currentColors) {
+            val colorsChanged = adapterColor.items != state.currentColors
+            if (colorsChanged) {
                 adapterColor.submitList(state.currentColors)
             }
             updateColorSectionVisibility(
                 showColors = true,
                 expanded = navPos < arrShowColor.size && arrShowColor[navPos]
             )
+            if (colorNavChanged || colorSelectionChanged || colorsChanged) {
+                ensurePositionVisible(binding.rcvColor, state.currentColorIndex)
+            }
         } else {
             updateColorSectionVisibility(showColors = false, expanded = false)
         }

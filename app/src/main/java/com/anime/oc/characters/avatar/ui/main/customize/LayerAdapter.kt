@@ -10,8 +10,10 @@ import com.anime.oc.characters.avatar.data.model.custom.ColorModel
 import com.anime.oc.characters.avatar.databinding.ItemBottomCustomBinding
 import com.anime.oc.characters.avatar.databinding.ItemColorBinding
 import com.anime.oc.characters.avatar.databinding.ItemLayerBinding
+import com.anime.oc.characters.avatar.utils.DataLocal
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.facebook.shimmer.ShimmerDrawable
 
 private object SelectionChangedPayload
 
@@ -37,6 +39,8 @@ class NavAdapter :
 
     override fun onBind(binding: ItemBottomCustomBinding, item: BodyPartModel, position: Int) {
         binding.apply {
+            val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
+
             bindFocus(binding, position)
             if (imvImage.tag != item.nav) {
                 imvImage.tag = item.nav
@@ -45,7 +49,7 @@ class NavAdapter :
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .override(256)
                     .dontAnimate()
-                    .placeholder(R.color.white)
+                    .placeholder(shimmerDrawable)
                     .into(imvImage)
             }
 
@@ -134,6 +138,8 @@ class PartAdapter : BaseAdapter<String, ItemLayerBinding>(ItemLayerBinding::infl
 
     override fun onBind(binding: ItemLayerBinding, item: String, position: Int) {
         binding.apply {
+            val shimmerDrawable = ShimmerDrawable().apply { setShimmer(DataLocal.shimmer) }
+
             bindFocus(binding, position)
             when (item) {
                 "none" -> {
@@ -160,7 +166,7 @@ class PartAdapter : BaseAdapter<String, ItemLayerBinding>(ItemLayerBinding::infl
                             .load(thumbPath)
                             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                             .override(256)
-                            .placeholder(R.color.white)
+                            .placeholder(shimmerDrawable)
                             .dontAnimate()
                             .into(imvImage)
                     }
