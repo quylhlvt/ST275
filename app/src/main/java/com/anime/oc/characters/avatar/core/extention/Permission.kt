@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import com.anime.oc.characters.avatar.R
 import androidx.core.net.toUri
 import androidx.appcompat.app.AppCompatActivity
-import com.anime.oc.characters.avatar.core.helper.LanguageHelper
 import com.anime.oc.characters.avatar.utils.key.RequestKey
 
 
@@ -31,7 +30,6 @@ fun AppCompatActivity.openImagePicker() {
     startActivityForResult(intent, RequestKey.PICK_IMAGE_REQUEST_CODE)
 }
 fun Activity.goToSettings() {
-    LanguageHelper.setLocale(this)
     val dialog = AlertDialog.Builder(this)
         .setTitle(R.string.go_to_setting_message)
         .setMessage(R.string.go_to_setting_message)

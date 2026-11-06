@@ -55,6 +55,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/ads_native_medium_btn_bottom_2_shimmer" />
+        <include layout="@layout/ads_native_big_btn_top_shimmer" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

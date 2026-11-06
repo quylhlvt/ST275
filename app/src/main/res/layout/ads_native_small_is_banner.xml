@@ -72,7 +72,7 @@
                     android:layout_width="@dimen/dimension_120"
                     android:layout_height="@dimen/dimension_35"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/bg_btn_ads_native1"
+                    android:background="@drawable/bg_btn_ads_native"
                     android:gravity="center"
                     android:text="Cài Đặt"
                     android:textColor="@color/white"

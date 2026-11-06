@@ -10,7 +10,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.anime.oc.characters.avatar.core.base.BackPressHandler
 import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.core.helper.SharedPreferencesManager
-import com.anime.oc.characters.avatar.utils.LanguageManager
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivityLanguageBinding
 import com.google.android.gms.ads.nativead.NativeAd
@@ -19,7 +18,6 @@ import com.lvt.ads.callback.NativeCallback
 import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.Locale
 import kotlin.system.exitProcess
 
 @AndroidEntryPoint
@@ -90,10 +88,11 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding, LanguageViewModel
     }
     override fun viewListener() {
         binding.apply {
-            actionBar.btnActionBarRight.onClick {
+            // handleDone guards navigation; a language tap must not debounce Save.
+            actionBar.btnActionBarRight.setOnClickListener {
                 handleDone()
             }
-            actionBar.btnActionBarLeft.onClick( 500) {
+            actionBar.btnActionBarLeft.setOnClickListener {
                 // Dùng chung logic với onBackPressed
                 onScreenBackPressed()
             }
@@ -208,11 +207,8 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding, LanguageViewModel
 
         val isFirstLanguage = viewModel.isFirstLanguage.value && !isFromSetting
         sharedPreferences.saveLanguageSelection(code)
-        Locale.setDefault(Locale.forLanguageTag(code))
-        LanguageManager.updateLanguage(code)
 
-        // New activities read the saved language in attachBaseContext. Mutating
-        // this Activity's Resources can corrupt a cached configuration on reuse.
+        // BaseActivity applies the saved locale when it creates the next screen.
         if (isFirstLanguage) {
             toIntroFromLanguage()
         } else {

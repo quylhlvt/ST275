@@ -24,7 +24,7 @@
                 android:layout_height="@dimen/dimension_50"
                 android:layout_marginHorizontal="@dimen/dimension_20"
                 android:layout_marginVertical="@dimen/dimension_10"
-                android:background="@drawable/bg_btn_ads_native2"
+                android:background="@drawable/bg_btn_ads_native"
                 android:gravity="center"
                 android:text="Install"
                 android:textColor="@color/white"

@@ -111,7 +111,7 @@
                         android:layout_height="@dimen/dimension_50"
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="@dimen/dimension_20"
-                        android:background="@drawable/bg_btn_ads_native1"
+                        android:background="@drawable/bg_btn_ads_native"
                         android:gravity="center"
                         android:text="Install"
                         android:textSize="@dimen/_12sdp"

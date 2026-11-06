@@ -3,7 +3,6 @@ package com.anime.oc.characters.avatar.ui.language
 import android.annotation.SuppressLint
 import android.content.Context
 import com.anime.oc.characters.avatar.core.base.BaseAdapter
-import com.anime.oc.characters.avatar.core.extention.onClick
 import com.anime.oc.characters.avatar.data.model.language.LanguageModel
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ItemLanguageBinding
@@ -21,7 +20,7 @@ class LanguageAdapter (val context: Context) : BaseAdapter<LanguageModel, ItemLa
             imgLangFor.setImageResource(if (item.activate) R.drawable.frame_selected_language else R.drawable.frame_unselect_language)
             btnRadio.setImageResource(if (item.activate) R.drawable.ic_select_lang else R.drawable.ic_un_select_lang)
             tvLang.text = item.name
-            root.onClick { onItemClick.invoke(item.code) }
+            root.setOnClickListener { onItemClick.invoke(item.code) }
         }
     }
     @SuppressLint("NotifyDataSetChanged")

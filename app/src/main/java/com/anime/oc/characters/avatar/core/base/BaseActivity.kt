@@ -54,8 +54,10 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel>(
     override fun attachBaseContext(newBase: Context) {
         val language = newBase.getSharedPreferences("DEFAULT", MODE_PRIVATE)
             .getString("language_key", "").orEmpty().ifEmpty { "en" }
+        val locale = Locale.forLanguageTag(language)
+        Locale.setDefault(locale)
         val config = Configuration(newBase.resources.configuration)
-        config.setLocale(Locale(language))
+        config.setLocale(locale)
         super.attachBaseContext(newBase.createConfigurationContext(config))
     }
 

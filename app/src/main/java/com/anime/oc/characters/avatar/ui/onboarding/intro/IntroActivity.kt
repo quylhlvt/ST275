@@ -59,7 +59,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>(
             this@IntroActivity,
             getString(R.string.native_intro),
             binding.nativeAds,
-            R.layout.ads_native_medium_btn_bottom_2
+            R.layout.ads_native_big_btn_top
         )
         binding.viewPager2.adapter = introAdapter
         binding.dotsIndicator.attachTo(binding.viewPager2)

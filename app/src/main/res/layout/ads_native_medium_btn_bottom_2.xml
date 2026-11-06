@@ -120,7 +120,7 @@
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/dimension_4"
-                android:background="@drawable/bg_btn_ads_native3"
+                android:background="@drawable/bg_btn_ads_native"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:text="INSTALL"
