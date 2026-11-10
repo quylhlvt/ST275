@@ -57,8 +57,6 @@ import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -99,11 +97,7 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
     private val imagepath: String by lazy {
         intent.extras?.getString("imagePath") ?: ""
     }
-    private fun initNativeCollab() {
-        Admob.getInstance().loadNativeCollapNotBanner(
-            this@AddCharacterActivity, getString(R.string.native_cl_bg), binding.flNativeCollab
-        )
-    }
+
     private fun buttonNavigationList() = arrayListOf(
         binding.btnBackground,
         binding.btnSticker,
@@ -151,7 +145,6 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
 
     override fun onRestart() {
         super.onRestart()
-        initNativeCollab()
     }
 
     // ── Observe ───────────────────────────────────────────────────────────────
@@ -335,7 +328,6 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
 
     // ── Init ──────────────────────────────────────────────────────────────────
     override fun initView() {
-        initNativeCollab()
         this@AddCharacterActivity.hideNavigation(true)
 
         setupKeyboardListener()
@@ -989,9 +981,7 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
                 hideLoadingSafe()
 
                 if (savedImagePath != null) {
-                    Admob.getInstance().showInterAll(this@AddCharacterActivity, object : InterCallback() {
-                        override fun onNextAction() {
-                            super.onNextAction()
+
                             openScreen(
                                 Screen.SUCCESS,
                                 Bundle().apply {
@@ -1001,9 +991,6 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
                                     putInt("imageType", 0)
                                 }
                             )
-
-                        }
-                    })
 
                 } else {
                     Toast.makeText(this@AddCharacterActivity, "Lưu thất bại!", Toast.LENGTH_SHORT).show()

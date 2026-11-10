@@ -13,8 +13,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:fontFamily="@font/pacifico_regular"
-        android:textColor="@color/app_color"
-        android:textSize="@dimen/text_size_18"
+        android:fontFamily="@font/finger_paint_regular"
+        android:textColor="@color/app_color2"
+        android:textSize="@dimen/text_size_20"
         tools:text="Next" />
 </FrameLayout>

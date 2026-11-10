@@ -19,101 +19,39 @@
             android:id="@+id/actionBar"
             layout="@layout/layout_actionbar" />
     </FrameLayout>
-
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contrain"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/dimension_50_"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutActionBar">
-
-        <ImageView
-            android:id="@+id/title_home"
-            android:layout_width="0dp"
-            android:elevation="3dp"
-            android:layout_marginTop="@dimen/dimension_20"
-            android:layout_marginHorizontal="@dimen/dimension_10"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_title_home"
-            app:layout_constraintDimensionRatio="3.42:2.36"
+    <TextView
+            android:id="@+id/txtTittleHome"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_color2"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_size_32"
+            android:gravity="center"
+            android:fontFamily="@font/finger_paint_regular"
+            style="@style/single_marquee"
+            app:layout_constraintVertical_bias="1"
+            android:layout_marginTop="@dimen/dimension_16"
+            android:src="@drawable/img_title_splash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutMainMenu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="@dimen/dimension_50_"
-            android:layout_marginBottom="@dimen/dimension_82"
-            android:elevation="1dp"
-            app:layout_constrainedHeight="true"
+            app:layout_constraintTop_toBottomOf="@+id/layoutActionBar" />
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvMain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimension_0"
+            android:clipToPadding="false"
+            android:layout_marginTop="@dimen/dimension_8"
+            android:layout_marginHorizontal="@dimen/dimension_12"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:itemCount="4"
+            app:spanCount="2"
+            tools:listitem="@layout/item_home_menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_home"
-            app:layout_constraintVertical_bias="0">
+            app:layout_constraintTop_toBottomOf="@+id/txtTittleHome"
+    />
 
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/app_color2"
-                app:cardCornerRadius="@dimen/dimension_20"
-                app:strokeWidth="@dimen/dimension_3"
-                app:strokeColor="@color/app_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardMainMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimension_10"
-                    android:layout_marginHorizontal="@dimen/dimension_10"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/dimension_10"
-                    app:strokeColor="@color/app_color3"
-                    app:strokeWidth="@dimen/dimension_2">
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcvMain"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clipToPadding="false"
-                        android:background="@drawable/bg_recycle_item_home"
-                        android:paddingTop="@dimen/dimension_10"
-                        android:overScrollMode="never"
-                        android:paddingHorizontal="@dimen/dimension_10"
-                        android:layout_marginTop="@dimen/dimension_40"
-                        android:paddingBottom="@dimen/dimension_10"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:itemCount="4"
-                        tools:listitem="@layout/item_home_menu" />
-                </com.google.android.material.card.MaterialCardView>
-            </com.google.android.material.card.MaterialCardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <FrameLayout
-                android:id="@+id/flNativeCollab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="@dimen/dimension_100"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-            <include layout="@layout/ads_shimmer_collap_native" />
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

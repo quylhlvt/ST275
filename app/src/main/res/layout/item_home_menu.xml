@@ -1,47 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dimension_10"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <View
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:background="@drawable/bg_item_home_shadown"
-        android:layout_height="@dimen/dimension_0"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimension_8"
+        android:layout_marginHorizontal="@dimen/dimension_4"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        app:layout_constraintDimensionRatio="2.8:0.71"
-        />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/menuContainer"
-        android:layout_width="match_parent"
-        android:background="@drawable/bg_item_home"
-        android:layout_height="@dimen/dimension_0"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintDimensionRatio="2.8:0.68">
-        <com.anime.oc.characters.avatar.core.extention.OuterStrokeTextView2
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="@string/pony_maker"
-            android:fontFamily="@font/pacifico_regular"
-            android:textSize="@dimen/text_size_26"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/view"
-            android:textColor="@color/white"
-            app:outerStrokeWidth="@dimen/dimension_2"
-            app:outerStrokeColor="@color/app_color"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-        <View
-            app:layout_constraintBottom_toBottomOf="parent"
+    <com.quylh.gradientstrokelayout.GradientStrokeFrameLayout
+            android:id="@+id/menuContainer"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension_0"
-            app:layout_constraintDimensionRatio="2.8:0.08"
-            android:id="@+id/view"
-            />
+            app:gslCornerRadius="@dimen/dimension_24"
+            app:gslStrokeWidth="@dimen/dimension_1"
+            app:gslStartColor="@color/white"
+            app:gslCenterColor="@color/white"
+            app:gslEndColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1">
+        <ImageView
+                android:id="@+id/imgHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/home1"/>
+        <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pony_maker"
+                style="@style/single_marquee"
+                android:fontFamily="@font/finger_paint_regular"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                android:textColor="@color/black"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dimension_8"
+                android:gravity="center"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.quylh.gradientstrokelayout.GradientStrokeFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,6 @@ class MyAvatarAdapter(val context: Context) :
             loadImage(root, item.path, imvImage)
 
             if (item.isShowSelection) {
-                showDownSelect.visible()
                 btnSelect.visible()
                 btnEdit.gone()
                 btnDelete.gone()
@@ -34,7 +33,6 @@ class MyAvatarAdapter(val context: Context) :
                 btnEdit.visible()
                 btnDelete.visible()
             }
-            if (item.isSelected) showDownSelect.visible() else showDownSelect.gone()
             btnSelect.setImageResource(
                 if (item.isSelected) R.drawable.ic_selected else R.drawable.ic_not_select
             )

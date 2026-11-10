@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/dimension_8"
-    android:layout_marginBottom="@dimen/dimension_16"
+    android:layout_marginHorizontal="@dimen/dimension_4"
+    android:layout_marginBottom="@dimen/dimension_8"
     android:background="@color/transparent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,44 +17,25 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="@dimen/dimension_0"
             android:layout_height="@dimen/dimension_0"
-            app:cardBackgroundColor="@color/app_color2"
-            app:cardCornerRadius="@dimen/dimension_20"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/dimension_4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/app_color"
-            app:strokeWidth="@dimen/dimension_3">
+            app:strokeWidth="@dimen/dimension_0">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="@dimen/dimension_3"
-                android:layout_marginBottom="@dimen/dimension_7"
                 android:layout_height="match_parent">
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    app:cardBackgroundColor="@color/white"
-                    app:strokeColor="@color/app_color4"
-                    app:cardCornerRadius="@dimen/dimension_17"
-                    app:strokeWidth="@dimen/dimension_0"
-                    android:layout_height="match_parent">
+
 
                     <ImageView
                         android:id="@+id/imvImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:foreground="@drawable/forgound_item_mycreation"
                         android:src="@drawable/img_permission" />
-                    <View
-                        android:id="@+id/showDownSelect"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/black6"/>
-
-
-                </com.google.android.material.card.MaterialCardView>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -62,19 +43,22 @@
 
         <ImageView
             android:id="@+id/btnDelete"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="@dimen/dimension_30"
-            android:layout_height="@dimen/dimension_30"
+            android:layout_width="@dimen/dimension_24"
+            android:layout_height="@dimen/dimension_24"
+            android:layout_margin="@dimen/dimension_8"
             android:src="@drawable/ic_delete1" />
 
         <!--        btnEdit-->
         <ImageView
             android:id="@+id/btnEdit"
-            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="@dimen/dimension_30"
-            android:layout_height="@dimen/dimension_30"
+            android:layout_width="@dimen/dimension_24"
+            android:layout_margin="@dimen/dimension_8"
+            android:layout_height="@dimen/dimension_24"
             android:src="@drawable/ic_edit" />
 
         <!--        btnSelect-->
@@ -82,8 +66,9 @@
             android:id="@+id/btnSelect"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="@dimen/dimension_30"
-            android:layout_height="@dimen/dimension_30"
+            android:layout_width="@dimen/dimension_24"
+            android:layout_margin="@dimen/dimension_8"
+            android:layout_height="@dimen/dimension_24"
             android:src="@drawable/ic_not_select"
             android:visibility="gone" />
 

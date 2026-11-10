@@ -22,7 +22,7 @@ android {
         versionName "1.0.5"
         testInstrumentationRunner= "androidx.test.runner.AndroidJUnitRunner"
         def formattedDate = new Date().format('MM.dd.yyyy')
-        archivesBaseName = "ST279_Anime_OC_Maker_Avatar_Creator_v${versionName}_${formattedDate}"
+        archivesBaseName = "ST275_Avatar_Cat_Maker_v${versionName}_${formattedDate}"
     }
     buildTypes {
         release {
@@ -122,6 +122,9 @@ dependencies {
     // Color Picker
     implementation 'com.github.quylhlvt:quycolorpiker:v1.7'
 
+
+    implementation("com.github.lehongquyme:roundedframelayout:release~v1.1")
+    implementation ("com.github.lehongquyme:canvasShadow:release~v1.0.1")
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
@@ -129,18 +132,18 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx")
     implementation("com.google.firebase:firebase-config-ktx")
 
-    // Ads - QUAN TRỌNG: Sử dụng version tương thích
-    implementation("com.github.LVTapp:AdsLibrary:1.5.5")
-    implementation("com.google.android.gms:play-services-ads:23.6.0")
-
-    // Ad Mediation - Downgrade để tương thích với Kotlin mới
-    implementation("com.google.ads.mediation:facebook:6.17.0.0")
-    implementation("com.google.ads.mediation:applovin:13.0.1.0")
-    implementation("com.google.ads.mediation:ironsource:8.4.0.0")
-    implementation("com.unity3d.ads:unity-ads:4.12.3")
-    implementation("com.google.ads.mediation:unity:4.12.3.0")
-    implementation("com.google.ads.mediation:pangle:7.8.5.2.0")
-    implementation("com.google.ads.mediation:mintegral:16.5.91.1")
+//    // Ads - QUAN TRỌNG: Sử dụng version tương thích
+//    implementation("com.github.LVTapp:AdsLibrary:1.5.5")
+//    implementation("com.google.android.gms:play-services-ads:23.6.0")
+//
+//    // Ad Mediation - Downgrade để tương thích với Kotlin mới
+//    implementation("com.google.ads.mediation:facebook:6.17.0.0")
+//    implementation("com.google.ads.mediation:applovin:13.0.1.0")
+//    implementation("com.google.ads.mediation:ironsource:8.4.0.0")
+//    implementation("com.unity3d.ads:unity-ads:4.12.3")
+//    implementation("com.google.ads.mediation:unity:4.12.3.0")
+//    implementation("com.google.ads.mediation:pangle:7.8.5.2.0")
+//    implementation("com.google.ads.mediation:mintegral:16.5.91.1")
     //datastore
     implementation "androidx.datastore:datastore-preferences:1.1.1"
 //mmkv

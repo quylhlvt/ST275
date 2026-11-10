@@ -2,8 +2,8 @@
 <!-- values-hi/strings.xml -->
 <resources>
     <string name="size_slider">आकार</string>
-    <string name="app_name">Anime OC Maker: Avatar Creator</string>
-    <string name="next">आगे\u00A0</string>
+    <string name="app_name">Avatar cat maker</string>
+    <string name="next">आगे</string>
     <string name="language">भाषा</string>
     <string name="title_1">\u00A0अपने विचारों को एनीमे के जादू में बदलें\u00A0</string>
     <string name="title_2">\u00A0शानदार OC? लोड हो रहा है...\u00A0</string>

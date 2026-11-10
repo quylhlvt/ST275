@@ -15,9 +15,7 @@ import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.core.helper.SharedPreferencesManager
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivitySplashBinding
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
-import com.tencent.mmkv.MMKV
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.first
@@ -32,7 +30,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(
     private val mainViewModel: AppSession get() = appSession
     private var pendingNavigate = false
     private var navigateJob: Job? = null
-    var interCallBack: InterCallback? = null
+//    var interCallBack: InterCallback? = null
     private var progressAnimator: ValueAnimator? = null
     private var currentOverlayFraction = 1f
     private var hasNavigated = false
@@ -45,24 +43,24 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(
     // ── INIT ──────────────────────────────────────────────────────────────────
 
     override fun initView() {
-        Admob.getInstance().setTimeLimitShowAds(30000)
-        Admob.getInstance().setTimeCountdownNativeCollab(20000)
-        Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
+//        Admob.getInstance().setTimeLimitShowAds(30000)
+//        Admob.getInstance().setTimeCountdownNativeCollab(20000)
+//        Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
         preloadLanguageDrawables()
         // ✅ Warm up font — giữ nguyên, nhẹ
         ResourcesCompat.getFont(this@SplashActivity, R.font.baloo2_extrabold)
 
 
-        interCallBack = object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
+//        interCallBack = object : InterCallback() {
+//            override fun onNextAction() {
+//                super.onNextAction()
                 viewModel.triggerNavigate()
-            }
-        }
-
-        Admob.getInstance().loadSplashInterAds(
-            this@SplashActivity, getString(R.string.inter_splash), 30000, 3000, interCallBack
-        )
+//            }
+//        }
+//
+//        Admob.getInstance().loadSplashInterAds(
+//            this@SplashActivity, getString(R.string.inter_splash), 30000, 3000, interCallBack
+//        )
     }
 
     private fun preloadLanguageDrawables() {

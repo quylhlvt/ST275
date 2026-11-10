@@ -2,6 +2,7 @@
 <resources>
 
     <color name="color_text_intro">#1F2F4F</color>
+    <color name="_FFD499">#FFD499</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white2">#FEFEF4</color>
     <color name="white3">#FFF9E5</color>
@@ -22,11 +23,11 @@
     <color name="gray_dot">#B0B5BD</color>
     <color name="gray2">#A6A6A6</color>
     <color name="yellow_F6">#F6CD46</color>
-    <color name="app_color">#0C55A2</color>
-    <color name="app_color2">#50C8E8</color>
-    <color name="app_color3">#58DAF7</color>
-    <color name="app_color4">#88C3FB</color>
-    <color name="app_color5">#C1E0FF</color>
+    <color name="app_color">#994000</color>
+    <color name="app_color2">#D9652B</color>
+    <color name="app_color3">#341500</color>
+    <color name="app_color4">#FFE4BF</color>
+    <color name="app_color5">#662A00</color>
     <color name="app_color6">#C4FBFF</color>
     <color name="app_color7">#99DDFF</color>
     <color name="app_color8">#D0F8FB</color>

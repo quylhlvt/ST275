@@ -12,10 +12,6 @@ import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.core.helper.SharedPreferencesManager
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivityLanguageBinding
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdView
-import com.lvt.ads.callback.NativeCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
@@ -24,7 +20,6 @@ import kotlin.system.exitProcess
 class LanguageActivity : BaseActivity<ActivityLanguageBinding, LanguageViewModel>(
     ActivityLanguageBinding::inflate, LanguageViewModel::class.java
 ), BackPressHandler {
-    private var screenNativeAd: NativeAd? = null
 
     private val languageAdapter by lazy { LanguageAdapter(this@LanguageActivity) }
     private var isFromSetting = false
@@ -80,16 +75,21 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding, LanguageViewModel
 
     private fun updateDoneButtonVisibility() {
         val hasSelectedLanguage = viewModel.codeLang.value.isNotEmpty()
-        if (hasSelectedLanguage) {
-            binding.actionBar.btnActionBarRight.visible()
-        } else {
-            binding.actionBar.btnActionBarRight.invisible()
-        }
+
+        // Nút tick trên action bar: chỉ dùng cho lần đầu (không từ Setting)
+        if (!isFromSetting && hasSelectedLanguage) binding.actionBar.btnActionBarRight.visible()
+        else binding.actionBar.btnActionBarRight.invisible()
+
+        // btnSave: chỉ hiện khi vào từ Setting, lần đầu thì ẩn
+        if (isFromSetting) binding.btnSave.visible() else binding.btnSave.gone()
     }
     override fun viewListener() {
         binding.apply {
             // handleDone guards navigation; a language tap must not debounce Save.
             actionBar.btnActionBarRight.setOnClickListener {
+                handleDone()
+            }
+            binding.btnSave.setOnClickListener {
                 handleDone()
             }
             actionBar.btnActionBarLeft.setOnClickListener {
@@ -104,46 +104,16 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding, LanguageViewModel
 
 
     override fun initView() {
-        Admob.getInstance().loadNativeAd(
-            this@LanguageActivity,
-            getString(R.string.native_language),
-            object : NativeCallback() {
-                override fun onNativeAdLoaded(nativeAd: NativeAd?) {
-                    super.onNativeAdLoaded(nativeAd)
-                    if (!isScreenAvailable) {
-                        nativeAd?.destroy()
-                        return
-                    }
-                    screenNativeAd?.destroy()
-                    screenNativeAd = nativeAd
-
-                    Log.d("LanguageNativeAd", "Native ad loaded: ${nativeAd != null}")
-                    val adView = LayoutInflater.from(this@LanguageActivity)
-                        .inflate(R.layout.ads_native_big_btn_top, null) as NativeAdView
-                    binding.nativeAds.visible()
-                    binding.nativeAds.removeAllViews()
-                    binding.nativeAds.addView(adView)
-                    Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
-
-                }
-
-                override fun onAdFailedToLoad() {
-                    super.onAdFailedToLoad()
-                    Log.e("LanguageNativeAd", "Native ad failed to load")
-                    binding.nativeAds.gone()
-                }
-            }
-        )
         binding.apply {
             actionBar.btnActionBarLeft.invisible()
             actionBar.btnActionBarRight.setImageResource(R.drawable.select_language)
+            txtSave.isSelected = true
         }
         isFromSetting = intent.getBooleanExtra(com.anime.oc.characters.avatar.core.extention.EXTRA_FROM_SETTINGS, false)
         binding.actionBar.apply {
             btnActionBarRight.invisible()
             btnActionBarLeft.setImageResource(R.drawable.back_app)
-            tvStart.isSelected = true
-            tvCenter.isSelected = true
+
         }
 
 
@@ -216,8 +186,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding, LanguageViewModel
         }
     }
     override fun onDestroy() {
-        screenNativeAd?.destroy()
-        screenNativeAd = null
         super.onDestroy()
     }
 

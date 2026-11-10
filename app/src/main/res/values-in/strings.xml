@@ -2,8 +2,8 @@
 <!-- values-id/strings.xml -->
 <resources>
     <string name="size_slider">Ukuran</string>
-    <string name="app_name">Anime OC Maker: Avatar Creator</string>
-    <string name="next">Lanjut\u00A0</string>
+    <string name="app_name">Avatar cat maker</string>
+    <string name="next">Lanjut</string>
     <string name="language">Bahasa</string>
     <string name="title_1">\u00A0Ubah idemu menjadi keajaiban anime\u00A0</string>
     <string name="title_2">\u00A0OC keren? Sedang dimuat...\u00A0</string>

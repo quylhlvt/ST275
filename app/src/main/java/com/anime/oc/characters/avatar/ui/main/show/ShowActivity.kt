@@ -35,8 +35,6 @@ import com.bumptech.glide.request.target.Target
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivityShowBinding
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -78,11 +76,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         return appSession.templates.value
             .getOrNull(templateIndex)?.id?.startsWith("online_") == true
     }
-    private fun initNativeCollab() {
-        Admob.getInstance().loadNativeCollapNotBanner(
-            this@ShowActivity, getString(R.string.native_cl_cosplayPlay), binding.flNativeCollab
-        )
-    }
+
     private fun checkOnlineNetworkOrShowDialog(): Boolean {
         if (!isOnlineTemplate()) return false
         return when {
@@ -99,10 +93,8 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
 
     override fun onRestart() {
         super.onRestart()
-        initNativeCollab()
     }
     override fun initView() {
-        initNativeCollab()
         binding.apply {
             txtTittle.isSelected = true
             txtNextDialog.isSelected = true
@@ -268,10 +260,8 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         val bitmap = renderLayersToBitmap()
         if (bitmap != null) appSession.userResultBitmap = bitmap
         appSession.cosplayPercent = viewModel.state.value.matchPercent
-        showInter {
-            openScreen(Screen.SUCCESS_COSPLAY)
-        }
 
+            openScreen(Screen.SUCCESS_COSPLAY)
     }
     private fun renderLayersToBitmap(): Bitmap? {
         val root = binding.rlCharacter
@@ -291,21 +281,13 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
     }
 
     // ── LISTENERS ─────────────────────────────────────────────────────────────
-    private  fun showInter(action: (()-> Unit)){
-        Admob.getInstance().showInterAll(this@ShowActivity, object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
-                action()
 
-            }
-        })
-    }
     override fun viewListener() {
         binding.apply {
             actionBar.cvLogo.onClick {
-                showInter {
+
                     popBack()
-                }
+
             }
 //            actionBar.btnActionBarRight.onClick { navigateToSuccess() }
 

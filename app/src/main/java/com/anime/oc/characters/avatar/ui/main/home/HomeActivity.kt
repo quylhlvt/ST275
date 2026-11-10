@@ -18,8 +18,6 @@ import com.anime.oc.characters.avatar.utils.state.RateState
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivityHomeBinding
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
@@ -34,17 +32,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(
 
 
     override fun initView() {
-        Admob.getInstance().loadNativeAll(this@HomeActivity, getString(R.string.native_all))
-        initNativeCollab()
+
         binding.rcvMain.adapter = HomeMenuAdapter(::onHomeMenuClick)
         binding.actionBar.apply {
             setImageActionBar(btnActionBarRight, R.drawable.ic_settings)
         }
-    }
-    private fun initNativeCollab() {
-        loadNativeCollabAds(
-            getString(R.string.native_cl_home), binding.flNativeCollab
-        )
     }
 
 
@@ -64,7 +56,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(
 
     override fun onRestart() {
         super.onRestart()
-        initNativeCollab()
+
     }
 
     override fun viewListener() {
@@ -78,12 +70,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(
             HomeMenuAction.COSPLAY -> navigateWithCheck(Screen.COSPLAY)
             HomeMenuAction.RANDOM -> navigateWithCheck(Screen.RANDOM)
             HomeMenuAction.MY_ALBUM -> {
-                Admob.getInstance().showInterAll(this@HomeActivity, object : InterCallback() {
-                    override fun onNextAction() {
-                        super.onNextAction()
                         openScreen(Screen.MY_PONY)
-                    }
-                })
             }
         }
     }

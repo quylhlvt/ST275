@@ -22,8 +22,6 @@ import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInterne
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.databinding.ActivityCosplayBinding
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -67,11 +65,6 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
         setupBackPressHandler()
     }
 
-    private fun initNativeCollab() {
-        loadNativeCollabAds(
-            getString(R.string.native_cl_cosplay), binding.flNativeCollab
-        )
-    }
 
     private fun setupBackPressHandler() {
         this@CosplayActivity.onBackPressedDispatcher.addCallback(
@@ -86,7 +79,7 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
 
     override fun onRestart() {
         super.onRestart()
-        initNativeCollab()
+
     }
     override fun setupPreViews() {
         super.setupPreViews()
@@ -94,7 +87,6 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
     }
 
     override fun initView() {
-        initNativeCollab()
         binding.imvImage.gone()
         binding.imageGif.visible()
         binding.setupActionBar()
@@ -151,14 +143,11 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
                 )
                 val currentIndex = viewModel.randomItem.value?.templateIndex ?: -1
                 if (currentIndex >= 0 && checkOnlineNetworkOrShowDialog(currentIndex)) return@onClick
-                Admob.getInstance().showInterAll(this@CosplayActivity, object : InterCallback() {
-                    override fun onNextAction() {
-                        super.onNextAction()
+
                         showLoading()
                         viewModel.randomize(isOnline = isOnline)
 
-                    }
-                })
+
             }
             actionBar.btnActionBarRight.onClick {
                 showGuide.visible()

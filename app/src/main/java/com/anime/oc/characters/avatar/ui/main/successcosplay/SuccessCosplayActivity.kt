@@ -13,8 +13,6 @@ import com.anime.oc.characters.avatar.core.navigation.Screen
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.databinding.ActivitySuccessCosplayBinding
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
@@ -36,14 +34,9 @@ class SuccessCosplayActivity : BaseActivity<ActivitySuccessCosplayBinding, Succe
             }
         )
     }
-    private fun initNativeCollab() {
-        loadNativeCollabAds(
-            getString(R.string.native_cl_cosplaySuccess), binding.flNativeCollab
-        )
-    }
+
 
     override fun initView() {
-        initNativeCollab()
         binding.apply {
 
             txtShow.isSelected = true
@@ -131,21 +124,11 @@ class SuccessCosplayActivity : BaseActivity<ActivitySuccessCosplayBinding, Succe
             setupNavigationListeners()
         }
     }
-    private  fun showInter(action: (()-> Unit)){
-        Admob.getInstance().showInterAll(this@SuccessCosplayActivity, object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
-                action()
 
-            }
-        })
-    }
     private fun ActivitySuccessCosplayBinding.setupActionBarListeners() {
         actionBar.btnActionBarRight.onClick {
-            showInter {
                 openHome()
             }
-        }
     }
 
     private fun ActivitySuccessCosplayBinding.setupNavigationListeners() {
@@ -153,10 +136,9 @@ class SuccessCosplayActivity : BaseActivity<ActivitySuccessCosplayBinding, Succe
             if (!isInternetAvailable(this@SuccessCosplayActivity)) {
                 showUnstableNetworkDialog(); return@onClick
             }
-            showInter {
                 appSession.shouldRestartShow = true  // ← báo ShowActivity reset
                 popBack()
-            }
+
         }
     }
 

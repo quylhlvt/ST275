@@ -19,18 +19,13 @@
 
     <TextView
         android:id="@+id/tvContent"
-        style="@style/single_marquee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/dimension_18"
+        android:paddingHorizontal="@dimen/dimension_38"
         android:gravity="center"
-        android:fontFamily="@font/pacifico_regular"
-        android:textColor="@color/app_color2"
-        app:outerStrokeWidth="1.5dp"
-        android:includeFontPadding="true"
-        app:outerStrokeColor="@color/app_color"
+        android:fontFamily="@font/finger_paint_regular"
+        android:textColor="@color/app_color3"
         android:textSize="@dimen/text_size_20"
-        android:maxLines="2"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

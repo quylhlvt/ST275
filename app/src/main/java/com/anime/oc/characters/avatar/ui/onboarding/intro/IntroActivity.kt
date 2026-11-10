@@ -9,7 +9,6 @@ import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.base.BackPressHandler
 import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.databinding.ActivityIntroBinding
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,11 +31,11 @@ class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>(
             OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if (position == 1) {
-                    binding.nativeAds.gone()
-                } else {
-                    binding.nativeAds.visible()
-                }
+//                if (position == 1) {
+//                    binding.nativeAds.gone()
+//                } else {
+//                    binding.nativeAds.visible()
+//                }
             }
         })
 //        binding.viewPager2.registerOnPageChangeCallback(object :
@@ -55,12 +54,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>(
 
 
     override fun initView() {
-        Admob.getInstance().loadNativeAd(
-            this@IntroActivity,
-            getString(R.string.native_intro),
-            binding.nativeAds,
-            R.layout.ads_native_big_btn_top
-        )
+
         binding.viewPager2.adapter = introAdapter
         binding.dotsIndicator.attachTo(binding.viewPager2)
         setOnChangeViewPager2()

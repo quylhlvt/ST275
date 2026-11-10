@@ -12,8 +12,10 @@ import com.anime.oc.characters.avatar.databinding.ActivitySettingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>( ActivitySettingBinding::inflate, SettingViewModel::class.java) {
-
+class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>(
+    ActivitySettingBinding::inflate,
+    SettingViewModel::class.java
+) {
     override fun onContentReady(view: View, savedInstanceState: Bundle?) {
         super.onContentReady(view, savedInstanceState)
         setupBackPressHandler()
@@ -29,7 +31,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>( 
             }
         )
     }
-
 
     override fun initView() {
         binding.apply {
@@ -48,25 +49,15 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>( 
             )
         }
     }
- private fun ActivitySettingBinding.setupActionTiltleBar() {
 
-
-            binding.apply {
-                txt1.isSelected = true
-                txt2.isSelected = true
-                txt3.isSelected = true
-                txt4.isSelected = true
-
-                setTextActionBar(
-                    actionBar.tvCenter,
-                    getString(R.string.settings)
-                )
-                actionBar.tvCenter.isSelected =true
-            }
-
+    private fun ActivitySettingBinding.setupActionTiltleBar() {
+        binding.apply {
+            txt1.isSelected = true
+            txt2.isSelected = true
+            txt3.isSelected = true
+            txt4.isSelected = true
+        }
     }
-
-
 
     private fun ActivitySettingBinding.setupRateButton() {
         if (sharedPreferences.isRateRequest()) {
@@ -75,8 +66,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>( 
             btnRate.visible()
         }
     }
-
-
 
     override fun viewListener() {
         binding.apply {
@@ -95,11 +84,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>( 
         btnLang.onClick {
             toLangFromSetting()
         }
-
         btnPolicy.onClick {
             policy()
         }
-
         btnRate.onClick {
             RateHelper.showRateDialog(this@SettingActivity, sharedPreferences) { state ->
                 if (state != RateState.CANCEL) {
@@ -108,14 +95,11 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>( 
                 }
             }
         }
-
         btnShare.onClick {
             shareApp()
         }
     }
 
-
     override fun observeData() {}
-
     override fun bindViewModel() {}
 }

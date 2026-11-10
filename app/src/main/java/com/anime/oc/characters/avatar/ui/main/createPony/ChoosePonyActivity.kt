@@ -19,8 +19,6 @@ import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInterne
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.databinding.ActivityChoosePonyBinding
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
@@ -35,31 +33,20 @@ class ChoosePonyActivity : BaseActivity<ActivityChoosePonyBinding, ChoosePonyVie
     private val mainViewModel: AppSession get() = appSession
     private lateinit var adapter: ChoosePonyAdapter
     private var isFirstLoad = true
-    private fun initNativeCollab() {
-        loadNativeCollabAds(
-            getString(R.string.native_cl_category), binding.flNativeCollab
-        )
-    }
+
 
     override fun onRestart() {
         super.onRestart()
-        initNativeCollab()
     }
     override fun initView() {
-        initNativeCollab()
-        Admob.getInstance().loadNativeAd(
-            this@ChoosePonyActivity,
-            getString(R.string.native_category),
-            binding.nativeAds,
-            R.layout.ads_native_collap_banner_2
-        )
+
         setImageActionBar(binding.actionBar.btnActionBarLeft, R.drawable.back_app)
         setTextActionBar(binding.actionBar.tvCenter, getString(R.string.category))
 
         adapter = ChoosePonyAdapter { character, position ->
             character.itemEventName()?.let { eventName ->
                 Log.d("logevent", "$eventName- ${character.avatar}")
-                logEvent(eventName, character.avatar)
+//                logEvent(eventName, character.avatar)
             }
             if (character.id.startsWith("online_")) {
                 if (!isInternetAvailable(this@ChoosePonyActivity)) {
@@ -104,9 +91,7 @@ class ChoosePonyActivity : BaseActivity<ActivityChoosePonyBinding, ChoosePonyVie
                     return
                 }
         }
-        Admob.getInstance().showInterAll(this, object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
+
                 openScreen(
                     Screen.CUSTOMIZE,
                     bundleOf(
@@ -114,8 +99,7 @@ class ChoosePonyActivity : BaseActivity<ActivityChoosePonyBinding, ChoosePonyVie
                         CustomizeActivity.ARG_TEMPLATE_ID to character.id
                     )
                 )
-            }
-        })
+
 
     }
     override fun viewListener() {

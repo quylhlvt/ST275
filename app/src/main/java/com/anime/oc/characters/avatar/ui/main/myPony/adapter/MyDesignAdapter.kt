@@ -27,7 +27,6 @@ class MyDesignAdapter() : BaseAdapter<MyAlbumModel, ItemMyDesignBinding>(ItemMyD
                 btnSelect.gone()
                 btnDelete.visible()
             }
-            if (item.isSelected) showDownSelect.visible() else showDownSelect.gone()
             btnSelect.setImageResource(
                 if (item.isSelected) R.drawable.ic_selected else R.drawable.ic_not_select
             )

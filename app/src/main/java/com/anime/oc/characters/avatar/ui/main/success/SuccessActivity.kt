@@ -21,8 +21,6 @@ import com.anime.oc.characters.avatar.core.helper.PermissionRequestHelper
 import com.anime.oc.characters.avatar.databinding.ActivitySuccessBinding
 import com.anime.oc.characters.avatar.ui.onboarding.permission.PermissionViewModel
 import com.anime.oc.characters.avatar.utils.share.SocialShareManager
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -47,11 +45,7 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
     private val windowFocusListener = ViewTreeObserver.OnWindowFocusChangeListener { hasFocus ->
         if (hasFocus && isScreenResumed && contentView != null) restoreSuccessInteractions()
     }
-    private fun initNativeCollab() {
-        loadNativeCollabAds(
-            getString(R.string.native_success), binding.flNativeCollab
-        )
-    }
+
 
     override fun onResume() {
         super.onResume()
@@ -96,10 +90,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
         binding.btnBottomLeft.isClickable = true
         binding.btnBottomRight.isEnabled = true
         binding.btnBottomRight.isClickable = true
-        binding.btnBottomLeftSocial.isEnabled = true
-        binding.btnBottomLeftSocial.isClickable = true
-        binding.btnBottomRightSocial.isEnabled = true
-        binding.btnBottomRightSocial.isClickable = true
         binding.root.requestLayout()
         binding.root.invalidate()
     }
@@ -113,17 +103,11 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
     }
 
     override fun initView() {
-        initNativeCollab()
+
         currentImagePath = imagePath
         binding.apply {
             setImageActionBar(actionBar.btnActionBarLeft, R.drawable.back_app)
             loadImage(this@SuccessActivity, imagePath, imvImage)
-            txtLeftSocial.apply  {
-                isSelected =true
-            }
-            txtRightSocial.apply  {
-                isSelected =true
-            }
             txtLeft.apply  {
                 isSelected =true
                 visible();}
@@ -136,45 +120,33 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
             tvSuccess.isSelected = true
         }
     }
-    private  fun showInter(action: (()-> Unit)){
-        Admob.getInstance().showInterAll(this@SuccessActivity, object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
-                action()
 
-            }
-        })
-    }
     override fun viewListener() {
         binding.apply {
             actionBar.btnActionBarLeft.onClick1 { popBack() }
 
             // Home
             actionBar.btnActionBarRight.onClick1 {
-                showInter {
                     openHome()
-                }
             }
             // Share
             actionBar.btnActionBarNextToRight.onClick( 1500) { shareImage() }
 
             // MyCreation
             btnBottomLeft.onClick1 {
-                showInter {
                     openMyCreations()
-                }
             }
 
             // Download
             btnBottomRight.onClick1 { downloadImage() }
-            btnBottomLeftSocial.onClick1 {
-                logSocialShareEvent("facebook")
-                shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
-            }
-            btnBottomRightSocial.onClick1 {
-                logSocialShareEvent("instagram")
-                shareToSocialApp(SocialShareManager.SocialApp.INSTAGRAM)
-            }
+//            btnBottomLeftSocial.onClick1 {
+//                logSocialShareEvent("facebook")
+//                shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
+//            }
+//            btnBottomRightSocial.onClick1 {
+//                logSocialShareEvent("instagram")
+//                shareToSocialApp(SocialShareManager.SocialApp.INSTAGRAM)
+//            }
         }
     }
     private fun logSocialShareEvent(socialName: String) {
@@ -183,11 +155,11 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
             .lastOrNull()
             .orEmpty()
 
-        logEventSocial(
-            "click_share_$socialName",
-            "click_share_${socialName}_$dataName",
-            avatarUrl
-        )
+//        logEventSocial(
+//            "click_share_$socialName",
+//            "click_share_${socialName}_$dataName",
+//            avatarUrl
+//        )
         Log.d("LogEvenA", "click_share_${socialName}_$dataName -- ${avatarUrl}")
 
     }

@@ -18,12 +18,6 @@ import com.anime.oc.characters.avatar.core.helper.StringHelper
 import com.anime.oc.characters.avatar.utils.key.RequestKey
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivityPermissionBinding
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdView
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.callback.NativeCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.system.exitProcess
 
@@ -31,22 +25,17 @@ import kotlin.system.exitProcess
 class PermissionActivity : BaseActivity<ActivityPermissionBinding, PermissionViewModel>(
     ActivityPermissionBinding::inflate, PermissionViewModel::class.java
 ), BackPressHandler {
-    private var screenNativeAd: NativeAd? = null
 
     // Some tablet builds dismiss the system permission popup when tapping
     // outside and return an empty result. Track that request across onResume.
     private var pendingPermissionRequest = false
     private var pendingStorageRequest = false
-    private var inter: InterstitialAd? = null
     override fun viewListener() {
         binding.swPermission.onClick(1500) { handlePermissionRequest(isStorage = true) }
         binding.swNotification.onClick(1500) { handlePermissionRequest(isStorage = false) }
         binding.tvContinue.onClick(1000) {
-            Admob.getInstance().showInterAds(this@PermissionActivity, inter, object : InterCallback() {
-                override fun onNextAction() {
-                    super.onNextAction()
-                    handleContinue()}
-            })
+
+                    handleContinue()
         }
     }
     private fun isNetworkAvailable(): Boolean {
@@ -73,43 +62,15 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding, PermissionVie
     }
 
     override fun initView() {
-        updateContinueMargin()
-        Admob.getInstance().loadInterAds(this@PermissionActivity, getString(R.string.inter_per), object : InterCallback() {
-            override fun onAdLoadSuccess(interstitialAd: InterstitialAd?) {
-                super.onAdLoadSuccess(interstitialAd)
-                inter = interstitialAd
-            }
-        })
-        Admob.getInstance().loadNativeAd(this@PermissionActivity, getString(R.string.native_per), object : NativeCallback() {
-            override fun onAdFailedToLoad() {
-                super.onAdFailedToLoad()
-                if (isScreenAvailable) binding.nativeAds.gone()
-            }
-
-            override fun onNativeAdLoaded(nativeAd: NativeAd?) {
-                super.onNativeAdLoaded(nativeAd)
-                if (!isScreenAvailable) {
-                    nativeAd?.destroy()
-                    return
-                }
-                screenNativeAd?.destroy()
-                screenNativeAd = nativeAd
-                binding.nativeAds.visible()
-                val adView =
-                    LayoutInflater.from(this@PermissionActivity).inflate(R.layout.ads_native_big_btn_top, null) as NativeAdView
-                binding.nativeAds.removeAllViews()
-                binding.nativeAds.addView(adView)
-                Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
-            }
-        })
+//        updateContinueMargin()
         binding.setupActionBar()
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            binding.btnStorage.visible()
-            binding.btnNotification.gone()
+            binding.btnStorageStroker.visible()
+            binding.btnNotificationStroker.gone()
             binding.space.gone()
         } else {
-            binding.btnNotification.visible()
-            binding.btnStorage.gone()
+            binding.btnNotificationStroker.visible()
+            binding.btnStorageStroker.gone()
             binding.space.gone()
         }
         // cập nhật UI switch khi vào màn
@@ -207,7 +168,7 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding, PermissionVie
 
     private fun updatePermissionUI(granted: Boolean, isStorage: Boolean) {
         val imageView = if (isStorage) binding.swPermission else binding.swNotification
-        imageView.setImageResource(if (granted) R.drawable.switch_on else R.drawable.switch_off)
+        imageView.setImageResource(if (granted) R.drawable.ic_select_lang else R.drawable.ic_un_select_lang)
     }
 
 
@@ -215,16 +176,7 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding, PermissionVie
 
     override fun initText() {
         binding.actionBar.tvCenter.select()
-        val textRes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            R.string.to_access_13 else R.string.to_access
 
-        binding.txtPermission.text = buildString {
-            append(getString(R.string.allow))
-            append(" ")
-            append(getString(R.string.app_name))
-            append(" ")
-            append(getString(textRes))
-        }
     }
 
     private fun handleContinue() {
@@ -234,11 +186,6 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding, PermissionVie
 
     override fun bindViewModel() {}
 
-    private fun createColoredText(
-        @StringRes textRes: Int,
-        @ColorRes colorRes: Int,
-        font: Int = R.font.baloo2_bold
-    ) = StringHelper.changeColor(this@PermissionActivity, getString(textRes), colorRes, font)
 
     override fun onScreenBackPressed(): Boolean {
         this@PermissionActivity.finishAffinity()
@@ -246,8 +193,6 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding, PermissionVie
         return true
     }
     override fun onDestroy() {
-        screenNativeAd?.destroy()
-        screenNativeAd = null
         super.onDestroy()
     }
 

@@ -2,8 +2,8 @@
 <!-- values-es/strings.xml -->
 <resources>
     <string name="size_slider">Tamaño</string>
-    <string name="app_name">Anime OC Maker: Avatar Creator</string>
-    <string name="next">Siguiente\u00A0</string>
+    <string name="app_name">Avatar cat maker</string>
+    <string name="next">Siguiente</string>
     <string name="language">Idioma</string>
     <string name="title_1">\u00A0Convierte tus ideas en magia anime\u00A0</string>
     <string name="title_2">\u00A0¿Un OC increíble? Cargando...\u00A0</string>

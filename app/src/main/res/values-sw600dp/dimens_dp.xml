@@ -32,7 +32,9 @@
     <dimen name="dimension_16">24dp</dimen>
     <dimen name="dimension_16_1">30dp</dimen>
     <dimen name="dimension_17">25.5dp</dimen>
+    <dimen name="dimension_17_">35.5dp</dimen>
     <dimen name="dimension_18">27dp</dimen>
+    <dimen name="dimension_18_">37dp</dimen>
     <dimen name="dimension_19">28.5dp</dimen>
     <dimen name="dimension_20">30dp</dimen>
     <dimen name="dimension_5_minus">-7.5dp</dimen>

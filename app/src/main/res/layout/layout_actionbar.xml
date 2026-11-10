@@ -92,11 +92,11 @@
             android:layout_width="@dimen/dimension_0"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimension_35"
-            android:fontFamily="@font/pacifico_regular"
+            android:fontFamily="@font/finger_paint_regular"
             android:gravity="center"
             android:text="@string/language"
             android:textColor="@color/app_color"
-            android:textSize="@dimen/text_size_30"
+            android:textSize="@dimen/text_size_16"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/btnActionBarLeft"
             app:layout_constraintEnd_toStartOf="@+id/btnActionBarRight"
@@ -196,51 +196,33 @@
 
         <!--            btnActionBarRightText-->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btnActionBarRightText"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="@dimen/dimension_0"
-            android:layout_marginEnd="@dimen/dimension_16"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/app_color2"
-            app:cardCornerRadius="@dimen/dimension_10"
-            app:layout_constraintBottom_toBottomOf="@+id/btnActionBarRight"
-            app:layout_constraintDimensionRatio="0.64:0.36"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnActionBarRight"
-            app:strokeColor="@color/app_color"
-            app:strokeWidth="@dimen/dimension_2">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/dimension_2"
-
-                android:layout_marginTop="@dimen/dimension_2"
-                android:layout_marginBottom="@dimen/dimension_5"
-                app:cardBackgroundColor="@color/app_color8"
-                app:cardCornerRadius="@dimen/dimension_8"
+                android:id="@+id/btnActionBarRightText"
+                android:layout_width="@dimen/dimension_0"
+                android:layout_height="@dimen/dimension_0"
+                android:layout_marginEnd="@dimen/dimension_16"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="@dimen/dimension_0"
+                app:layout_constraintBottom_toBottomOf="@+id/btnActionBarRight"
+                app:layout_constraintDimensionRatio="5.7:4.4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnActionBarRight"
+                app:strokeColor="@color/app_color"
                 app:strokeWidth="@dimen/dimension_0">
-
-                <FrameLayout
+            <TextView
+                    android:id="@+id/tvRightText"
+                    style="@style/single_marquee"
+                    android:background="@drawable/img_bg_frame_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/forground_next">
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/finger_paint_regular"
+                    android:gravity="center"
+                    android:text="@string/edit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimension_16" />
 
-                    <TextView
-                        android:id="@+id/tvRightText"
-                        style="@style/single_marquee"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/pacifico_regular"
-                        android:foreground="@drawable/forground_next"
-                        android:gravity="center"
-                        android:text="@string/next"
-                        android:textColor="@color/app_color"
-                        android:textSize="@dimen/dimension_16" />
-                </FrameLayout>
 
-            </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 <resources>
     <string name="size_slider">Size</string>
-    <string name="app_name">Anime OC Maker: Avatar Creator</string>
-    <string name="next">Next\u00A0</string>
+    <string name="app_name">Avatar cat maker</string>
+    <string name="next">Next</string>
     <string name="language">Language</string>
     <string name="title_1">\u00A0Turn Your Ideas into Anime Magic\u00A0</string>
     <string name="title_2">\u00A0Amazing OC? Loading...\u00A0</string>
@@ -39,7 +39,7 @@
     <string name="download">Download</string>
     <string name="my_avatar">My Anime</string>
     <string name="design">My Design</string>
-    <string name="no_item_here">No item here</string>
+    <string name="no_item_here">No character here</string>
     <string name="add_to_whatsapp">Add To WhatsApp</string>
     <string name="add_to_telegram">Add To Telegram</string>
     <string name="share">Share</string>

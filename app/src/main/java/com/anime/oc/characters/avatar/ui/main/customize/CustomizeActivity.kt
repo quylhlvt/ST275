@@ -33,8 +33,6 @@ import com.bumptech.glide.request.target.Target
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivityCustomizeBinding
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -74,11 +72,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
     private var scrollPartAfterRandom = false
 
     // ── INFLATE ───────────────────────────────────────────────────────────────
-    private fun initNativeCollab() {
-        Admob.getInstance().loadNativeCollapNotBanner(
-            this@CustomizeActivity, getString(R.string.native_cl_custom), binding.flNativeCollab
-        )
-    }
+
 
 
 
@@ -111,10 +105,8 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
 
     override fun onRestart() {
         super.onRestart()
-        initNativeCollab()
     }
     override fun initView() {
-        initNativeCollab()
         applyTabletLayout()
 
         binding.apply {
@@ -353,14 +345,14 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
                         yesText = getString(R.string.cancel),
                         noText = getString(R.string.ok),
                         onNo = {
-                            showRewardAds1(
-                                onRewardSuccess = {
-                                    if (!checkOnlineNetworkOrShowDialog()) {
+//                            showRewardAds1(
+//                                onRewardSuccess = {
+//                                    if (!checkOnlineNetworkOrShowDialog()) {
                                         viewModel.randomizeAll()
-                                    }
-                                },
-                                onAdClosed = {}
-                            )
+//                                    }
+//                                },
+//                                onAdClosed = {}
+//                            )
                         },
                         onYes = { hideLoadingSafe() }
                     )
@@ -381,15 +373,12 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
                         applyTransformsToAllLayers(viewModel.state.value)
                         updateScaleControls()
                         closeScalePanel()
-                        Admob.getInstance().showInterAll(this@CustomizeActivity, object : InterCallback() {
-                            override fun onNextAction() {
-                                super.onNextAction()
+
                                 binding.rcvNav.stopScroll()
                                 binding.rcvNav.post {
                                     binding.rcvNav.scrollToPosition(0)
                                 }
-                            }
-                        })
+
                     }
                 )
             }
@@ -834,7 +823,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
                     return@launch
                 }
                 savedCharacter.itemEventName(if (isEdit) "edit" else "done")?.let { eventName ->
-                    logEvent(eventName, savedCharacter.avatar)
+//                    logEvent(eventName, savedCharacter.avatar)
                     Log.d("LogEvenA", "$eventName -- ${savedCharacter.avatar}")
                 }
 
@@ -893,23 +882,15 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
             message = getString(R.string.haven_t_saved_it_yet_do_you_want_to_exit),
             title = getString(R.string.exit),
             onYes = {
-                showInter {
+
                     hideLoadingSafe()
                     popBack()
-                }
+
             },
             onNo = { hideLoadingSafe() }
         )
     }
-    private  fun showInter(action: (()-> Unit)){
-        Admob.getInstance().showInterAll(this@CustomizeActivity, object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
-                action()
 
-            }
-        })
-    }
     companion object {
         private const val MIN_LAYER_SCALE = 0.3f
         private const val MAX_LAYER_SCALE = 2f

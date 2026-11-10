@@ -1,53 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/img_bg_lang"
-    tools:context="com.anime.oc.characters.avatar.ui.language.LanguageActivity">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension_0"
-        android:layout_marginTop="@dimen/dimension_5"
-        android:layout_marginHorizontal="@dimen/dimension_16"
-        app:layout_constraintTop_toBottomOf="@+id/native_ads"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleLanguage"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="@drawable/img_bg_lang"
+                                                   tools:context="com.anime.oc.characters.avatar.ui.language.LanguageActivity">
+
+    <FrameLayout
+            android:id="@+id/layoutActionBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/dimension_5"
+            app:layout_constraintTop_toTopOf="parent">
 
+        <include
+                android:id="@+id/actionBar"
+                layout="@layout/layout_actionbar" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleLanguage"
+            android:layout_width="@dimen/dimension_0"
+
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimension_16"
+            android:layout_marginTop="@dimen/dimension_5"
             android:elevation="@dimen/dimension_1"
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutActionBar"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:listitem="@layout/item_language" />
-    </RelativeLayout>
-
 
     <FrameLayout
-        android:id="@+id/layoutActionBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/dimension_5"
-        app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/btnSave"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_44"
+            android:layout_marginHorizontal="@dimen/dimension_16"
+            android:layout_marginTop="@dimen/dimension_14"
+            android:layout_marginBottom="@dimen/dimension_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycleLanguage">
 
-        <include
-            android:id="@+id/actionBar"
-            layout="@layout/layout_actionbar" />
+        <TextView
+                android:id="@+id/txtSave"
+                style="@style/single_marquee"
+                android:layout_width="@dimen/dimension_120"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_save_lang"
+                android:fontFamily="@font/fluffy_cat"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20" />
     </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/native_ads"
-        android:layout_width="@dimen/dimension_0"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutActionBar">
-
-        <include layout="@layout/ads_native_big_btn_top_shimmer" />
-    </FrameLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension_0"
         android:layout_marginHorizontal="@dimen/dimension_16"
-        android:layout_marginBottom="@dimen/dimension_82"
+        android:layout_marginBottom="@dimen/dimension_12"
 
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,105 +102,5 @@
         <!--        btnBottomRight-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lnlBottomSocial"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension_0"
-        android:layout_marginHorizontal="@dimen/dimension_16"
-        android:layout_marginBottom="@dimen/dimension_12"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/lnlBottom"
-        app:layout_constraintDimensionRatio="3.26:0.44">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnBottomLeftSocial"
-            android:layout_width="@dimen/dimension_0"
-            android:background="@drawable/img_bg_fb"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1.54:0.44"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <ImageView
-                android:id="@+id/iconFb"
-                android:layout_width="@dimen/dimension_0"
-                android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                android:src="@drawable/ic_fb"
-                android:layout_marginVertical="@dimen/dimension_15"
-                android:layout_marginStart="@dimen/dimension_10"/>
-
-            <TextView
-                android:id="@+id/txtLeftSocial"
-                style="@style/single_marquee"
-                android:layout_width="@dimen/dimension_0"
-                android:layout_marginBottom="@dimen/dimension_5"
-                app:layout_constraintStart_toEndOf="@+id/iconFb"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginHorizontal="@dimen/dimension_2"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/facebook_share"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16"
-                android:fontFamily="@font/pacifico_regular"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnBottomRightSocial"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="match_parent"
-            android:background="@drawable/img_bg_ig"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1.54:0.44"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <ImageView
-                android:id="@+id/iconIg"
-                android:layout_width="@dimen/dimension_0"
-                android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                android:src="@drawable/ic_ig"
-                android:layout_marginVertical="@dimen/dimension_15"
-                android:layout_marginStart="@dimen/dimension_10"/>
-
-
-            <TextView
-                android:id="@+id/txtRightSocial"
-                style="@style/single_marquee"
-                android:layout_width="@dimen/dimension_0"
-                android:layout_marginHorizontal="@dimen/dimension_2"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dimension_5"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/instagram_share"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toEndOf="@+id/iconIg"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="@dimen/text_size_16"
-                android:fontFamily="@font/pacifico_regular"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <!--        btnBottomRight-->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <FrameLayout
-            android:id="@+id/flNativeCollab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="100dp"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-        <include layout="@layout/ads_shimmer_collap_native" />
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

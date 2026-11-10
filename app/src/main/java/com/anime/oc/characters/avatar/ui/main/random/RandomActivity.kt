@@ -21,8 +21,6 @@ import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInterne
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.databinding.ActivityRandomBinding
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -48,11 +46,7 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
         return appSession.templates.value.getOrNull(templateIndex)?.id?.startsWith("online_") == true
     }
 
-    private fun initNativeCollab() {
-        Admob.getInstance().loadNativeCollapNotBanner(
-            this@RandomActivity, getString(R.string.native_cl_random), binding.flNativeCollab
-        )
-    }
+
 
     private fun checkOnlineNetworkOrShowDialog(templateIndex: Int): Boolean {
         if (!isOnlineTemplate(templateIndex)) return false
@@ -86,7 +80,7 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
 
     override fun onRestart() {
         super.onRestart()
-        initNativeCollab()
+
     }
 
     override fun setupPreViews() {
@@ -95,31 +89,26 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
     }
 
     override fun initView() {
-        initNativeCollab()
         binding.imvImage.gone()
         binding.imageGif.visible()
         setSaveButtonEnabled(false)
         binding.setupActionBar()
         binding.txtRandom.isSelected = true
-        binding.txtEdit.isSelected = true
     }
 
     private fun ActivityRandomBinding.setupActionBar() {
         actionBar.apply {
             tvCenter.select()
             setImageActionBar(btnActionBarLeft, R.drawable.back_app)
-            setTextActionBar(tvCenter, getString(R.string.random))
+
+            setMaterialCardViewActionBar1(
+                btnActionBarRightText,
+                tvRightText,
+                getString(R.string.edit)
+            )
         }
     }
-    private  fun showInter(action: (()-> Unit)){
-        Admob.getInstance().showInterAll(this@RandomActivity, object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
-                action()
 
-            }
-        })
-    }
     override fun viewListener() {
         binding.apply {
             actionBar.btnActionBarLeft.onClick {
@@ -141,14 +130,15 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
                     if (randomClickCount == 1) {
                         randomizeAction()
                     } else {
-                        showInter(randomizeAction)
+                        randomizeAction()
+//                        showInter(randomizeAction)
                     }
                 } else {
                     return@onClick
                 }
             }
-            btnEdit.onClick {
-                if (!btnEdit.isEnabled) return@onClick
+            actionBar.btnActionBarRightText.onClick {
+                if (!actionBar.btnActionBarRightText.isEnabled) return@onClick
                 val item = viewModel.randomItem.value ?: return@onClick
                 if (checkOnlineNetworkOrShowDialog(item.templateIndex)) return@onClick
                 val templateId = appSession.templates.value.getOrNull(item.templateIndex)?.id ?: ""
@@ -158,9 +148,9 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
                     isEdit = false,
                     savedSelections = item.selections
                 )
-                showInter {
+
                     openScreen(Screen.CUSTOMIZE, args)
-                }
+
             }
         }
     }
@@ -274,9 +264,9 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
     }
 
     private fun setSaveButtonEnabled(enabled: Boolean) {
-        binding.btnEdit.isEnabled = enabled
-        binding.btnEdit.isClickable = enabled
-        binding.btnEdit.alpha = if (enabled) 1f else 0.5f
+        binding.actionBar.btnActionBarRightText.isEnabled = enabled
+        binding.actionBar.btnActionBarRightText.isClickable = enabled
+        binding.actionBar.btnActionBarRightText.alpha = if (enabled) 1f else 0.5f
 
         binding.random.isEnabled = enabled
         binding.random.isClickable = enabled

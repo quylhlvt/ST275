@@ -22,8 +22,6 @@ import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.databinding.ActivityViewBinding
-import com.lvt.ads.callback.InterCallback
-import com.lvt.ads.util.Admob
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import kotlin.compareTo
@@ -81,10 +79,7 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
         binding.btnBottomLeft.isClickable = true
         binding.btnBottomRight.isEnabled = true
         binding.btnBottomRight.isClickable = true
-        binding.btnBottomLeftSocial.isEnabled = true
-        binding.btnBottomLeftSocial.isClickable = true
-        binding.btnBottomRightSocial.isEnabled = true
-        binding.btnBottomRightSocial.isClickable = true
+
         binding.root.requestLayout()
         binding.root.invalidate()
     }
@@ -96,21 +91,15 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
         )
         this@ViewActivity.window.decorView.isEnabled = true
     }
-    private fun initNativeCollab() {
-        loadNativeCollabAds(
-            getString(R.string.native_cl_detail), binding.flNativeCollab
-        )
-    }
+
     override fun initView() {
-        initNativeCollab()
         currentImagePath = imagePath
         binding.apply {
             setImageActionBar(actionBar.btnActionBarLeft, R.drawable.back_app)
             loadImage(this@ViewActivity, imagePath, imvImage)
             txtRight.isSelected = true
             txtLeft.isSelected = true
-            txtLeftSocial.isSelected = true
-            txtRightSocial.isSelected = true
+
 
             when (imageType) {
                 1 -> {
@@ -129,52 +118,44 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
             }
         }
     }
-    private  fun showInter(action: (()-> Unit)){
-        Admob.getInstance().showInterAll(this@ViewActivity, object : InterCallback() {
-            override fun onNextAction() {
-                super.onNextAction()
-                action()
 
-            }
-        })
-    }
     override fun viewListener() {
         binding.apply {
-            actionBar.btnActionBarLeft.onClick { showInter {
+            actionBar.btnActionBarLeft.onClick {
                 popBack()
-            } }
+            }
 
 
             when (imageType) {
                 1 -> {
                     actionBar.btnActionBarRight.onClick1 { confirmDelete() }
                     actionBar.btnActionBarNextToRight.onClick1 {
-                        showInter {  navigateToEdit()}
+                   navigateToEdit()
                     }
                     btnBottomLeft.onClick(1500) { shareImage() }
                     btnBottomRight.onClick1 { downloadImage() }
-                    btnBottomLeftSocial.onClick1 {
-                        logSocialShareEvent("facebook")
-                        shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
-                    }
-                    btnBottomRightSocial.onClick1 {
-                        logSocialShareEvent("instagram")
-                        shareToSocialApp(SocialShareManager.SocialApp.INSTAGRAM)
-                    }
+//                    btnBottomLeftSocial.onClick1 {
+//                        logSocialShareEvent("facebook")
+//                        shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
+//                    }
+//                    btnBottomRightSocial.onClick1 {
+//                        logSocialShareEvent("instagram")
+//                        shareToSocialApp(SocialShareManager.SocialApp.INSTAGRAM)
+//                    }
                 }
 
                 2 -> {
                     actionBar.btnActionBarRight.onClick1 { confirmDelete() }
                     btnBottomLeft.onClick(1500) { shareImage() }
                     btnBottomRight.onClick1 { downloadImage() }
-                    btnBottomLeftSocial.onClick1 {
-                        logSocialShareEvent("facebook")
-                        shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
-                    }
-                    btnBottomRightSocial.onClick1 {
-                        logSocialShareEvent("instagram")
-                        shareToSocialApp(SocialShareManager.SocialApp.INSTAGRAM)
-                    }
+//                    btnBottomLeftSocial.onClick1 {
+//                        logSocialShareEvent("facebook")
+//                        shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
+//                    }
+//                    btnBottomRightSocial.onClick1 {
+//                        logSocialShareEvent("instagram")
+//                        shareToSocialApp(SocialShareManager.SocialApp.INSTAGRAM)
+//                    }
                 }
             }
         }
@@ -194,11 +175,11 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
             .lastOrNull()
             .orEmpty()
 //
-        logEventSocial(
-            "click_share_$socialName",
-            "click_share_${socialName}_$dataName",
-            avatarPath
-        )
+//        logEventSocial(
+//            "click_share_$socialName",
+//            "click_share_${socialName}_$dataName",
+//            avatarPath
+//        )
         Log.d("LogEvenA", "click_share_${socialName}_$dataName -- ${avatarPath}")
     }
     private fun shareToSocialApp(app: SocialShareManager.SocialApp) {

@@ -2,6 +2,7 @@ package com.anime.oc.characters.avatar.ui.main.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.oc.characters.avatar.R
@@ -13,6 +14,7 @@ enum class HomeMenuAction {
 
 data class HomeMenuItem(
     @StringRes val titleRes: Int,
+    @DrawableRes val iconRes: Int,
     val action: HomeMenuAction
 )
 
@@ -21,10 +23,10 @@ class HomeMenuAdapter(
 ) : RecyclerView.Adapter<HomeMenuAdapter.HomeMenuViewHolder>() {
 
     private val items = listOf(
-        HomeMenuItem(R.string.pony_maker, HomeMenuAction.CREATE),
-        HomeMenuItem(R.string.cosplay, HomeMenuAction.COSPLAY),
-        HomeMenuItem(R.string.cat_random, HomeMenuAction.RANDOM),
-        HomeMenuItem(R.string.my_creation, HomeMenuAction.MY_ALBUM)
+        HomeMenuItem(R.string.pony_maker,R.drawable.home1, HomeMenuAction.CREATE),
+        HomeMenuItem(R.string.cosplay, R.drawable.home2,HomeMenuAction.COSPLAY),
+        HomeMenuItem(R.string.cat_random, R.drawable.home3,HomeMenuAction.RANDOM),
+        HomeMenuItem(R.string.my_creation, R.drawable.home4,HomeMenuAction.MY_ALBUM)
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMenuViewHolder {
@@ -49,6 +51,7 @@ class HomeMenuAdapter(
         fun bind(item: HomeMenuItem) {
             binding.tvTitle.isSelected = true
             binding.tvTitle.setText(item.titleRes)
+            binding.imgHome.setImageResource(item.iconRes)
             binding.root.setOnClickListener { onItemClick(item.action) }
         }
     }
