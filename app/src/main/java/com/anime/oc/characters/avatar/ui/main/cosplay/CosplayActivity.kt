@@ -4,10 +4,9 @@ import com.anime.oc.characters.avatar.core.extention.*
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
-import android.text.SpannableString
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
@@ -16,20 +15,22 @@ import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.core.navigation.Screen
 import com.anime.oc.characters.avatar.ui.main.show.ShowActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isInternetAvailable
 import com.anime.oc.characters.avatar.core.extention.InternetExtension.isNetworkConnected
 import com.anime.oc.characters.avatar.databinding.ActivityCosplayBinding
-import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.runInterruptible
+import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -38,7 +39,6 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
     ActivityCosplayBinding::inflate,
     CosplayViewModel::class.java
 ) {
-    private var renderJob: Job? = null
 
     private fun isOnlineTemplate(templateIndex: Int): Boolean {
         return appSession.templates.value.getOrNull(templateIndex)
@@ -83,7 +83,10 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
     }
     override fun setupPreViews() {
         super.setupPreViews()
-        Glide.with(binding.imageGif).asGif().load(R.drawable.gif).into(binding.imageGif)
+        Glide.with(binding.imageGif).asGif().load(R.drawable.gif)
+            .override(512)
+            .priority(Priority.IMMEDIATE)
+            .into(binding.imageGif)
     }
 
     override fun initView() {
@@ -104,7 +107,6 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
             tvCenter.select()
             setImageActionBar(btnActionBarLeft, R.drawable.back_app)
             setImageActionBar(btnActionBarRight, R.drawable.guid)
-            setTextActionBar(tvCenter, getString(R.string.cosplay))
         }
     }
 
@@ -183,59 +185,59 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
         }
     }
 
-    private fun renderCharacter(item: CosplayViewModel.RandomItem) {
-        renderJob?.cancel()
-        setShowButtonEnabled(false)
-        renderJob = this@CosplayActivity.lifecycleScope.launch {
-            val paths = item.resolvedPaths.filterNotNull()
-            if (paths.isEmpty()) return@launch
-            showLoading()
+    private suspend fun renderCharacter(item: CosplayViewModel.RandomItem) {
+        showLoading()
+        val paths = item.resolvedPaths.filterNotNull()
+        if (paths.isEmpty()) {
+            showRenderError()
+            return
+        }
 
-            var networkDialogShown = false
-            var waitingForNetwork = false
-            var bitmaps: List<Bitmap> = emptyList()
-            while (isActive) {
-                val loaded = withContext(Dispatchers.IO) {
-                    paths.map { path ->
-                        async {
-                            runCatching {
-                                Glide.with(this@CosplayActivity).asBitmap().load(path)
-                                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                                    .override(512).submit().get()
-                            }.getOrNull()
-                        }
+        val startedAt = android.os.SystemClock.elapsedRealtime()
+        val requestManager = Glide.with(this@CosplayActivity)
+        val targets = paths.map { path ->
+            requestManager.asBitmap().load(path)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.IMMEDIATE)
+                .disallowHardwareConfig()
+                .override(512, 512)
+                .submit()
+        }
+        try {
+            val merged = withTimeout(15_000L) {
+                val bitmaps = coroutineScope {
+                    targets.map { target ->
+                        async { runInterruptible(Dispatchers.IO) { target.get() } }
                     }.awaitAll()
                 }
-                bitmaps = loaded.filterNotNull()
-                if (bitmaps.size == paths.size) break
-
-                val hasNetwork = InternetExtension.isNetworkConnected(this@CosplayActivity) &&
-                        InternetExtension.isInternetAvailable(this@CosplayActivity)
-                if (!hasNetwork) {
-                    waitingForNetwork = true
-                    if (!networkDialogShown) {
-                        showUnstableNetworkDialog()
-                        networkDialogShown = true
-                    }
-                    delay(200)
-                    continue
-                }
-                if (waitingForNetwork) {
-                    viewModel.randomize(isOnline = true)
-                    return@launch
-                }
-                delay(200)
+                withContext(Dispatchers.Default) { mergeBitmaps(bitmaps) }
             }
-            if (!isActive || bitmaps.size != paths.size) return@launch
-
-            val merged = mergeBitmaps(bitmaps)
-
-            // ✅ Lưu vào cache
             viewModel.setCachedBitmap(merged)
+            showBitmap(merged)
+            Log.d("CosplayActivity", "Rendered ${paths.size} layers in ${android.os.SystemClock.elapsedRealtime() - startedAt}ms")
+        } catch (e: TimeoutCancellationException) {
+            Log.w("CosplayActivity", "Character loading timed out", e)
+            showRenderError()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.w("CosplayActivity", "Character loading failed", e)
+            showRenderError()
+        } finally {
+            // Keep Glide resources alive until Canvas has finished merging them.
+            targets.forEach { requestManager.clear(it) }
+        }
+    }
 
-            withContext(Dispatchers.Main) {
-                showBitmap(merged)
-            }
+    private fun showRenderError() {
+        binding.imageGif.gone()
+        setShowButtonEnabled(false)
+        setRandomButtonEnabled(true)
+        if (!isScreenAvailable) return
+        if (!isNetworkConnected(this) || !isInternetAvailable(this)) {
+            showUnstableNetworkDialog()
+        } else {
+            showOkDialog(getString(R.string.download_failed_please_try_again_later))
         }
     }
 
@@ -262,6 +264,10 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
         binding.play.isEnabled = enabled
         binding.play.isClickable = enabled
         binding.play.alpha = if (enabled) 1f else 0.5f
+        setRandomButtonEnabled(enabled)
+    }
+
+    private fun setRandomButtonEnabled(enabled: Boolean) {
         binding.random.isEnabled = enabled
         binding.random.isClickable = enabled
         binding.random.alpha = if (enabled) 1f else 0.5f

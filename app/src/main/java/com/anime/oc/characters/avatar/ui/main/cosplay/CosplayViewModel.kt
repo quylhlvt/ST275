@@ -89,7 +89,7 @@ class CosplayViewModel @Inject constructor(
             val paths    = color.listPath
             val limited  = if (paths.size > 6) paths.subList(0, paths.size / 2) else paths
             val validIdx = limited.indices.filter { limited[it] != "none" && limited[it] != "dice" }
-            val pathIdx  = if (validIdx.isNotEmpty()) validIdx.random() else limited.indices.random()
+            val pathIdx  = if (validIdx.isNotEmpty()) validIdx.random() else limited.indices.randomOrNull() ?: 0
             list.add(SelectionIndex(bpIdx, colorIdx, pathIdx))
         }
         return list
@@ -100,6 +100,6 @@ class CosplayViewModel @Inject constructor(
             val s     = sel.getOrNull(bpIdx) ?: return@mapIndexed null
             val color = bp.listPath.getOrNull(s.colorIndex) ?: return@mapIndexed null
             val path  = color.listPath.getOrNull(s.pathIndex) ?: return@mapIndexed null
-            if (path == "none") null else path
+            path.takeUnless { it.isBlank() || it == "none" || it == "dice" }
         }
 }

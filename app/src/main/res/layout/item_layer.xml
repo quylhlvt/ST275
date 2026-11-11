@@ -37,7 +37,6 @@
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/dimension_4"
                     app:cardElevation="@dimen/dimension_0"
-                    app:strokeColor="@color/app_color7"
                     app:strokeWidth="@dimen/dimension_0">
 
                 <ImageView

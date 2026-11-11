@@ -1,5 +1,4 @@
 <resources>
-    <string name="size_slider">Size</string>
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Next</string>
     <string name="language">Language</string>
@@ -15,14 +14,9 @@
     <string name="notification">Notification\u00A0</string>
     <string name="granted_notification">Notification permission granted</string>
     <string name="granted_storage">Storage permission granted</string>
-    <string name="allow">\u00A0Allow</string>
-    <string name="to_access">to access photos on your device\u00A0</string>
-    <string name="to_access_13">to access notification on your device\u00A0</string>
     <string name="go_to_setting_message">The app needs this permission</string>
     <string name="settings">Settings</string>
     <string name="cancel">Cancel</string>
-    <string name="add_image">Add image</string>
-    <string name="text">Text</string>
     <string name="type_your_content">Type_your_content</string>
     <string name="loading">Loading</string>
     <string name="haven_t_saved_it_yet_do_you_want_to_exit">Haven’t saved it yet, do you want to exit?</string>
@@ -35,7 +29,6 @@
     <string name="exit">Exit</string>
     <string name="rate_us">Rate us</string>
     <string name="share_app">Share app</string>
-    <string name="image_has_been_saved_successfully">Image has been saved successfully!</string>
     <string name="download">Download</string>
     <string name="my_avatar">My Anime</string>
     <string name="design">My Design</string>
@@ -80,13 +73,10 @@
     <string name="have_rated">Thank you for rate our app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="cosplay">Cosplay Anime</string>
-    <string name="cosplay2">Cosplay</string>
     <string name="random">Random</string>
     <string name="my_creation">My Creation</string>
-    <string name="category">Category</string>
     <string name="image">Image</string>
     <string name="color">Color</string>
-    <string name="successful">Successful</string>
     <string name="successfully">Successfully</string>
     <string name="try_again">Try again</string>
     <string name="no_internet">No internet</string>
@@ -98,26 +88,16 @@
     <string name="create_package_name">Create Package Name</string>
     <string name="enter_your_package_name">Enter your package name</string>
     <string name="please_enter_your_package_name">Please enter your package name!</string>
-    <string name="this_action_may_contain_advertising">This action can contain ads</string>
     <string name="instruction">Instruction</string>
     <string name="tvCosplay1">Players receive a random reference image and must recreate the character by choosing matching hairstyles, outfits, colors, and accessories. Each correct choice increases the percentage score the closer the character matches the image, the higher the final score.</string>
     <string name="save">Save</string>
     <string name="error">Error</string>
     <string name="save_failed">Could not save your creation. Please try again.</string>
     <string name="errorcontent">This item is no longer available.</string>
-    <string name="facebook_share">Facebook Share</string>
-    <string name="instagram_share">Instagram Share</string>
-    <string name="bubbles">Bubbles</string>
     <string name="edit">Edit</string>
-    <string name="font">Font</string>
-    <string name="not_matched">Not Matched</string>
-    <string name="cosplay_complete">Cosplay Complete!</string>
-    <string name="you_lose">You Losed!</string>
-    <string name="victory">Victory</string>
     <string name="done">Done</string>
     <string name="please_wait">Please wait...</string>
-    <string name="please_watch_full_ads">Please Watch Full Ads</string>
-    <string name="load_ads_fail">Load Ads Fail</string>
     <string name="watch_a_short_ad_to_generate_a_random_anime">Watch a short ad to generate a Random Anime</string>
     <string name="play">Play</string>
+    <string name="click_the_random_button_below_to_see_what_your_character_is">Click the random button below to see what your character is!</string>
 </resources>

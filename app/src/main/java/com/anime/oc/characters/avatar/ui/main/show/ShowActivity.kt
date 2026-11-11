@@ -1,20 +1,15 @@
 package com.anime.oc.characters.avatar.ui.main.show
 
 import com.anime.oc.characters.avatar.core.extention.*
-import android.animation.ValueAnimator
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -34,7 +29,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.anime.oc.characters.avatar.R
 import com.anime.oc.characters.avatar.databinding.ActivityShowBinding
-import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -61,11 +55,10 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
 
     private val pendingLoads = AtomicInteger(0)
     private var timerJob: Job? = null
-    private var starAnimator: ValueAnimator? = null
-    private val totalSeconds = 10 * 60
+    private var countDownJob: Job? = null
+    private val totalSeconds = 1 * 6
     private var remainingSeconds = totalSeconds
 
-    private var remainingSecondsOnPause: Int = totalSeconds
     private var hasNavigatedToSuccess = false
     private var scrollPartAfterRandom = false
 
@@ -96,9 +89,6 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
     }
     override fun initView() {
         binding.apply {
-            txtTittle.isSelected = true
-            txtNextDialog.isSelected = true
-            txtNext.isSelected = true
             actionBar.apply {
                 setImageActionBar(cvLogo, R.drawable.back_app)
 //            setImageActionBar(btnActionBarRight, R.drawable.next_app)
@@ -108,8 +98,6 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
 
         setupAdapters()
         readArgsAndInit()
-        updateCompletionDialog(isComplete = false)
-        binding.showWin.gone()
         startCountDown()
 
         val bitmap = appSession.cosplayBitmap
@@ -130,6 +118,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         )
     }
     private fun startTimer(fromSeconds: Int = totalSeconds) {
+        if (hasNavigatedToSuccess) return
         timerJob?.cancel()
         remainingSeconds = fromSeconds
 
@@ -140,7 +129,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
                 updateTimerUI(minutes, seconds)
 
                 if (remainingSeconds == 0) {
-                    showFailLayout()
+                    navigateToSuccess()
                     break
                 }
 
@@ -149,12 +138,8 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
             }
         }
     }
-    // Thêm hàm showFailLayout
-    private fun showFailLayout() {
-        if (!isScreenAvailable || isDestroyed) return
-        showResultDialog(isComplete = false)
-    }
     private fun startCountDown() {
+        countDownJob?.cancel()
         binding.actionBar.cvLogo.isEnabled = false
         binding.actionBar.btnActionBarRight.isEnabled = false
         val colors = listOf(
@@ -165,7 +150,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
 
         binding.countDown.visibility = View.VISIBLE
 
-        this@ShowActivity.lifecycleScope.launch {
+        countDownJob = this@ShowActivity.lifecycleScope.launch {
             for (count in 3 downTo 1) {
                 val colorIndex = 3 - count
                 binding.tvCountDown.setTextColor(colors[colorIndex])
@@ -241,6 +226,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         if (hasNavigatedToSuccess) return
         hasNavigatedToSuccess = true
         timerJob?.cancel()
+        countDownJob?.cancel()
 
         // Nếu vẫn còn đang load ảnh → đợi
         if (pendingLoads.get() > 0) {
@@ -261,7 +247,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         if (bitmap != null) appSession.userResultBitmap = bitmap
         appSession.cosplayPercent = viewModel.state.value.matchPercent
 
-            openScreen(Screen.SUCCESS_COSPLAY)
+        openScreen(Screen.SUCCESS_COSPLAY)
     }
     private fun renderLayersToBitmap(): Bitmap? {
         val root = binding.rlCharacter
@@ -284,40 +270,9 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
 
     override fun viewListener() {
         binding.apply {
-            actionBar.cvLogo.onClick {
-
-                    popBack()
-
-            }
-//            actionBar.btnActionBarRight.onClick { navigateToSuccess() }
-
-            materialSmall.onClick {
-                imgShowBig.visible()
-            }
+            actionBar.cvLogo.onClick { popBack() }
+            materialSmall.onClick { imgShowBig.visible() }
             close.onClick { imgShowBig.gone() }
-            frameNextDialog.onClick { navigateToSuccess() }
-
-
-
-
-
-            // ── Color toggle ──────────────────────────────────────────────────────
-            imgChangColor.onClick {
-                if (checkOnlineNetworkOrShowDialog()) return@onClick              // ← guard
-                val navPos = viewModel.state.value.currentNavIndex
-                if (!viewModel.state.value.hasMultipleColors) return@onClick
-                if (llColor.isVisible) {
-                    if (navPos < arrShowColor.size) arrShowColor[navPos] = false
-                    llColor.animate().alpha(0f).setDuration(200).withEndAction {
-                        llColor.visibility = View.INVISIBLE
-                    }.start()
-                } else {
-                    if (navPos < arrShowColor.size) arrShowColor[navPos] = true
-                    llColor.visibility = View.VISIBLE
-                    llColor.alpha = 0f
-                    llColor.animate().alpha(1f).setDuration(200).start()
-                }
-            }
         }
 
         // ── Nav ───────────────────────────────────────────────────────────────────
@@ -351,34 +306,6 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
     // ✅ FIX — thêm flag giống CustomizeActivity
     private var hasTriggeredReInit = false
 
-    private fun updateCompletionDialog(isComplete: Boolean) {
-        binding.apply {
-
-            imgAvatarDialog.setImageResource(
-                if (isComplete) R.drawable.avatar_win else R.drawable.avatar_lost
-            )
-            bgTiltleDialog.setImageResource(
-                if (isComplete) R.drawable.bg_tittle_win else R.drawable.bg_tittle_lost
-            )
-            txtNextDialog.setText(
-                if (isComplete) R.string.cosplay_complete else R.string.not_matched
-            )
-            txtTittle.setText(
-                if (isComplete) R.string.victory else R.string.you_lose
-            )
-        }
-    }
-
-    private fun showResultDialog(isComplete: Boolean) {
-        timerJob?.cancel()
-        updateCompletionDialog(isComplete)
-        binding.showWin.visible()
-    }
-
-    private fun showWinLayout() {
-        if (!isScreenAvailable || isDestroyed) return
-        showResultDialog(isComplete = true)
-    }
     override fun observeData() {
 
         this@ShowActivity.lifecycleScope.launch {
@@ -402,11 +329,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
                     layerViews.forEach { it.scaleX = scale }
                     updateMatchUI(state.matchPercent)
                     if (state.matchPercent >= 100) {
-                        timerJob?.cancel()
-                        if (isScreenAvailable && !isDestroyed) {
-//                            navigateToSuccess()
-                            showWinLayout()
-                        }
+                        navigateToSuccess()
                     }
                 }
             }
@@ -508,7 +431,6 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
     private fun updateAdapters(state: ShowState) {
         adapterNav.setPos(state.currentNavIndex)
         adapterNav.submitList(state.listData)
-//        binding.imgChangColor.isVisible = state.hasMultipleColors
 
         adapterColor.setPos(state.currentColorIndex)
 
@@ -521,15 +443,12 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         val navPos = state.currentNavIndex
 
         if (state.hasMultipleColors) {
-//            binding.imgChangColor.visible()
             adapterColor.submitList(state.currentColors)
             if (navPos < arrShowColor.size && arrShowColor[navPos]) {
                 binding.llColor.animate().alpha(1f).setDuration(150).withStartAction {
                     binding.llColor.visibility = View.VISIBLE
-                    binding.imgChangColor.visibility = View.VISIBLE
                 }.start()
             } else {
-//                binding.imgChangColor.invisible()
                 binding.llColor.animate().alpha(0f).setDuration(150).withEndAction {
                     binding.llColor.visibility = View.GONE
                 }.start()
@@ -537,7 +456,6 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         } else {
             binding.llColor.animate().alpha(0f).setDuration(150).withEndAction {
                 binding.llColor.visibility = View.GONE
-                binding.imgChangColor.visibility = View.GONE
             }.start()
         }
 
@@ -566,73 +484,10 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         }
     }
 
-    // ── PROGRESS (giống ShowActivity.updateMatchUI) ───────────────────────────
-
     private fun updateMatchUI(percent: Int) {
-        val safePercent = percent.coerceIn(0, 100)
-        val starCount = when (percent) {
-            0 -> 0
-            in 1..20 -> 1
-            in 21..40 -> 2
-            in 41..70 -> 3
-            in 71..98 -> 4
-            in 99..100 -> 5
-            else -> 0
-        }
-
-        binding.ll1.rating = starCount.toFloat()
-
-        // 0% = bias 1 (bottom), 100% = bias 0 (top).
-        val targetBias = 1f - safePercent / 100f
-        val currentBias =
-            (binding.imgStar.layoutParams as ConstraintLayout.LayoutParams).verticalBias
-
-        starAnimator?.cancel()
-        starAnimator = ValueAnimator.ofFloat(currentBias, targetBias).apply {
-            duration = 400L
-            interpolator = DecelerateInterpolator()
-            addUpdateListener { animator ->
-                binding.imgStar.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                    verticalBias = animator.animatedValue as Float
-                }
-            }
-            start()
-        }
-        binding.tvPercent.text = "$percent%"
-//
-//        // Animate progress fill (scaleY từ 0→1 theo %)
-//        binding.progressTrack.post {
-//            val trackH = binding.progressTrack.height.toFloat()
-//            val marginPx = 10 * resources.displayMetrics.density
-//            val fillH = trackH - marginPx
-//            val scale = percent / 100f
-//
-//            binding.progressFill.pivotX = binding.progressFill.width / 2f
-//            binding.progressFill.pivotY = fillH
-
-//            ObjectAnimator.ofFloat(
-//                binding.progressFill, "scaleY",
-//                binding.progressFill.scaleY,
-//                scale * fillH / trackH
-//            ).apply {
-//                duration = 400
-//                interpolator = DecelerateInterpolator()
-//                start()
-//            }
-//
-//            // Star icon chạy theo thanh progress
-//            val starH = binding.imgStar.height.toFloat()
-//            ObjectAnimator.ofFloat(
-//                binding.imgStar, "translationY",
-//                binding.imgStar.translationY,
-//                -(fillH * scale) - marginPx + starH / 2f
-//            ).apply {
-//                duration = 400
-//                interpolator = DecelerateInterpolator()
-//                start()
-//            }
-//        }
+        binding.tvPercent.text = "${percent.coerceIn(0, 100)}%"
     }
+
     // onPause — lưu remainingSeconds thực tế
     override fun onPause() {
         super.onPause()
@@ -658,11 +513,14 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
 
             // Reset hoàn toàn
             timerJob?.cancel()
-            hasNavigatedToSuccess = false
-            viewModel.reset()
+            countDownJob?.cancel()
+            binding.tvCountDown.animate().cancel()
             hasTriggeredReInit = false
-            updateCompletionDialog(isComplete = false)
-            binding.showWin.gone()
+            remainingSeconds = totalSeconds
+            scrollPartAfterRandom = false
+            binding.imgShowBig.gone()
+            appSession.userResultBitmap = null
+            appSession.cosplayPercent = 0
 
             // Clear tất cả layer
             layerViews.forEach { Glide.with(binding.rlCharacter).clear(it) }
@@ -670,6 +528,12 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
             navToLayerIndex.clear()
             arrShowColor.clear()
             binding.rlCharacter.removeAllViews()
+            pendingLoads.set(0)
+            viewModel.reset()
+            hasNavigatedToSuccess = false
+            binding.rcvNav.scrollToPosition(0)
+            binding.rcvColor.scrollToPosition(0)
+            binding.rcvPart.scrollToPosition(0)
 
             // Cập nhật ảnh cosplay mới
             val bitmap = appSession.cosplayBitmap
@@ -707,10 +571,9 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         }
     }
     override fun onDestroy() {
-        starAnimator?.cancel()
-        starAnimator = null
         super.onDestroy()
         timerJob?.cancel()
+        countDownJob?.cancel()
     }
     override fun bindViewModel() {}
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- values-pt/strings.xml -->
 <resources>
-    <string name="size_slider">Tamanho</string>
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Avançar</string>
     <string name="language">Idioma</string>
@@ -17,14 +16,9 @@
     <string name="notification">Notificação\u00A0</string>
     <string name="granted_notification">Permissão de notificação concedida</string>
     <string name="granted_storage">Permissão de armazenamento concedida</string>
-    <string name="allow">\u00A0Permitir</string>
-    <string name="to_access">para acessar fotos no seu dispositivo\u00A0</string>
-    <string name="to_access_13">para acessar notificações no seu dispositivo\u00A0</string>
     <string name="go_to_setting_message">O aplicativo precisa desta permissão</string>
     <string name="settings">Configurações</string>
     <string name="cancel">Cancelar</string>
-    <string name="add_image">Adicionar imagem</string>
-    <string name="text">Texto</string>
     <string name="type_your_content">Digite seu conteúdo</string>
     <string name="loading">Carregando</string>
     <string name="haven_t_saved_it_yet_do_you_want_to_exit">Ainda não foi salvo, deseja sair?</string>
@@ -37,7 +31,6 @@
     <string name="exit">Sair</string>
     <string name="rate_us">Avalie-nos</string>
     <string name="share_app">Compartilhar app</string>
-    <string name="image_has_been_saved_successfully">Imagem salva com sucesso!</string>
     <string name="download">Baixar</string>
     <string name="my_avatar">Meu anime</string>
     <string name="design">Meu design</string>
@@ -77,13 +70,10 @@
     <string name="rate_us_0">Você ainda não avaliou!</string>
     <string name="have_rated">Obrigado por avaliar nosso app</string>
     <string name="cosplay">Cosplay de anime</string>
-    <string name="cosplay2">Cosplay</string>
     <string name="random">Aleatório</string>
     <string name="my_creation">Minha criação</string>
-    <string name="category">Categoria</string>
     <string name="image">Imagem</string>
     <string name="color">Cor</string>
-    <string name="successful">Sucesso</string>
     <string name="successfully">Com sucesso</string>
     <string name="try_again">Tentar novamente</string>
     <string name="no_internet">Sem internet</string>
@@ -95,32 +85,15 @@
     <string name="create_package_name">Criar nome do pacote</string>
     <string name="enter_your_package_name">Digite o nome do pacote</string>
     <string name="please_enter_your_package_name">Digite o nome do pacote!</string>
-    <string name="this_action_may_contain_advertising">Esta ação pode conter anúncios</string>
     <string name="instruction">Instruções</string>
     <string name="tvCosplay1">No modo Cosplay,</string>
-    <string name="tvCosplay2">os jogadores recebem aleatoriamente</string>
-    <string name="tvCosplay3">uma imagem de referência</string>
-    <string name="tvCosplay4">para seguir. Sua tarefa é recriar esse personagem com a maior precisão possível escolhendo os</string>
-    <string name="tvCosplay5">penteados, roupas, cores e acessórios corretos.</string>
-    <string name="tvCosplay6">Cada combinação correta aumenta sua</string>
-    <string name="tvCosplay7">porcentagem (%).</string>
-    <string name="tvCosplay8">Quanto mais o seu personagem se parecer com a imagem aleatória, maior será sua pontuação final. Preste atenção aos pequenos detalhes para obter o melhor resultado de cosplay.</string>
     <string name="save">Salvar</string>
     <string name="error">Erro</string>
     <string name="errorcontent">Este item não está mais disponível.</string>
     <string name="image_not_found">Imagem não encontrada</string><string name="facebook_not_available">O Facebook não está instalado ou não pode receber esta imagem</string><string name="instagram_not_available">O Instagram não está instalado ou não pode receber esta imagem</string><string name="share_failed">Não foi possível compartilhar a imagem. Tente novamente.</string>
-    <string name="facebook_share">Compartilhar no Facebook</string><string name="instagram_share">Compartilhar no Instagram</string>
-    <string name="bubbles">Bolhas</string>
     <string name="edit">Editar</string>
     <string name="cat_random">Anime aleatório</string>
-    <string name="font">Fonte</string>
-    <string name="not_matched">Sem correspondência</string>
-    <string name="cosplay_complete">Cosplay concluído!</string>
-    <string name="you_lose">Você perdeu!</string>
-    <string name="victory">Vitória</string>
     <string name="done">Concluído</string>
     <string name="please_wait">Aguarde...</string>
-    <string name="please_watch_full_ads">Assista ao anúncio completo</string>
-    <string name="load_ads_fail">Falha ao carregar o anúncio</string>
     <string name="watch_a_short_ad_to_generate_a_random_anime">Assista a um anúncio curto para gerar um personagem de anime aleatório</string>
 </resources>

@@ -90,8 +90,10 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
 
     override fun initView() {
         binding.imvImage.gone()
-        binding.imageGif.visible()
+        binding.imageGif.gone()
+        binding.demoRandom.visible()
         setSaveButtonEnabled(false)
+        setRandomButtonEnabled(viewModel.isDataReady.value)
         binding.setupActionBar()
         binding.txtRandom.isSelected = true
     }
@@ -160,10 +162,8 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.isDataReady.collect { ready ->
-                        if (ready && viewModel.randomItem.value == null) {
-                            val isOnline = isNetworkConnected(this@RandomActivity) &&
-                                isInternetAvailable(this@RandomActivity)
-                            viewModel.randomize(isOnline = isOnline)
+                        if (viewModel.randomItem.value == null) {
+                            setRandomButtonEnabled(ready)
                         }
                     }
                 }
@@ -245,6 +245,7 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
     }
 
     private fun showLoading() {
+        binding.demoRandom.gone()
         binding.imvImage.apply {
             setImageDrawable(null)
             gone()
@@ -254,6 +255,7 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
     }
 
     private fun showBitmap(bitmap: Bitmap) {
+        binding.demoRandom.gone()
         binding.imvImage.apply {
             scaleType = ImageView.ScaleType.CENTER_CROP
             setImageBitmap(bitmap)
@@ -268,6 +270,10 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
         binding.actionBar.btnActionBarRightText.isClickable = enabled
         binding.actionBar.btnActionBarRightText.alpha = if (enabled) 1f else 0.5f
 
+        setRandomButtonEnabled(enabled)
+    }
+
+    private fun setRandomButtonEnabled(enabled: Boolean) {
         binding.random.isEnabled = enabled
         binding.random.isClickable = enabled
         binding.random.alpha = if (enabled) 1f else 0.5f

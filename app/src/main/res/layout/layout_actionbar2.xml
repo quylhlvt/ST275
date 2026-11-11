@@ -15,7 +15,7 @@
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension_0"
-            app:layout_constraintDimensionRatio="3.6:0.4"/>
+            app:layout_constraintDimensionRatio="3.6:0.35"/>
         <View
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/view2"
@@ -37,59 +37,37 @@
             app:layout_constraintTop_toBottomOf="@+id/view1"
             app:layout_constraintBottom_toTopOf="@+id/view2"
             app:layout_constraintStart_toStartOf="parent" />
-<com.google.android.material.card.MaterialCardView
-    android:layout_width="@dimen/dimension_0"
-    android:layout_height="@dimen/dimension_0"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    app:layout_constraintDimensionRatio="1.2:0.4"
-    app:strokeColor="@color/app_color"
-    app:strokeWidth="@dimen/dimension_2"
-    app:cardCornerRadius="@dimen/dimension_10"
-    app:cardBackgroundColor="@color/app_color8"
-    app:layout_constraintBottom_toBottomOf="@+id/btnActionBarLeft"
-    app:layout_constraintEnd_toStartOf="@+id/btnActionBarRight"
-    app:layout_constraintStart_toEndOf="@+id/cvLogo"
-    app:layout_constraintTop_toTopOf="@+id/btnActionBarLeft">
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false">
-        <ImageView
-            android:id="@+id/Clock"
-            android:layout_width="@dimen/dimension_0"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_height="@dimen/dimension_0"
-            android:layout_marginVertical="@dimen/dimension_10"
-            android:layout_marginStart="@dimen/dimension_8"
-            android:src="@drawable/ic_clock"/>
+        android:layout_width="@dimen/dimension_0"
+        android:layout_height="@dimen/dimension_0"
+        app:layout_constraintDimensionRatio="6.6:4.4"
+        app:layout_constraintBottom_toBottomOf="@+id/btnActionBarLeft"
+        app:layout_constraintEnd_toStartOf="@+id/btnActionBarRight"
+        app:layout_constraintStart_toEndOf="@+id/cvLogo"
+        app:layout_constraintTop_toTopOf="@+id/btnActionBarLeft">
+
 
         <TextView
             android:id="@+id/tvCenter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:ellipsize="none"
+            android:background="@drawable/bg_clock_show"
+
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:fontFamily="@font/digital_numbers_regular"
+            android:fontFamily="@font/finger_paint_regular"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/Clock"
+            app:layout_constraintStart_toStartOf="parent"
             android:includeFontPadding="true"
             android:scrollHorizontally="false"
-            android:layout_marginStart="@dimen/dimension_10"
-            app:layout_constraintHorizontal_bias="0"
             android:singleLine="true"
             android:text="10:00"
-            android:textColor="@color/app_color"
-            android:textSize="@dimen/text_size_18"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
 
 
         <!--    cvLogo-->

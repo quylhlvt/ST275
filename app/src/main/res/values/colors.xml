@@ -8,6 +8,7 @@
     <color name="white3">#FFF9E5</color>
     <color name="gray1">#CCCCCC</color>
     <color name="gray3">#7F7F7F</color>
+    <color name="gray4">#666666</color>
     <color name="black">#000000</color>
     <color name="gray">#99363636</color>
     <color name="black1">#4B4B4B</color>
@@ -29,10 +30,10 @@
     <color name="app_color4">#FFE4BF</color>
     <color name="app_color5">#662A00</color>
     <color name="app_color6">#CC6419</color>
-    <color name="app_color7">#99DDFF</color>
+    <color name="app_color7">#FFF9F2</color>
     <color name="app_color8">#803500</color>
     <color name="app_color9">#FFE1CC</color>
-    <color name="app_color10">#CC0022</color>
+    <color name="app_color10">#FFE5CC</color>
     <color name="app_color11">#CC0088</color>
     <color name="app_color12">#4400CC</color>
     <color name="app_color13">#80D4FF</color>

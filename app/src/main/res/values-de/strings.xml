@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- values-de/strings.xml -->
 <resources>
-    <string name="size_slider">Größe</string>
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Weiter</string>
     <string name="language">Sprache</string>
@@ -17,14 +16,9 @@
     <string name="notification">Benachrichtigung\u00A0</string>
     <string name="granted_notification">Benachrichtigungsberechtigung erteilt</string>
     <string name="granted_storage">Speicherberechtigung erteilt</string>
-    <string name="allow">\u00A0Erlauben</string>
-    <string name="to_access">um auf Fotos auf Ihrem Gerät zuzugreifen\u00A0</string>
-    <string name="to_access_13">um auf Benachrichtigungen auf Ihrem Gerät zuzugreifen\u00A0</string>
     <string name="go_to_setting_message">Die App benötigt diese Berechtigung</string>
     <string name="settings">Einstellungen</string>
     <string name="cancel">Abbrechen</string>
-    <string name="add_image">Bild hinzufügen</string>
-    <string name="text">Text</string>
     <string name="type_your_content">Geben Sie Ihren Inhalt ein</string>
     <string name="loading">Wird geladen</string>
     <string name="haven_t_saved_it_yet_do_you_want_to_exit">Noch nicht gespeichert, möchten Sie wirklich beenden?</string>
@@ -37,7 +31,6 @@
     <string name="exit">Beenden</string>
     <string name="rate_us">Bewerten Sie uns</string>
     <string name="share_app">App teilen</string>
-    <string name="image_has_been_saved_successfully">Bild wurde erfolgreich gespeichert!</string>
     <string name="download">Herunterladen</string>
     <string name="my_avatar">Mein Anime</string>
     <string name="design">Mein Design</string>
@@ -77,13 +70,10 @@
     <string name="rate_us_0">Sie haben noch nicht bewertet!</string>
     <string name="have_rated">Vielen Dank für Ihre Bewertung</string>
     <string name="cosplay">Anime-Cosplay</string>
-    <string name="cosplay2">Cosplay</string>
     <string name="random">Zufällig</string>
     <string name="my_creation">Meine Kreation</string>
-    <string name="category">Kategorie</string>
     <string name="image">Bild</string>
     <string name="color">Farbe</string>
-    <string name="successful">Erfolgreich</string>
     <string name="successfully">Erfolgreich</string>
     <string name="try_again">Erneut versuchen</string>
     <string name="no_internet">Kein Internet</string>
@@ -95,16 +85,8 @@
     <string name="create_package_name">Paketnamen erstellen</string>
     <string name="enter_your_package_name">Paketnamen eingeben</string>
     <string name="please_enter_your_package_name">Bitte gib deinen Paketnamen ein!</string>
-    <string name="this_action_may_contain_advertising">Diese Aktion kann Werbung enthalten</string>
     <string name="instruction">Anleitung</string>
     <string name="tvCosplay1">Im Cosplay-Modus</string>
-    <string name="tvCosplay2">erhalten Spieler zufällig</string>
-    <string name="tvCosplay3">ein Referenzbild,</string>
-    <string name="tvCosplay4">dem sie folgen sollen. Deine Aufgabe ist es, diesen Charakter so genau wie möglich nachzustellen, indem du die richtigen</string>
-    <string name="tvCosplay5">Frisuren, Outfits, Farben und Accessoires auswählst.</string>
-    <string name="tvCosplay6">Jede richtige Übereinstimmung erhöht deinen</string>
-    <string name="tvCosplay7">Prozentsatz (%).</string>
-    <string name="tvCosplay8">Je ähnlicher dein Charakter dem Zufallsbild sieht, desto höher wird deine Endpunktzahl sein. Achte auf kleine Details, um das beste Cosplay-Ergebnis zu erzielen.</string>
     <string name="save">Speichern</string>
     <string name="error">Fehler</string>
     <string name="errorcontent">Dieses Element ist nicht mehr verfügbar.</string>
@@ -112,19 +94,9 @@
     <string name="facebook_not_available">Facebook ist nicht installiert oder kann dieses Bild nicht empfangen</string>
     <string name="instagram_not_available">Instagram ist nicht installiert oder kann dieses Bild nicht empfangen</string>
     <string name="share_failed">Das Bild konnte nicht geteilt werden. Bitte versuche es erneut.</string>
-    <string name="facebook_share">Auf Facebook teilen</string>
-    <string name="instagram_share">Auf Instagram teilen</string>
-    <string name="bubbles">Blasen</string>
     <string name="edit">Bearbeiten</string>
     <string name="cat_random">Anime zufällig</string>
-    <string name="font">Schriftart</string>
-    <string name="not_matched">Keine Übereinstimmung</string>
-    <string name="cosplay_complete">Cosplay abgeschlossen!</string>
-    <string name="you_lose">Du hast verloren!</string>
-    <string name="victory">Sieg</string>
     <string name="done">Fertig</string>
     <string name="please_wait">Bitte warten...</string>
-    <string name="please_watch_full_ads">Bitte sieh dir die Werbung vollständig an</string>
-    <string name="load_ads_fail">Werbung konnte nicht geladen werden</string>
     <string name="watch_a_short_ad_to_generate_a_random_anime">Sieh dir eine kurze Werbung an, um einen zufälligen Anime-Charakter zu erstellen</string>
 </resources>

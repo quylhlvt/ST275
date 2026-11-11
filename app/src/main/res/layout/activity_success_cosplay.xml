@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_bg_lang"
+    android:background="@color/app_color4"
     android:clipChildren="false"
     android:clipToPadding="false"
     tools:context="com.anime.oc.characters.avatar.ui.main.successcosplay.SuccessCosplayActivity">
@@ -18,374 +18,85 @@
 
         <include
             android:id="@+id/actionBar"
-            layout="@layout/layout_actionbar" />
+            layout="@layout/layout_actionbar4" />
     </FrameLayout>
+
 
     <View
         android:id="@+id/view1"
         android:layout_width="@dimen/dimension_0"
-        android:layout_height="match_parent"
-        app:layout_constraintDimensionRatio="0.16:8"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/view2"
+        android:layout_height="@dimen/dimension_0"
+        android:layout_marginTop="@dimen/dimension_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/layoutActionBar" />
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="@dimen/dimension_0"
-        android:layout_height="match_parent"
-        app:layout_constraintDimensionRatio="0.16:8"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constrainStar"
-        android:layout_width="@dimen/dimension_0"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimension_50"
-        android:layout_marginBottom="@dimen/dimension_12"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/constraint"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@+id/view1">
+        android:layout_height="@dimen/dimension_0"
+        android:id="@+id/material1"
+        android:elevation="@dimen/dimension_5"
+        app:cardElevation="@dimen/dimension_5"
+        app:cardBackgroundColor="@color/app_color7"
+        app:cardCornerRadius="@dimen/dimension_8"
+        android:layout_marginVertical="@dimen/dimension_36"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintEnd_toEndOf="@+id/view1"
+        app:layout_constraintStart_toStartOf="@+id/view1"
+        app:layout_constraintDimensionRatio="2.4:2.88"
+        app:layout_constraintTop_toTopOf="@+id/view1"
+        app:strokeColor="@color/app_color10"
+        app:strokeWidth="@dimen/dimension_4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutProgress"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="@dimen/dimension_0"
-            android:elevation="@dimen/dimension_8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintDimensionRatio="2.6:0.24"
-            app:layout_constraintEnd_toEndOf="parent">
-            <View
-                android:id="@+id/view16"
-                app:layout_constraintTop_toTopOf="@+id/progressTrack"
-                app:layout_constraintEnd_toEndOf="@+id/progressTrack"
-                app:layout_constraintStart_toStartOf="@+id/progressTrack"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="2.6:0.03"/>
-            <View
-                android:id="@+id/view17"
-                app:layout_constraintStart_toStartOf="@+id/progressTrack"
-                app:layout_constraintBottom_toBottomOf="@+id/progressTrack"
-                app:layout_constraintEnd_toEndOf="@+id/progressTrack"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="2.6:0.03"/>
-            <!-- 1. Track nền cam - elevation thấp nhất -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/progressTrack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:id="@+id/imvImage"
                 android:layout_width="@dimen/dimension_0"
                 android:layout_height="@dimen/dimension_0"
-                android:adjustViewBounds="true"
-                android:elevation="@dimen/dimension_0"
-                app:cardBackgroundColor="@color/white"
-                android:scaleType="fitXY"
-                app:cardCornerRadius="@dimen/dimension_20"
-                app:strokeColor="@color/app_color"
-                app:strokeWidth="@dimen/dimension_2"
+                android:elevation="@dimen/dimension_1"
+                android:layout_margin="@dimen/dimension_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintDimensionRatio="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_permission"/>
 
+            <ImageView
+                android:id="@+id/img_level"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1.4:0.44"
+                android:layout_marginVertical="@dimen/dimension_10"
+                android:elevation="@dimen/dimension_8"
+                android:src="@drawable/img_level1"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imvImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="@dimen/dimension_0"
-                    android:layout_height="@dimen/dimension_0"
-                    app:strokeWidth="@dimen/dimension_0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view16"
-                    app:layout_constraintBottom_toTopOf="@+id/view17"
-                    app:cardCornerRadius="@dimen/dimension_20"
-                    android:layout_marginHorizontal="@dimen/dimension_3"
-                    app:cardBackgroundColor="@color/transparent">
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/imgStar"
-                            app:layout_constraintHorizontal_bias="0"
-                            android:layout_width="@dimen/dimension_0"
-                            android:layout_height="@dimen/dimension_0"
-                            android:adjustViewBounds="true"
-                            android:elevation="@dimen/dimension_10"
-                            android:src="@drawable/ic_star"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="1.8:2"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                        <View
-                            android:layout_width="@dimen/dimension_0"
-                            android:layout_height="match_parent"
-                            app:layout_constraintDimensionRatio="0.9:1.8"
-                            android:id="@+id/viewTop"
-                            app:layout_constraintEnd_toEndOf="@+id/imgStar"/>
-                        <View
-                            android:background="@color/app_color2"
-                            android:id="@+id/viewProgress"
-                            android:layout_width="@dimen/dimension_0"
-                            android:layout_height="@dimen/dimension_0"
-                            app:layout_constraintEnd_toStartOf="@+id/viewTop"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-
-
-
-
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tvMatchPercent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/madimi_one_regular"
-            android:gravity="center"
-            android:text="0/100"
-            android:translationX="@dimen/dimension_5_minus"
-            android:textColor="@color/app_color"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="@dimen/text_size_16"
-            app:layout_constraintTop_toBottomOf="@+id/layoutProgress"
-            app:outerStrokeColor="@color/app_color"
-            app:outerStrokeWidth="@dimen/dimension_5"
-            tools:layout_editor_absoluteX="@dimen/dimension_46" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.willy.ratingbar.ScaleRatingBar
-        android:id="@+id/ll1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimension_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutActionBar"
-        app:srb_clearRatingEnabled="false"
-        app:srb_clickable="false"
-        app:srb_drawableEmpty="@drawable/ic_unrate_success"
-        app:srb_drawableFilled="@drawable/ic_rate_success"
-        app:srb_isIndicator="true"
-        app:srb_minimumStars="0"
-        app:srb_numStars="5"
-        app:srb_rating="0"
-        app:srb_scrollable="false"
-        app:srb_starHeight="@dimen/dimension_40"
-        app:srb_starPadding="@dimen/dimension_4"
-        app:srb_starWidth="@dimen/dimension_40"
-        app:srb_stepSize="1" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/dimension_0"
-        android:layout_height="@dimen/dimension_0"
-        android:layout_marginHorizontal="@dimen/dimension_20"
-        android:layout_marginVertical="@dimen/dimension_20"
-        app:layout_constraintBottom_toTopOf="@+id/constrainStar"
-        app:layout_constraintDimensionRatio="3.08:3.92"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll1">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/frameImage1"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="@dimen/dimension_0"
-            android:layout_marginBottom="-20dp"
-            app:layout_constraintBottom_toTopOf="@+id/frameImage2"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    </com.google.android.material.card.MaterialCardView>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension_0"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="@dimen/dimension_1"
-                    app:cardBackgroundColor="@color/app_color2"
-                    app:cardCornerRadius="@dimen/dimension_20"
-                    app:strokeColor="@color/app_color"
-                    app:strokeWidth="@dimen/dimension_3" >
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materMini2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/dimension_8"
-                    android:layout_marginTop="@dimen/dimension_3"
-                    android:layout_marginHorizontal="@dimen/dimension_3"
-                    android:elevation="@dimen/dimension_2"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/dimension_17"
-                    app:strokeWidth="@dimen/dimension_0" >
-
-
-                    <ImageView
-                        android:id="@+id/imvImage2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:foreground="@drawable/forgound_success_cosplay"
-                        android:src="@drawable/img_permission" />
-                </com.google.android.material.card.MaterialCardView>
-                </com.google.android.material.card.MaterialCardView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/frameImage2"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="@dimen/dimension_0"
-            android:layout_marginTop="@dimen/dimension_42"
-            android:elevation="@dimen/dimension_2"
-            app:cardBackgroundColor="@color/app_color4"
-            app:cardCornerRadius="@dimen/dimension_15"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameImage1"
-            app:strokeColor="@color/app_color"
-            app:strokeWidth="@dimen/dimension_1_25">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimension_0"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="@dimen/dimension_1"
-                    app:cardBackgroundColor="@color/app_color2"
-                    app:cardCornerRadius="@dimen/dimension_20"
-                    app:strokeColor="@color/app_color"
-                    app:strokeWidth="@dimen/dimension_3" >
-
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/materMini22"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/dimension_8"
-                        android:layout_marginTop="@dimen/dimension_3"
-                        android:layout_marginHorizontal="@dimen/dimension_3"
-                        android:elevation="@dimen/dimension_2"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/dimension_17"
-                        app:strokeWidth="@dimen/dimension_0" >
-
-
-                        <ImageView
-                            android:id="@+id/imvImage3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:foreground="@drawable/forgound_success_cosplay"
-                            android:src="@drawable/img_permission" />
-                    </com.google.android.material.card.MaterialCardView>
-                </com.google.android.material.card.MaterialCardView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:layout_width="@dimen/dimension_0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginVertical="@dimen/dimension_70"
-            android:layout_height="@dimen/dimension_0"
-            android:layout_marginHorizontal="@dimen/dimension_15"
-            android:elevation="@dimen/dimension_3"
-            android:src="@drawable/img_vs"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="2.7:2.43"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint"
+    <ImageView
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension_0"
-        android:layout_marginBottom="@dimen/dimension_32"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="3.6:0.44">
+        android:layout_marginTop="@dimen/dimension_22"
+        android:elevation="@dimen/dimension_3"
+        android:background="@drawable/bg_win_effect"
+        app:layout_constraintBottom_toBottomOf="@+id/material1"
+        app:layout_constraintDimensionRatio="3.62:5.72"
+        app:layout_constraintEnd_toEndOf="@+id/material1"
+        app:layout_constraintStart_toStartOf="@+id/material1"
+        app:layout_constraintTop_toTopOf="@+id/material1"/>
 
-        <View
-            android:id="@+id/view3"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1.03:0.44"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnTryAgain"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <View
-            android:id="@+id/view4"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1.03:0.44"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnTryAgain" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnTryAgain"
-            android:layout_width="@dimen/dimension_0"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_try_again"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1.54:0.44"
-            app:layout_constraintEnd_toStartOf="@+id/view4"
-            app:layout_constraintStart_toEndOf="@+id/view3"
-            app:strokeColor="@color/app_color2"
-            app:strokeWidth="@dimen/dimension_1">
-
-            <TextView
-                android:id="@+id/txtShow"
-                style="@style/single_marquee"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/pacifico_regular"
-                android:gravity="center"
-                android:layout_marginHorizontal="@dimen/dimension_2"
-                android:layout_marginBottom="@dimen/dimension_10"
-                android:text="@string/try_again"
-                android:textColor="@color/app_color"
-                android:textSize="@dimen/text_size_20"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:outerStrokeColor="@color/app_color"
-                app:outerStrokeWidth="@dimen/dimension_2" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
