@@ -217,6 +217,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
     private fun closeScalePanel(animate: Boolean = false) {
         binding.frameScale.animate().cancel()
         isScaleActive = false
+        if (binding.imgScale.isEnabled) binding.imgScale.setImageResource(R.drawable.ic_scale_cus)
         if (animate && binding.frameScale.visibility == View.VISIBLE) {
             binding.frameScale.animate().alpha(0f).setDuration(200).withEndAction {
                 binding.frameScale.visibility = View.GONE
@@ -240,7 +241,6 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
             binding.frameScale.alpha = 0f
             binding.frameScale.animate().alpha(1f).setDuration(200).start()
         } else {
-            binding.imgScale.setImageResource(R.drawable.ic_scale_cus)
             closeScalePanel(animate = true)
         }
     }
@@ -251,9 +251,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
             if (viewModel.resolvePathAt(viewModel.state.value.currentNavIndex) == null) return@onClick
             toggleScalePanel()
         }
-//        binding.imgScale.onClick {
-//            closeScalePanel()
-//        }
+        binding.txtExit.onClick { closeScalePanel(animate = true) }
 
         binding.ratioRight.onClickAndHold {
             changeCurrentTransform {
@@ -701,7 +699,13 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         val canMoveDown = hasLayer && transform.translationY < maxY - TRANSFORM_EPSILON
 
         binding.imgScale.isEnabled = hasLayer
-        binding.imgScale.setImageResource(if (hasLayer) R.drawable.ic_scale_cus else R.drawable.ic_scale_cus_none)
+        binding.imgScale.setImageResource(
+            when {
+                !hasLayer -> R.drawable.ic_scale_cus_none
+                isScaleActive -> R.drawable.ic_scale_cus_open
+                else -> R.drawable.ic_scale_cus
+            }
+        )
 
         binding.transitionLeft.isEnabled = canMoveLeft
         binding.transitionLeft.alpha = if (canMoveLeft) 1f else 0.4f
