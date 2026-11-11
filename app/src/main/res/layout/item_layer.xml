@@ -1,54 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/dimension_6"
-    android:layout_marginBottom="@dimen/dimension_12">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimension_4"
+        android:layout_marginBottom="@dimen/dimension_8">
+    <com.quylh.gradientstrokelayout.GradientStrokeFrameLayout
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            app:gslCornerRadius="@dimen/dimension_8"
+            app:gslStrokeWidth="@dimen/dimension_0"
+            android:elevation="@dimen/dimension_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialParent"
-        android:layout_width="@dimen/dimension_0"
-        android:layout_height="@dimen/dimension_0"
-        android:elevation="@dimen/dimension_1"
-        app:cardBackgroundColor="@color/white"
-
-        app:cardCornerRadius="@dimen/dimension_10"
-        app:cardElevation="@dimen/dimension_0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:strokeColor="@color/app_color7"
-        app:strokeWidth="@dimen/dimension_0">
-
-            <ImageView
-                android:id="@+id/imvImage"
+        <quylh.canvas.shadow.ShadowLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerInside" />
+                app:shadowBlur="@dimen/dimension_0"
+                app:shadowSpread="@dimen/dimension_1"
+                app:shadowMode="outer"
+                app:shadowAlpha="0.3"
+                app:shadowColor="@color/black2"
+  >
+
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="@dimen/dimension_1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/dimension_4"
+                    app:cardElevation="@dimen/dimension_0"
+                    app:strokeColor="@color/app_color7"
+                    app:strokeWidth="@dimen/dimension_0">
+
+                <ImageView
+                        android:id="@+id/imvImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerInside"/>
 
 
-    </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
+        </quylh.canvas.shadow.ShadowLayout>
+    </com.quylh.gradientstrokelayout.GradientStrokeFrameLayout>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/forcus"
-        android:layout_width="@dimen/dimension_0"
-        android:layout_height="@dimen/dimension_0"
-        android:elevation="@dimen/dimension_3"
-        android:visibility="invisible"
-        app:cardBackgroundColor="@color/transparent"
-        app:cardCornerRadius="@dimen/dimension_10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/app_color"
-        app:strokeWidth="@dimen/dimension_3" />
+            android:id="@+id/forcus"
+            android:layout_width="@dimen/dimension_0"
+            android:layout_height="@dimen/dimension_0"
+            android:elevation="@dimen/dimension_3"
+            android:visibility="invisible"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="@dimen/dimension_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/app_color6"
+            app:strokeWidth="@dimen/dimension_3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

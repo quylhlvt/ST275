@@ -111,11 +111,10 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
 
         binding.apply {
             txtReset.isSelected = true
+            txtExit.isSelected = true
         }
         binding.actionBar.apply {
             setImageActionBar(btnActionBarLeft, R.drawable.back_app)
-            setImageActionBar(btnActionBarCenter2, R.drawable.ic_reset_all_custom)
-            setImageActionBar(btnActionBarCenter, R.drawable.ic_flip_all_custom)
             setMaterialCardViewActionBar1(
                 btnActionBarRightText,
                 tvRightText,
@@ -278,9 +277,8 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         binding.transitionRight.onClickAndHold { changeCurrentTransform { it.copy(translationX = it.translationX + 20f) } }
         binding.transitionTop.onClickAndHold { changeCurrentTransform { it.copy(translationY = it.translationY - 20f) } }
         binding.transitionBottom.onClickAndHold { changeCurrentTransform { it.copy(translationY = it.translationY + 20f) } }
-        binding.scalePlus.onClickAndHold { changeCurrentTransform { it.copy(scale = it.scale + 0.05f) } }
-        binding.scaleMinus.onClickAndHold { changeCurrentTransform { it.copy(scale = it.scale - 0.05f) } }
-        binding.btnResetScale.onClick {
+
+        binding.txtReset.onClick {
             viewModel.resetTransform(viewModel.state.value.currentNavIndex)
             applyTransformsToAllLayers(viewModel.state.value)
             updateScaleControls()
@@ -321,22 +319,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
             }
         }
         binding.apply {
-            imgChangColor.onClick {
-                val navPos = viewModel.state.value.currentNavIndex
-                if (!viewModel.state.value.hasMultipleColors) return@onClick
-                if (llColor.isVisible) {
-                    if (navPos < arrShowColor.size) arrShowColor[navPos] = false
-                    llColor.animate().alpha(0f).setDuration(200).withEndAction {
-                        llColor.visibility = View.INVISIBLE
-                    }.start()
-                } else {
-                    if (navPos < arrShowColor.size) arrShowColor[navPos] = true
-                    llColor.visibility = View.VISIBLE
-                    llColor.alpha = 0f
-                    llColor.animate().alpha(1f).setDuration(200).start()
-                    ensurePositionVisible(rcvColor, viewModel.state.value.currentColorIndex)
-                }
-            }
+
             imgRandom.onClick {
                 if (!checkOnlineNetworkOrShowDialog()) {
                     showConfirmDialog(
@@ -358,10 +341,10 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
                     )
                 }
             }
-            actionBar.btnActionBarCenter.setOnClickListener {
+            btnFlip.setOnClickListener {
                 viewModel.toggleFlip()
             }
-            actionBar.btnActionBarCenter2.setOnClickListener {
+            btnReset.setOnClickListener {
                 showConfirmDialog(
                     title = getString(R.string.reset),
                     message = getString(R.string.do_you_want_to_reset_all),
@@ -633,7 +616,6 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
 
     private fun updateColorSectionVisibility(showColors: Boolean, expanded: Boolean) {
         val showPanel = showColors && expanded
-        binding.imgChangColor.visibility = if (showColors) View.VISIBLE else View.GONE
 
         if (showPanel &&
             (binding.llColor.visibility != View.VISIBLE || binding.llColor.alpha != 1f)
@@ -720,10 +702,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
 
         binding.imgScale.isEnabled = hasLayer
         binding.imgScale.setImageResource(if (hasLayer) R.drawable.ic_scale_cus else R.drawable.ic_scale_cus_none)
-        binding.scalePlus.isEnabled = canScaleUp
-        binding.scalePlus.alpha = if (canScaleUp) 1f else 0.4f
-        binding.scaleMinus.isEnabled = canScaleDown
-        binding.scaleMinus.alpha = if (canScaleDown) 1f else 0.4f
+
         binding.transitionLeft.isEnabled = canMoveLeft
         binding.transitionLeft.alpha = if (canMoveLeft) 1f else 0.4f
         binding.transitionRight.isEnabled = canMoveRight
@@ -732,8 +711,8 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         binding.transitionTop.alpha = if (canMoveUp) 1f else 0.4f
         binding.transitionBottom.isEnabled = canMoveDown
         binding.transitionBottom.alpha = if (canMoveDown) 1f else 0.4f
-        binding.btnResetScale.isEnabled = hasLayer && !viewModel.isTransformDefault(index)
-        binding.btnResetScale.alpha = if (binding.btnResetScale.isEnabled) 1f else 0.4f
+        binding.txtReset.isEnabled = hasLayer && !viewModel.isTransformDefault(index)
+        binding.txtReset.alpha = if (binding.txtReset.isEnabled) 1f else 0.4f
         if (!hasLayer) {
             closeScalePanel()
         }

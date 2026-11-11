@@ -41,7 +41,6 @@ class ChoosePonyActivity : BaseActivity<ActivityChoosePonyBinding, ChoosePonyVie
     override fun initView() {
 
         setImageActionBar(binding.actionBar.btnActionBarLeft, R.drawable.back_app)
-        setTextActionBar(binding.actionBar.tvCenter, getString(R.string.category))
 
         adapter = ChoosePonyAdapter { character, position ->
             character.itemEventName()?.let { eventName ->

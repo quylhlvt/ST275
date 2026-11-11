@@ -26,11 +26,11 @@
         app:layout_constraintTop_toBottomOf="@+id/layoutActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         android:elevation="@dimen/dimension_1"
-        android:layout_marginTop="@dimen/dimension_5"
+        android:layout_marginTop="@dimen/dimension_10"
         app:spanCount="2"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:layout_marginHorizontal="@dimen/dimension_8"
+        android:layout_marginHorizontal="@dimen/dimension_12"
         tools:listitem="@layout/item_choose" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
