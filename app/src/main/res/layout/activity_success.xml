@@ -18,7 +18,7 @@
 
         <include
                 android:id="@+id/actionBar"
-                layout="@layout/layout_actionbar"/>
+                layout="@layout/layout_actionbar4"/>
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,116 +32,87 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="@dimen/dimension_0"
                 android:layout_height="@dimen/dimension_0"
-                app:layout_constraintDimensionRatio="7.2:8.3"
+                android:layout_marginHorizontal="@dimen/dimension_16"
+                android:layout_marginBottom="@dimen/dimension_10"
+                app:layout_constraintDimensionRatio="3.28:3.92"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/lnlBottomSocial">
-            <ImageView
-                    android:id="@+id/imvImage"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintBottom_toBottomOf="parent">
+            <FrameLayout
+
+                    android:background="@android:color/transparent"
+                    android:elevation="@dimen/dimension_3"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dimension_0"
                     app:layout_constraintBottom_toTopOf="@+id/space"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/img_permission"/>
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="@color/app_color2"
+                        app:cardCornerRadius="@dimen/dimension_20"
+                        app:strokeColor="@color/app_color5"
+                        app:strokeWidth="@dimen/dimension_2">
+
+                    <quylh.canvas.shadow.ShadowLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:shadowBlur="@dimen/dimension_15"
+                            app:shadowColor="@color/white"
+                            app:shadowMode="inner"
+                            app:shadowSpread="@dimen/dimension_0">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/dimension_12">
+
+                            <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardBackgroundColor="@color/white"
+                                    app:cardCornerRadius="@dimen/dimension_8"
+                                    app:strokeColor="@color/app_color5"
+                                    app:strokeWidth="@dimen/dimension_2">
+                                <ImageView
+                                        android:id="@+id/imvImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/img_permission"/>
+                            </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </quylh.canvas.shadow.ShadowLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
+
+
             <Space
                     android:id="@+id/space"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimension_0"
-                    app:layout_constraintBottom_toTopOf="@+id/tvSuccess"
+                    app:layout_constraintBottom_toTopOf="@+id/btnDownload"
                     app:layout_constraintDimensionRatio="3.6:0.11"/>
             <TextView
-                    android:id="@+id/tvSuccess"
-                    style="@style/single_marquee"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimension_0"
+                    android:id="@+id/btnDownload"
+                    android:layout_width="@dimen/dimension_120"
+                      android:layout_height="@dimen/dimension_48"
                     android:gravity="center"
-                    android:text="@string/image_has_been_saved_successfully"
-                    android:textColor="@color/app_color2"
-                    android:textSize="@dimen/text_size_16"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:outerStrokeColor="@color/app_color"
-                    app:layout_constraintDimensionRatio="3.6:0.44"
-                    android:fontFamily="@font/pacifico_regular"
-                    app:outerStrokeWidth="@dimen/dimension_3_5"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <!--        tvSuccess-->
-
-
-        <!--    lnlBottom-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/lnlBottom"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="@dimen/dimension_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="3.24:0.44" tools:layout_editor_absoluteX="32dp">
-
-
-            <FrameLayout
-                    android:id="@+id/btnBottomLeft"
-                    android:layout_width="@dimen/dimension_0"
-                    android:background="@drawable/frame_select_success"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1.54:0.44"
+                    android:background="@drawable/bg_download_success"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                <TextView
-                        android:id="@+id/txtLeft"
-                        style="@style/single_marquee"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/dimension_5"
-                        android:gravity="center"
-                        android:text="@string/my_creation"
-                        android:textColor="@color/app_color"
-                        android:textSize="@dimen/text_size_20"
-                        android:fontFamily="@font/pacifico_regular"
-                        app:outerStrokeWidth="@dimen/dimension_3_5"/>
-            </FrameLayout>
-
-
-            <FrameLayout
-                    android:id="@+id/btnBottomRight"
-                    android:layout_width="@dimen/dimension_0"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/frame_select_success"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1.54:0.44"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                <TextView
-                        android:id="@+id/txtRight"
-                        style="@style/single_marquee"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginBottom="@dimen/dimension_5"
-                        android:text="@string/download"
-                        android:textColor="@color/app_color"
-                        android:textSize="@dimen/text_size_20"
-                        android:fontFamily="@font/pacifico_regular"
-                        app:outerStrokeWidth="@dimen/dimension_3_5"/>
-            </FrameLayout>
-            <!--        btnBottomRight-->
-
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    style="@style/single_marquee"
+                    android:text="@string/download"
+                    android:fontFamily="@font/finger_paint_regular"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_16"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,14 +82,12 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
         binding.actionBar.root.isEnabled = true
         binding.actionBar.btnActionBarLeft.isEnabled = true
         binding.actionBar.btnActionBarLeft.isClickable = true
-        binding.actionBar.btnActionBarNextToRight.isEnabled = true
-        binding.actionBar.btnActionBarNextToRight.isClickable = true
-        binding.actionBar.btnActionBarRight.isEnabled = true
-        binding.actionBar.btnActionBarRight.isClickable = true
-        binding.btnBottomLeft.isEnabled = true
-        binding.btnBottomLeft.isClickable = true
-        binding.btnBottomRight.isEnabled = true
-        binding.btnBottomRight.isClickable = true
+        binding.actionBar.btnActionBarCenter.isEnabled = true
+        binding.actionBar.btnActionBarCenter.isClickable = true
+        binding.actionBar.btnActionBarCenter1.isEnabled = true
+        binding.actionBar.btnActionBarCenter1.isClickable = true
+        binding.actionBar.btnActionBarCenter2.isEnabled = true
+        binding.actionBar.btnActionBarCenter2.isClickable = true
         binding.root.requestLayout()
         binding.root.invalidate()
     }
@@ -108,16 +106,11 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
         binding.apply {
             setImageActionBar(actionBar.btnActionBarLeft, R.drawable.back_app)
             loadImage(this@SuccessActivity, imagePath, imvImage)
-            txtLeft.apply  {
-                isSelected =true
-                visible();}
-            txtRight.apply {
-                isSelected =true
-                visible();}
-            setImageActionBar(actionBar.btnActionBarNextToRight, R.drawable.ic_share_success)
-            setImageActionBar(actionBar.btnActionBarRight, R.drawable.ic_home)
-            setTextActionBar(actionBar.tvCenter, getString(R.string.successful))
-            tvSuccess.isSelected = true
+
+            setImageActionBar(actionBar.btnActionBarCenter, R.drawable.ic_share_success)
+            setImageActionBar(actionBar.btnActionBarCenter1, R.drawable.ic_mycreation_success)
+            setImageActionBar(actionBar.btnActionBarCenter2, R.drawable.ic_home)
+
         }
     }
 
@@ -126,19 +119,19 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding, SuccessViewModel>(
             actionBar.btnActionBarLeft.onClick1 { popBack() }
 
             // Home
-            actionBar.btnActionBarRight.onClick1 {
+            actionBar.btnActionBarCenter2.onClick1 {
                     openHome()
             }
             // Share
-            actionBar.btnActionBarNextToRight.onClick( 1500) { shareImage() }
+            actionBar.btnActionBarCenter.onClick( 1500) { shareImage() }
 
             // MyCreation
-            btnBottomLeft.onClick1 {
+            actionBar.btnActionBarCenter1.onClick1 {
                     openMyCreations()
             }
 
             // Download
-            btnBottomRight.onClick1 { downloadImage() }
+            btnDownload.onClick1 { downloadImage() }
 //            btnBottomLeftSocial.onClick1 {
 //                logSocialShareEvent("facebook")
 //                shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)

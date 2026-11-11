@@ -35,13 +35,9 @@ class TextColorAdapter :
 
             // ── Sau đó mới apply selected state ────────────────
             if (item.isSelected) {
-                frame.apply {
-                    strokeColor = ContextCompat.getColor(context, R.color.app_color)
-                }
+                frameSelect.visible()
             } else {
-                frame.apply {
-                    strokeColor = ContextCompat.getColor(context, R.color.transparent)
-                }
+                frameSelect.gone()
             }
         }
     }

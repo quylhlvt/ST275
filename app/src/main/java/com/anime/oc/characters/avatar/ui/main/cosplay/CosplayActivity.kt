@@ -92,31 +92,7 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
         binding.setupActionBar()
         setShowButtonEnabled(false)
         binding.txtRandom.isSelected = true
-        binding.txtShow.isSelected = true
-        val space = SpannableString(" ")
-        val parts = listOf(
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay1), R.color.app_color2, R.font.pacifico_regular),
-            space,
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay2), R.color.app_color2, R.font.pacifico_regular),
-            space,
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay3), R.color.app_color2, R.font.pacifico_regular),
-            space,
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay4), R.color.app_color2, R.font.pacifico_regular),
-            space,
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay5), R.color.app_color2, R.font.pacifico_regular),
-            space,
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay6), R.color.app_color2, R.font.pacifico_regular),
-            space,
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay7), R.color.app_color2, R.font.pacifico_regular),
-            space,
-            changeText(this@CosplayActivity, getString(R.string.tvCosplay8), R.color.app_color2, R.font.pacifico_regular),
-        )
 
-        // ✅ Dùng SpannableStringBuilder thay vì TextUtils.concat
-        val builder = android.text.SpannableStringBuilder()
-        parts.forEach { builder.append(it) }
-
-        binding.txtGuile.setText(builder, TextView.BufferType.SPANNABLE)
         // Chỉ randomize lần đầu, nếu chưa có item nào
 //        if (viewModel.randomItem.value == null) {
 //            viewModel.randomize()
@@ -155,8 +131,8 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
             closeGuide.onClick {
                 showGuide.gone()
             }
-            show.onClick {
-                if (!show.isEnabled) return@onClick
+            play.onClick {
+                if (!play.isEnabled) return@onClick
                 val item = viewModel.randomItem.value ?: return@onClick
                 if (checkOnlineNetworkOrShowDialog(item.templateIndex)) return@onClick
         val cached = viewModel.cachedBitmap
@@ -283,9 +259,9 @@ class CosplayActivity : BaseActivity<ActivityCosplayBinding, CosplayViewModel>(
     }
 
     private fun setShowButtonEnabled(enabled: Boolean) {
-        binding.show.isEnabled = enabled
-        binding.show.isClickable = enabled
-        binding.show.alpha = if (enabled) 1f else 0.5f
+        binding.play.isEnabled = enabled
+        binding.play.isClickable = enabled
+        binding.play.alpha = if (enabled) 1f else 0.5f
         binding.random.isEnabled = enabled
         binding.random.isClickable = enabled
         binding.random.alpha = if (enabled) 1f else 0.5f

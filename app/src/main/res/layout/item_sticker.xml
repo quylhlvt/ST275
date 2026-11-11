@@ -12,14 +12,14 @@
         android:id="@+id/materialParent"
         android:layout_width="@dimen/dimension_0"
         android:layout_height="@dimen/dimension_0"
-        app:cardCornerRadius="@dimen/dimension_10"
+        app:cardCornerRadius="@dimen/dimension_8"
         android:elevation="@dimen/dimension_1"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:strokeColor="@color/app_color2"
-        app:strokeWidth="@dimen/dimension_0"
+        app:strokeColor="@color/gray1"
+        app:strokeWidth="@dimen/dimension_0_4"
         app:cardElevation="@dimen/dimension_0"
         app:cardBackgroundColor="@color/white"
 

@@ -17,17 +17,11 @@ class TextFontAdapter(val context: Context) : BaseAdapter<SelectedAddModel, Item
 
     override fun onBind(binding: ItemFontBinding, item: SelectedAddModel, position: Int) {
         binding.apply {
-            if (item.isSelected) {
-                frame.apply {
-                    setCardBackgroundColor(ContextCompat.getColor(context, R.color.app_color6))
-                    strokeColor = ContextCompat.getColor(context, R.color.app_color)
-                }
-            } else {
-                frame.apply {
-                    setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
-                    strokeColor = ContextCompat.getColor(context, R.color.white)
-                }
-            }
+            val color = ContextCompat.getColor(
+                context,
+                if (item.isSelected) R.color.app_color6 else R.color.white
+            )
+            frame.setGradientColors(color, color, color)
             tvFont.setFont(item.color)
 
             root.onClick { onTextFontClick.invoke(item.color, position) }

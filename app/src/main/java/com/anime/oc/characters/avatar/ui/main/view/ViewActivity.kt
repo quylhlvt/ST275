@@ -71,15 +71,12 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
         binding.actionBar.root.isEnabled = true
         binding.actionBar.btnActionBarLeft.isEnabled = true
         binding.actionBar.btnActionBarLeft.isClickable = true
-        binding.actionBar.btnActionBarNextToRight.isEnabled = true
-        binding.actionBar.btnActionBarNextToRight.isClickable = true
-        binding.actionBar.btnActionBarRight.isEnabled = true
-        binding.actionBar.btnActionBarRight.isClickable = true
-        binding.btnBottomLeft.isEnabled = true
-        binding.btnBottomLeft.isClickable = true
-        binding.btnBottomRight.isEnabled = true
-        binding.btnBottomRight.isClickable = true
-
+        binding.actionBar.btnActionBarCenter.isEnabled = true
+        binding.actionBar.btnActionBarCenter.isClickable = true
+        binding.actionBar.btnActionBarCenter1.isEnabled = true
+        binding.actionBar.btnActionBarCenter1.isClickable = true
+        binding.actionBar.btnActionBarCenter2.isEnabled = true
+        binding.actionBar.btnActionBarCenter2.isClickable = true
         binding.root.requestLayout()
         binding.root.invalidate()
     }
@@ -96,24 +93,18 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
         currentImagePath = imagePath
         binding.apply {
             setImageActionBar(actionBar.btnActionBarLeft, R.drawable.back_app)
+            setImageActionBar(actionBar.btnActionBarCenter, R.drawable.ic_share_success)
+            setImageActionBar(actionBar.btnActionBarCenter1, R.drawable.ic_delete_mycreation)
+            setImageActionBar(actionBar.btnActionBarCenter2, R.drawable.ic_down_mycreation)
             loadImage(this@ViewActivity, imagePath, imvImage)
-            txtRight.isSelected = true
-            txtLeft.isSelected = true
-
-
+            btnEdit.isSelected = true
             when (imageType) {
                 1 -> {
-                    txtLeft.text = getString(R.string.share)
-                    setImageActionBar(actionBar.btnActionBarRight, R.drawable.ic_delete)
-                    setImageActionBar(actionBar.btnActionBarNextToRight, R.drawable.ic_edit1)
-                    txtRight.apply { visible(); text = getString(R.string.download) }
-                    txtLeft.visible()
+                    btnEdit.visible()
                 }
+
                 2 -> {
-                    txtLeft.text = getString(R.string.share)
-                    setImageActionBar(actionBar.btnActionBarRight, R.drawable.ic_delete)
-                    txtRight.apply { visible(); text = getString(R.string.download) }
-                    txtLeft.visible()
+                    btnEdit.gone()
                 }
             }
         }
@@ -128,12 +119,12 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
 
             when (imageType) {
                 1 -> {
-                    actionBar.btnActionBarRight.onClick1 { confirmDelete() }
-                    actionBar.btnActionBarNextToRight.onClick1 {
-                   navigateToEdit()
+                    actionBar.btnActionBarCenter1.onClick1 { confirmDelete() }
+                    btnEdit.onClick1 {
+                        navigateToEdit()
                     }
-                    btnBottomLeft.onClick(1500) { shareImage() }
-                    btnBottomRight.onClick1 { downloadImage() }
+                    actionBar.btnActionBarCenter.onClick(1500) { shareImage() }
+                    actionBar.btnActionBarCenter2.onClick1 { downloadImage() }
 //                    btnBottomLeftSocial.onClick1 {
 //                        logSocialShareEvent("facebook")
 //                        shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
@@ -145,9 +136,9 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
                 }
 
                 2 -> {
-                    actionBar.btnActionBarRight.onClick1 { confirmDelete() }
-                    btnBottomLeft.onClick(1500) { shareImage() }
-                    btnBottomRight.onClick1 { downloadImage() }
+                    actionBar.btnActionBarCenter1.onClick1 { confirmDelete() }
+                    actionBar.btnActionBarCenter.onClick(1500) { shareImage() }
+                    actionBar.btnActionBarCenter2.onClick1 { downloadImage() }
 //                    btnBottomLeftSocial.onClick1 {
 //                        logSocialShareEvent("facebook")
 //                        shareToSocialApp(SocialShareManager.SocialApp.FACEBOOK)
@@ -182,6 +173,7 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
 //        )
         Log.d("LogEvenA", "click_share_${socialName}_$dataName -- ${avatarPath}")
     }
+
     private fun shareToSocialApp(app: SocialShareManager.SocialApp) {
         val path = currentImagePath.takeIf { it.isNotBlank() } ?: imagePath
         when (socialShareManager.shareImage(path, app)) {
@@ -204,7 +196,8 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
             putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(
                 Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                        Intent.FLAG_ACTIVITY_NEW_TASK)
+                        Intent.FLAG_ACTIVITY_NEW_TASK
+            )
         }
         startActivity(android.content.Intent.createChooser(intent, getString(R.string.share)))
     }
@@ -222,6 +215,7 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
                 isReturningFromExternalScreen = true
                 this@ViewActivity.goToSettings()
             }
+
             else -> downloadPermissionLauncher.launch(arrayOf(permission))
         }
     }
@@ -308,7 +302,7 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
             savedSelections = customized.selections.toCleanSelections(),
             isFlipped = customized.isFlipped
         )
-            openScreen(Screen.CUSTOMIZE, args)
+        openScreen(Screen.CUSTOMIZE, args)
 
     }
 
@@ -325,10 +319,10 @@ class ViewActivity : BaseActivity<ActivityViewBinding, ViewViewModel>(
 
     override fun observeData() {
         appSession.updatedImagePaths.observe(this) { (characterId, newPath) ->
-                if (idEdit.isEmpty() || characterId != idEdit || newPath.isEmpty()) return@observe
-                currentImagePath = newPath
-                loadImage(this@ViewActivity, currentImagePath, binding.imvImage)
-            }
+            if (idEdit.isEmpty() || characterId != idEdit || newPath.isEmpty()) return@observe
+            currentImagePath = newPath
+            loadImage(this@ViewActivity, currentImagePath, binding.imvImage)
+        }
     }
 
     override fun bindViewModel() {}

@@ -39,7 +39,6 @@ import com.anime.oc.characters.avatar.core.dialog.DialogSpeech
 import com.anime.oc.characters.avatar.core.navigation.Screen
 import com.anime.oc.characters.avatar.core.helper.BitmapHelper
 import com.anime.oc.characters.avatar.ui.main.add_character.adapter.BackgroundColorAdapter
-import com.anime.oc.characters.avatar.ui.main.add_character.adapter.StickerCategoryAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.oc.characters.avatar.core.custom.DrawView
 import com.anime.oc.characters.avatar.data.datalocal.manager.CharacterImageManager
@@ -52,7 +51,6 @@ import com.anime.oc.characters.avatar.ui.onboarding.permission.PermissionViewMod
 import com.anime.oc.characters.avatar.utils.DataLocal
 import com.anime.oc.characters.avatar.utils.key.ValueKey
 import com.anime.oc.characters.avatar.databinding.ActivityAddCharacterBinding
-import com.anime.oc.characters.avatar.ui.main.add_character.adapter.SpeechCategoryAdapter
 import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.target.CustomTarget
@@ -86,8 +84,7 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
 
     // ── Adapters ─────────────────────────────────────────────────────────────
     private val backgroundImageAdapter by lazy { BackgroundImageAdapter() }
-    private val stickerCategoryAdapter by lazy { StickerCategoryAdapter() }
-    private val speechCategoryAdapter by lazy { SpeechCategoryAdapter() }
+
     private val backgroundColorAdapter by lazy { BackgroundColorAdapter() }
     private val stickerAdapter by lazy { StickerAdapter() }
     private val speechAdapter by lazy { SpeechAdapter() }
@@ -171,7 +168,6 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
                     appSession.stickerCategories.collectLatest { categories ->
                         if (categories.isNotEmpty()) {
                             viewModel.setStickerCategories(categories)
-                            stickerCategoryAdapter.submitList(viewModel.stickerCategoryList)
                             stickerAdapter.submitList(viewModel.stickerList)
                         }
                     }
@@ -182,7 +178,6 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
                             viewModel.setSpeechCategories(categories)
                             val selected = viewModel.speechCategoryList.indexOfFirst { it.isSelected }
                             if (selected >= 0) viewModel.selectSpeechCategory(selected)
-                            speechCategoryAdapter.submitList(viewModel.speechCategoryList)
                             speechAdapter.submitList(viewModel.speechList)
                         }
                     }
@@ -285,20 +280,7 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
             stickerAdapter.onItemClick = {
                 if (checkNetworkBeforeRemoteAsset(it)) addDrawable(it)
             }
-            stickerCategoryAdapter.onCategoryClick = { _, position ->
-                viewModel.selectStickerCategory(position)
-                stickerCategoryAdapter.submitList(viewModel.stickerCategoryList)
-                stickerAdapter.currentSelected = -1
-                stickerAdapter.submitList(viewModel.stickerList)
-                rcvSticker.scrollToPosition(0)
-            }
-            speechCategoryAdapter.onCategoryClick = { _, position ->
-                viewModel.selectSpeechCategory(position)
-                speechCategoryAdapter.submitList(viewModel.speechCategoryList)
-                speechAdapter.currentSelected = -1
-                speechAdapter.submitList(viewModel.speechList)
-                rcvSpeech.scrollToPosition(0)
-            }
+
             speechAdapter.onItemClick = { path ->
                 if (checkNetworkBeforeRemoteAsset(path)) handleSpeech(path)
             }
@@ -453,7 +435,7 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
     private fun initActionBar() {
         binding.actionBar.apply {
             setImageActionBar(btnActionBarLeft, R.drawable.back_app)
-            setImageActionBar(btnActionBarCenter1, R.drawable.ic_reset_all_custom)
+            setImageActionBar(btnActionBarCenter1, R.drawable.ic_reset_all_bg)
             setMaterialCardViewActionBar1(
                 btnActionBarRightText,
                 tvRightText,
@@ -475,20 +457,7 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
                 adapter = stickerAdapter; itemAnimator = null
                 setHasFixedSize(true); setItemViewCacheSize(10)
             }
-            rcvStickerTittle.apply {
-                adapter = stickerCategoryAdapter
-                itemAnimator = null
-                layoutManager = LinearLayoutManager(
-                    this@AddCharacterActivity, LinearLayoutManager.HORIZONTAL, false
-                )
-            }
-            rcvSpeechTittle.apply {
-                adapter = speechCategoryAdapter
-                itemAnimator = null
-                layoutManager = LinearLayoutManager(
-                    this@AddCharacterActivity, LinearLayoutManager.HORIZONTAL, false
-                )
-            }
+
             rcvSpeech.apply {
                 adapter = speechAdapter; itemAnimator = null
                 setHasFixedSize(true); setItemViewCacheSize(10)
@@ -560,8 +529,6 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
 
     private fun submitAllAdapters() {
         backgroundImageAdapter.submitList(viewModel.backgroundImageList)
-        stickerCategoryAdapter.submitList(viewModel.stickerCategoryList)
-        speechCategoryAdapter.submitList(viewModel.speechCategoryList)
         backgroundColorAdapter.submitList(viewModel.backgroundColorList, true)
         stickerAdapter.submitList(viewModel.stickerList, true)
         speechAdapter.submitList(viewModel.speechList)
@@ -699,18 +666,13 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
             val isImageSelected = type == ValueKey.IMAGE_BACKGROUND
 
             lnlBackground.btnBackgroundImage.setBackgroundResource(
-                if (isImageSelected) R.drawable.frame_select_add else 0
+                if (isImageSelected) R.drawable.frame_select_add else R.drawable.frame_un_select_add
             )
 
             lnlBackground.btnBackgroundColor.setBackgroundResource(
-                if (isImageSelected)0 else R.drawable.frame_select_add
+                if (isImageSelected)R.drawable.frame_un_select_add else R.drawable.frame_select_add
             )
-            lnlBackground.btnBackgroundImageTv.setTextColor(
-                ContextCompat.getColor(this@AddCharacterActivity, if (isImageSelected) R.color.app_color else R.color.white)
-            )
-            lnlBackground.btnBackgroundColorTv.setTextColor(
-                ContextCompat.getColor(this@AddCharacterActivity, if (!isImageSelected) R.color.app_color else R.color.white)
-            )
+
             lnlBackground.btnBackgroundImageTv.isSelected = isImageSelected
             lnlBackground.btnBackgroundColorTv.isSelected = !isImageSelected
 
@@ -741,8 +703,6 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
             } else {
                 DataLocal.bottomNavigationNotSelect.getOrNull(index)
             }
-            val bgIcon = if (isSelected) R.drawable.bg_selected_add else R.drawable.bg_unselected_add
-            buttons.getOrNull(index)?.setBackgroundResource(bgIcon)
             iconRes?.let { images.getOrNull(index)?.setImageResource(it) }
             layouts.getOrNull(index)?.isVisible = isSelected
         }

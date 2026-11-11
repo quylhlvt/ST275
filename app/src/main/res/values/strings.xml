@@ -100,14 +100,7 @@
     <string name="please_enter_your_package_name">Please enter your package name!</string>
     <string name="this_action_may_contain_advertising">This action can contain ads</string>
     <string name="instruction">Instruction</string>
-    <string name="tvCosplay1">Cosplay Mode,</string>
-    <string name="tvCosplay2">players are randomly given</string>
-    <string name="tvCosplay3">one reference image</string>
-    <string name="tvCosplay4">to follow. Your task is to recreate that character as accurately as possible by choosing the right</string>
-    <string name="tvCosplay5">hairstyles, outfits, colors, and accessories.</string>
-    <string name="tvCosplay6">Every correct match increases your</string>
-    <string name="tvCosplay7">percentage score (%).</string>
-    <string name="tvCosplay8">The closer your character looks to the random image, the higher your final score will be. Pay attention to small details to achieve the best cosplay result.</string>
+    <string name="tvCosplay1">Players receive a random reference image and must recreate the character by choosing matching hairstyles, outfits, colors, and accessories. Each correct choice increases the percentage score the closer the character matches the image, the higher the final score.</string>
     <string name="save">Save</string>
     <string name="error">Error</string>
     <string name="save_failed">Could not save your creation. Please try again.</string>
@@ -126,4 +119,5 @@
     <string name="please_watch_full_ads">Please Watch Full Ads</string>
     <string name="load_ads_fail">Load Ads Fail</string>
     <string name="watch_a_short_ad_to_generate_a_random_anime">Watch a short ad to generate a Random Anime</string>
+    <string name="play">Play</string>
 </resources>

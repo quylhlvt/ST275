@@ -708,15 +708,15 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         )
 
         binding.transitionLeft.isEnabled = canMoveLeft
-        binding.transitionLeft.alpha = if (canMoveLeft) 1f else 0.4f
+        binding.transitionLeft.setImageResource( if (canMoveLeft) R.drawable.transition_left else R.drawable.transition_un_left)
         binding.transitionRight.isEnabled = canMoveRight
-        binding.transitionRight.alpha = if (canMoveRight) 1f else 0.4f
+        binding.transitionRight.setImageResource(  if (canMoveRight)  R.drawable.transition_right else R.drawable.transition_un_right)
         binding.transitionTop.isEnabled = canMoveUp
-        binding.transitionTop.alpha = if (canMoveUp) 1f else 0.4f
+        binding.transitionTop.setImageResource( if (canMoveUp)  R.drawable.transition_top else R.drawable.transition_un_top)
         binding.transitionBottom.isEnabled = canMoveDown
-        binding.transitionBottom.alpha = if (canMoveDown) 1f else 0.4f
+        binding.transitionBottom.setImageResource( if (canMoveDown) R.drawable.transition_bottom else R.drawable.transition_un_bottom)
         binding.txtReset.isEnabled = hasLayer && !viewModel.isTransformDefault(index)
-        binding.txtReset.alpha = if (binding.txtReset.isEnabled) 1f else 0.4f
+        binding.txtReset.setBackgroundResource(if (binding.txtReset.isEnabled) R.drawable.bg_scale_reset else R.drawable.bg_scale_un_reset)
         if (!hasLayer) {
             closeScalePanel()
         }
