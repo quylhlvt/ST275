@@ -816,8 +816,8 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
     }
 
     private companion object {
-        const val ADD_BACKGROUND_POSITION = 0
-        const val NONE_BACKGROUND_POSITION = 1
+        const val NONE_BACKGROUND_POSITION = 0
+        const val ADD_BACKGROUND_POSITION = 1
         const val CUSTOM_BACKGROUND_COLOR_POSITION = 0
         const val PHONE_GRID_SPAN_COUNT = 5
         const val TABLET_GRID_SPAN_COUNT = 7

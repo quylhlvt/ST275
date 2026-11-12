@@ -91,11 +91,11 @@ class AddCharacterViewModel @Inject constructor(
         backgroundImageList = arrayListOf(
             SelectedAddModel(
                 path = "",
-                isSelected = selectedBackgroundImagePosition == ADD_BACKGROUND_POSITION
+                isSelected = selectedBackgroundImagePosition == NONE_BACKGROUND_POSITION
             ),
             SelectedAddModel(
                 path = "",
-                isSelected = selectedBackgroundImagePosition == NONE_BACKGROUND_POSITION
+                isSelected = selectedBackgroundImagePosition == ADD_BACKGROUND_POSITION
             )
         ).apply {
             addAll(backgrounds.map { path ->
