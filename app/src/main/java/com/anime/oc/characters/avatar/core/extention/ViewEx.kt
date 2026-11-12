@@ -7,6 +7,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -48,7 +49,7 @@ fun setImageActionBar(imageView: ImageView, res: Int) {
     imageView.visible()
 }
 
-fun setMaterialCardViewActionBar1(materialCardView: MaterialCardView, textView: TextView, text: String) {
+fun setMaterialCardViewActionBar1(materialCardView: FrameLayout, textView: TextView, text: String) {
     textView.text = text
     materialCardView.visible()
     textView.isSelected = true

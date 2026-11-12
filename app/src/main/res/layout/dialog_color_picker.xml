@@ -11,6 +11,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/contrainColor"
+                        android:layout_marginHorizontal="@dimen/dimension_20"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_width="match_parent"
                         android:layout_gravity="center"

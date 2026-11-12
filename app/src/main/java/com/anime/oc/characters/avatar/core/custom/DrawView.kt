@@ -122,10 +122,10 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             )
             borderPaint.alpha = typedArray.getInteger(R.styleable.StickerView_borderAlpha, 255)
             borderPaint.style = Paint.Style.STROKE
-            borderPaint.strokeWidth = dpToPx(7)
+            borderPaint.strokeWidth = dpToPx(3)
             borderPaint.strokeJoin = Paint.Join.ROUND
             borderPaint.strokeCap = Paint.Cap.ROUND
-            borderPaint.pathEffect = DashPathEffect(floatArrayOf(20f, 35f), 0f)
+            borderPaint.pathEffect = DashPathEffect(floatArrayOf(30f, 35f), 0f)
 
             setupDefaultIcons()
         } finally {

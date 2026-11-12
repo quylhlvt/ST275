@@ -11,20 +11,19 @@
         android:layout_height="@dimen/dimension_0"
         app:layout_constraintDimensionRatio="3.6:0.9"
         app:layout_constraintTop_toTopOf="parent">
+        <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_0"
+                app:layout_constraintDimensionRatio="3.6:0.35"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension_0"
-            app:layout_constraintDimensionRatio="3.6:0.4"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension_0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="3.6:0.11" />
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="3.6:0.16"/>
 
         <!--    btnActionBarLeft-->
         <ImageView
@@ -195,24 +194,25 @@
             app:layout_constraintTop_toTopOf="@+id/btnActionBarRight" />
 
         <!--            btnActionBarRightText-->
-        <com.google.android.material.card.MaterialCardView
+        <FrameLayout
                 android:id="@+id/btnActionBarRightText"
                 android:layout_width="@dimen/dimension_0"
                 android:layout_height="@dimen/dimension_0"
                 android:layout_marginEnd="@dimen/dimension_16"
                 android:visibility="gone"
-                app:cardBackgroundColor="@color/transparent"
-                app:cardCornerRadius="@dimen/dimension_0"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="@+id/btnActionBarRight"
                 app:layout_constraintDimensionRatio="5.7:4.4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/btnActionBarRight"
-                app:strokeColor="@color/app_color"
-                app:strokeWidth="@dimen/dimension_0">
+   >
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/img_bg_frame_edit"/>
             <TextView
                     android:id="@+id/tvRightText"
                     style="@style/single_marquee"
-                    android:background="@drawable/img_bg_frame_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -223,6 +223,6 @@
                     android:textSize="@dimen/dimension_16" />
 
 
-        </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
