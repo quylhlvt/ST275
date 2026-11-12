@@ -232,7 +232,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         binding.frameScale.animate().cancel()
         isScaleActive = !isScaleActive
         if (isScaleActive) {
-            binding.imgScale.setImageResource(R.drawable.ic_scale_cus_open)
+            binding.imgScale.setImageResource(R.drawable.ic_scale_cus)
             binding.frameScale.visibility = View.VISIBLE
             binding.rcvPart.visibility = View.INVISIBLE
             binding.frameScale.alpha = 0f
@@ -613,18 +613,18 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         val showPanel = showColors && expanded
 
         if (showPanel &&
-            (binding.llColor.visibility != View.VISIBLE || binding.llColor.alpha != 1f)
+            (binding.frameRandoAll.visibility != View.VISIBLE || binding.frameRandoAll.alpha != 1f)
         ) {
-            binding.llColor.animate().cancel()
-            if (binding.llColor.visibility != View.VISIBLE) {
-                binding.llColor.visibility = View.VISIBLE
-                binding.llColor.alpha = 0f
+            binding.frameRandoAll.animate().cancel()
+            if (binding.frameRandoAll.visibility != View.VISIBLE) {
+                binding.frameRandoAll.visibility = View.VISIBLE
+                binding.frameRandoAll.alpha = 0f
             }
-            binding.llColor.animate().alpha(1f).setDuration(150).start()
-        } else if (!showPanel && binding.llColor.visibility == View.VISIBLE) {
-            binding.llColor.animate().cancel()
-            binding.llColor.animate().alpha(0f).setDuration(150).withEndAction {
-                binding.llColor.visibility = View.GONE
+            binding.frameRandoAll.animate().alpha(1f).setDuration(150).start()
+        } else if (!showPanel && binding.frameRandoAll.visibility == View.VISIBLE) {
+            binding.frameRandoAll.animate().cancel()
+            binding.frameRandoAll.animate().alpha(0f).setDuration(150).withEndAction {
+                binding.frameRandoAll.visibility = View.GONE
             }.start()
         }
     }
@@ -696,13 +696,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         val canMoveDown = hasLayer && transform.translationY < maxY - TRANSFORM_EPSILON
 
         binding.imgScale.isEnabled = hasLayer
-        binding.imgScale.setImageResource(
-            when {
-                !hasLayer -> R.drawable.ic_scale_cus_none
-                isScaleActive -> R.drawable.ic_scale_cus_open
-                else -> R.drawable.ic_scale_cus
-            }
-        )
+        binding.imgScale.setImageResource(R.drawable.ic_scale_cus)
 
         binding.transitionLeft.isEnabled = canMoveLeft
         binding.transitionLeft.setImageResource( if (canMoveLeft) R.drawable.transition_left else R.drawable.transition_un_left)

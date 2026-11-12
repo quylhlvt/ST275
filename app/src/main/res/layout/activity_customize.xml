@@ -91,7 +91,7 @@
             android:layout_width="@dimen/dimension_0"
             android:layout_height="@dimen/dimension_56"
             android:elevation="@dimen/dimension_18"
-            app:layout_constraintBottom_toTopOf="@+id/frame_rando_all"
+            app:layout_constraintTop_toTopOf="@+id/view36"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -174,7 +174,7 @@
             android:id="@+id/frame_rando_all"
             android:layout_width="@dimen/dimension_0"
             android:layout_height="@dimen/dimension_48"
-            app:layout_constraintBottom_toTopOf="@+id/frameLayer"
+            app:layout_constraintTop_toBottomOf="@+id/constrain2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -247,13 +247,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <View android:layout_width="match_parent" android:layout_height="0dp"
+              app:layout_constraintHeight_percent="0.27"
+              android:layout_marginBottom="@dimen/dimension_100"
+              app:layout_constraintBottom_toTopOf="@+id/constraintNav"
+              android:id="@+id/view36"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/frameLayer"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension_0"
+            app:layout_constraintTop_toBottomOf="@+id/frame_rando_all"
             app:layout_constraintBottom_toTopOf="@+id/constraintNav"
-            app:layout_constraintHeight_percent="0.27">
+            >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvPart"
