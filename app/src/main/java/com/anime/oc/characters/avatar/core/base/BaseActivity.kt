@@ -16,8 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import com.anime.oc.characters.avatar.AppSession
 import com.anime.oc.characters.avatar.LoadingController
@@ -27,8 +25,6 @@ import com.anime.oc.characters.avatar.core.helper.SharedPreferencesManager
 import com.anime.oc.characters.avatar.databinding.DialogbaseBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
 
@@ -88,15 +84,8 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel>(
             viewListener()
             bindViewModel()
             observeData()
-            lifecycleScope.launch {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    appSession.networkOnline.filter { it }.collect {
-                        if (appSession.templates.value.none { it.id.startsWith("online_") }) {
-                            appSession.fetchOnlineTemplates()
-                        }
-                    }
-                }
-            }
+            // Việc tải lại template online khi có mạng do AppSession tự lo,
+            // không để từng màn hình gọi lại API mỗi lần mở.
         }
     }
 

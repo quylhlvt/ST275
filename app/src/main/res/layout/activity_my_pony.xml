@@ -213,7 +213,7 @@
                     android:layout_marginBottom="@dimen/dimension_17"
                     android:orientation="horizontal"
                     android:weightSum="328"
-                    app:layout_constraintBottom_toTopOf="@+id/llBottom">
+                    app:layout_constraintBottom_toBottomOf="parent">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout

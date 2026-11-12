@@ -23,11 +23,10 @@ class SplashViewModel @Inject constructor() : ViewModel() {
     private var isTimerRunning = false
     private val initTime = System.currentTimeMillis()
 
-    fun triggerNavigate() { viewModelScope.launch {
-        val remaining = 5_000L - (System.currentTimeMillis() - initTime)
-        if (remaining > 0) delay(remaining)
+    /** Splash chuyển màn ngay khi data sẵn sàng (đã đủ thời gian tối thiểu). */
+    fun triggerNavigate() {
         _navigateSignal.value = true
-    } }
+    }
 
     fun startSplashTimer(
         hasNetwork: Boolean,
@@ -40,10 +39,12 @@ class SplashViewModel @Inject constructor() : ViewModel() {
         isTimerRunning = true
 
         viewModelScope.launch {
-            if (!hasNetwork) { delay(5_000L); _navigateSignal.value = true; return@launch }
-            val startTime = System.currentTimeMillis()
             withTimeoutOrNull(5_000L) {
                 localDataReadyFlow.first { it }
+            }
+            if (!hasNetwork) {
+                finishAfterMinDuration()
+                return@launch
             }
             val dataJob = launch {
                 if (!hasOnlineTemplates) {
@@ -64,12 +65,19 @@ class SplashViewModel @Inject constructor() : ViewModel() {
             dataJob.join()
             imagesJob.join()
 
-            val elapsed = System.currentTimeMillis() - startTime
-            val remaining = 3_000L - elapsed  // ✅ khớp với MIN_SPLASH_MS = 3_000L
-            if (remaining > 0) delay(remaining)
-
-            isTimerRunning = false
-            _dataReadySignal.value = true
+            finishAfterMinDuration()
         }
+    }
+
+    private suspend fun finishAfterMinDuration() {
+        // Tính từ lúc mở Splash, không cộng dồn thêm sau thời gian chờ data.
+        val remaining = MIN_SPLASH_MS - (System.currentTimeMillis() - initTime)
+        if (remaining > 0) delay(remaining)
+        isTimerRunning = false
+        _dataReadySignal.value = true
+    }
+
+    private companion object {
+        const val MIN_SPLASH_MS = 3_000L
     }
 }

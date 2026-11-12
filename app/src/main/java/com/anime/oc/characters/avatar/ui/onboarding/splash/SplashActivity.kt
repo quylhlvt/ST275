@@ -6,7 +6,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
-import androidx.core.content.res.ResourcesCompat
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.anime.oc.characters.avatar.AppSession
@@ -20,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeoutOrNull
 
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(
@@ -47,14 +45,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(
 //        Admob.getInstance().setTimeCountdownNativeCollab(20000)
 //        Admob.getInstance().loadInterAll(this, getString(R.string.inter_all))
         preloadLanguageDrawables()
-        // ✅ Warm up font — giữ nguyên, nhẹ
-        ResourcesCompat.getFont(this@SplashActivity, R.font.baloo2_extrabold)
 
 
 //        interCallBack = object : InterCallback() {
 //            override fun onNextAction() {
 //                super.onNextAction()
-                viewModel.triggerNavigate()
+//                viewModel.triggerNavigate()
 //            }
 //        }
 //
@@ -93,9 +89,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(
         )
         this@SplashActivity.lifecycleScope.launch {
             viewModel.dataReadySignal.first { it }
-            if (!isNetworkAvailable()) viewModel.triggerNavigate()
-            else withTimeoutOrNull(30_000L) { viewModel.navigateSignal.first { it } }
-                ?: viewModel.triggerNavigate()
+            viewModel.triggerNavigate()
         }
 
     }

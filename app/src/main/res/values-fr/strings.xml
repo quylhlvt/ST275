@@ -8,7 +8,7 @@
     <string name="title_2">\u00A0Personnalisez chaque petit détail\u00A0</string>
     <string name="title_3">\u00A0Rendez votre chat unique\u00A0</string>
     <string name="not_select_lang">Veuillez sélectionner une langue</string>
-    <string name="pony_maker">Créateur d’anime</string>
+    <string name="pony_maker">Créateur d’avatar de chat</string>
 
     <string name="permission">Autorisation</string>
     <string name="storage">Stockage\u00A0</string>
@@ -32,9 +32,9 @@
     <string name="rate_us">Nous noter</string>
     <string name="share_app">Partager l’application</string>
     <string name="download">Télécharger</string>
-    <string name="my_avatar">Mon anime</string>
+    <string name="my_avatar">Mon avatar</string>
     <string name="design">Mon design</string>
-    <string name="no_item_here">Aucun élément ici</string>
+    <string name="no_item_here">Aucun personnage ici</string>
     <string name="add_to_whatsapp">Ajouter à WhatsApp</string>
     <string name="add_to_telegram">Ajouter à Telegram</string>
     <string name="share">Partager</string>
@@ -69,7 +69,7 @@
 
     <string name="rate_us_0">Vous n’avez pas encore noté!</string>
     <string name="have_rated">Merci d’avoir noté notre application</string>
-    <string name="cosplay">Cosplay anime</string>
+    <string name="cosplay">Cosplay de chat</string>
     <string name="random">Aléatoire</string>
     <string name="my_creation">Ma création</string>
     <string name="image">Image</string>
@@ -93,7 +93,7 @@
     <string name="errorcontent">Cet élément n’est plus disponible.</string>
     <string name="image_not_found">Image introuvable</string><string name="facebook_not_available">Facebook n’est pas installé ou ne peut pas recevoir cette image</string><string name="instagram_not_available">Instagram n’est pas installé ou ne peut pas recevoir cette image</string><string name="share_failed">Impossible de partager l’image. Veuillez réessayer.</string>
     <string name="edit">Modifier</string>
-    <string name="cat_random">Anime aléatoire</string>
+    <string name="cat_random">Tirage chanceux</string>
     <string name="done">Terminé</string>
     <string name="please_wait">Veuillez patienter...</string>
     <string name="watch_a_short_ad_to_generate_a_random_anime">Voulez-vous regarder une courte publicité pour générer un personnage aléatoire ?</string>

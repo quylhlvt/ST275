@@ -8,7 +8,7 @@
     <string name="title_2">\u00A0Sesuaikan setiap detail kecil\u00A0</string>
     <string name="title_3">\u00A0Jadikan kucingmu unik\u00A0</string>
     <string name="not_select_lang">Silakan pilih bahasa</string>
-    <string name="pony_maker">Pembuat Anime</string>
+    <string name="pony_maker">Pembuat Avatar Kucing</string>
 
     <string name="permission">Izin</string>
     <string name="storage">Penyimpanan\u00A0</string>
@@ -32,9 +32,9 @@
     <string name="rate_us">Beri Nilai</string>
     <string name="share_app">Bagikan Aplikasi</string>
     <string name="download">Unduh</string>
-    <string name="my_avatar">Anime Saya</string>
+    <string name="my_avatar">Avatar Saya</string>
     <string name="design">Desain Saya</string>
-    <string name="no_item_here">Tidak ada item di sini</string>
+    <string name="no_item_here">Tidak ada karakter di sini</string>
     <string name="add_to_whatsapp">Tambahkan ke WhatsApp</string>
     <string name="add_to_telegram">Tambahkan ke Telegram</string>
     <string name="share">Bagikan</string>
@@ -69,7 +69,7 @@
 
     <string name="rate_us_0">Anda belum memberi nilai!</string>
     <string name="have_rated">Terima kasih telah memberi nilai aplikasi kami</string>
-    <string name="cosplay">Cosplay Anime</string>
+    <string name="cosplay">Cosplay Kucing</string>
     <string name="random">Acak</string>
     <string name="my_creation">Kreasi Saya</string>
     <string name="image">Gambar</string>
@@ -93,7 +93,7 @@
     <string name="errorcontent">Item ini sudah tidak tersedia.</string>
     <string name="image_not_found">Gambar tidak ditemukan</string><string name="facebook_not_available">Facebook tidak terpasang atau tidak dapat menerima gambar ini</string><string name="instagram_not_available">Instagram tidak terpasang atau tidak dapat menerima gambar ini</string><string name="share_failed">Tidak dapat membagikan gambar. Silakan coba lagi.</string>
     <string name="edit">Edit</string>
-    <string name="cat_random">Anime Acak</string>
+    <string name="cat_random">Putaran Keberuntungan</string>
     <string name="done">Selesai</string>
     <string name="please_wait">Harap tunggu...</string>
     <string name="watch_a_short_ad_to_generate_a_random_anime">Ingin menonton iklan singkat untuk membuat karakter acak?</string>

@@ -33,6 +33,14 @@ class ChoosePonyActivity : BaseActivity<ActivityChoosePonyBinding, ChoosePonyVie
     private val mainViewModel: AppSession get() = appSession
     private lateinit var adapter: ChoosePonyAdapter
     private var isFirstLoad = true
+    /** List đã submit gần nhất — so sánh tham chiếu thay vì so sánh sâu cả cây template. */
+    private var submittedTemplates: List<CustomModel>? = null
+
+    private fun submitTemplatesIfChanged(templates: List<CustomModel>) {
+        if (submittedTemplates === templates) return
+        submittedTemplates = templates
+        adapter.submitList(templates)
+    }
 
 
     override fun onRestart() {
@@ -126,9 +134,7 @@ class ChoosePonyActivity : BaseActivity<ActivityChoosePonyBinding, ChoosePonyVie
                         .collect { (templates, isFetching) ->
                             // Giữ danh sách đã tải/cache khi mất mạng. Việc mở một
                             // template online vẫn được kiểm tra ở click listener.
-                            if (adapter.items != templates) {
-                                adapter.submitList(templates)
-                            }
+                            submitTemplatesIfChanged(templates)
 
                             if (isFirstLoad && !isFetching) {
                                 isFirstLoad = false
@@ -153,28 +159,6 @@ class ChoosePonyActivity : BaseActivity<ActivityChoosePonyBinding, ChoosePonyVie
                     mainViewModel.error.collect { error ->
                         error?.let { showSnackbar(it) }
                     }
-                }
-            }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        this@ChoosePonyActivity.lifecycleScope.launch {
-            val hasInternet = withContext(Dispatchers.IO) {
-                InternetExtension.isInternetAvailable(this@ChoosePonyActivity)
-            }
-            val templates = viewModel.templates.value
-            // Không xóa item online khỏi UI khi offline vì dữ liệu đã có trong cache.
-            if (adapter.items != templates) {
-                adapter.submitList(templates)
-            }
-
-            // Fetch online nếu có mạng mà chưa có data online
-            if (hasInternet) {
-                val hasOnline = templates.any { it.id.startsWith("online_") }
-                if (!hasOnline && !mainViewModel.isFetchingOnlineFlow.value) {
-                    mainViewModel.fetchOnlineTemplates()
                 }
             }
         }

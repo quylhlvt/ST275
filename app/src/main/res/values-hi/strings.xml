@@ -8,7 +8,7 @@
     <string name="title_2">\u00A0हर छोटी जानकारी को अनुकूलित करें\u00A0</string>
     <string name="title_3">\u00A0अपनी बिल्ली को अनोखा बनाएँ\u00A0</string>
     <string name="not_select_lang">कृपया एक भाषा चुनें</string>
-    <string name="pony_maker">एनीमे मेकर</string>
+    <string name="pony_maker">कैट अवतार मेकर</string>
 
     <string name="permission">अनुमति</string>
     <string name="storage">स्टोरेज\u00A0</string>
@@ -32,9 +32,9 @@
     <string name="rate_us">हमें रेट करें</string>
     <string name="share_app">ऐप साझा करें</string>
     <string name="download">डाउनलोड</string>
-    <string name="my_avatar">मेरा एनीमे</string>
+    <string name="my_avatar">मेरा अवतार</string>
     <string name="design">मेरा डिज़ाइन</string>
-    <string name="no_item_here">यहाँ कोई आइटम नहीं है</string>
+    <string name="no_item_here">यहाँ कोई कैरेक्टर नहीं है</string>
     <string name="add_to_whatsapp">WhatsApp में जोड़ें</string>
     <string name="add_to_telegram">Telegram में जोड़ें</string>
     <string name="share">साझा करें</string>
@@ -69,7 +69,7 @@
 
     <string name="rate_us_0">आपने अभी तक रेट नहीं किया है!</string>
     <string name="have_rated">हमारे ऐप को रेट करने के लिए धन्यवाद</string>
-    <string name="cosplay">एनीमे कॉसप्ले</string>
+    <string name="cosplay">कैट कॉस्प्ले</string>
     <string name="random">रैंडम</string>
     <string name="my_creation">मेरी रचना</string>
     <string name="image">छवि</string>
@@ -93,7 +93,7 @@
     <string name="errorcontent">यह आइटम अब उपलब्ध नहीं है।</string>
     <string name="image_not_found">चित्र नहीं मिला</string><string name="facebook_not_available">Facebook इंस्टॉल नहीं है या यह चित्र प्राप्त नहीं कर सकता</string><string name="instagram_not_available">Instagram इंस्टॉल नहीं है या यह चित्र प्राप्त नहीं कर सकता</string><string name="share_failed">चित्र शेयर नहीं किया जा सका। कृपया फिर से प्रयास करें।</string>
     <string name="edit">संपादित करें</string>
-    <string name="cat_random">रैंडम एनीमे</string>
+    <string name="cat_random">लकी रोल</string>
     <string name="done">पूर्ण</string>
     <string name="please_wait">कृपया प्रतीक्षा करें...</string>
     <string name="watch_a_short_ad_to_generate_a_random_anime">रैंडम कैरेक्टर बनाने के लिए एक छोटा विज्ञापन देखना चाहते हैं?</string>

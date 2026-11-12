@@ -6,8 +6,8 @@
     <string name="title_2">\u00A0Customize Every Little Detail\u00A0</string>
     <string name="title_3">\u00A0Make Your Cat Unique\u00A0</string>
     <string name="not_select_lang">Please select a language</string>
-    <string name="pony_maker">Anime Maker</string>
-    <string name="cat_random">Anime Random</string>
+    <string name="pony_maker">Avatar cat maker</string>
+    <string name="cat_random">Lucky roll</string>
     <string name="permission">Permission</string>
     <string name="storage">Storage\u00A0</string>
     <string name="continue_per">\u00A0Continue\u00A0</string>
@@ -17,7 +17,7 @@
     <string name="go_to_setting_message">The app needs this permission</string>
     <string name="settings">Settings</string>
     <string name="cancel">Cancel</string>
-    <string name="type_your_content">Type_your_content</string>
+    <string name="type_your_content">Type your content</string>
     <string name="loading">Loading</string>
     <string name="haven_t_saved_it_yet_do_you_want_to_exit">Haven’t saved it yet, do you want to exit?</string>
     <string name="no">No</string>
@@ -30,7 +30,7 @@
     <string name="rate_us">Rate us</string>
     <string name="share_app">Share app</string>
     <string name="download">Download</string>
-    <string name="my_avatar">My Anime</string>
+    <string name="my_avatar">My avatar</string>
     <string name="design">My Design</string>
     <string name="no_item_here">No character here</string>
     <string name="add_to_whatsapp">Add To WhatsApp</string>
@@ -72,9 +72,9 @@
     <string name="rate_us_0">You have not rated it yet!</string>
     <string name="have_rated">Thank you for rate our app</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="cosplay">Cosplay Anime</string>
+    <string name="cosplay">Cosplay cat</string>
     <string name="random">Random</string>
-    <string name="my_creation">My Creation</string>
+    <string name="my_creation">My creation</string>
     <string name="image">Image</string>
     <string name="color">Color</string>
     <string name="successfully">Successfully</string>

@@ -145,10 +145,14 @@ class AppSession @Inject constructor(
     }
     private suspend fun observeNetworkForRetry() {
         networkOnline.collect { isOnline ->
-            if (isOnline && _bgStickerFailed.value && !_bgLoading.value) {
+            if (!isOnline) return@collect
+            if (_bgStickerFailed.value && !_bgLoading.value) {
                 Log.d("AppSession", "🔄 Network restored, retrying...")
                 _bgStickerFailed.value = false
                 loadBackgroundsAndStickers()
+            }
+            if (templates.value.none { it.id.startsWith("online_") }) {
+                fetchOnlineTemplates()
             }
         }
     }
@@ -159,11 +163,11 @@ class AppSession @Inject constructor(
      * BaseActivity gọi khi vào màn + có mạng + chưa có online data.
      */
     private suspend fun fetchOnlineTemplatesInternal() {
-        if (_isFetchingOnline.value) {
+        // compareAndSet: chỉ 1 coroutine được bắt đầu fetch, kể cả khi gọi song song trên IO.
+        if (!_isFetchingOnline.compareAndSet(expect = false, update = true)) {
             Log.d("AppSession", "⏭️ Already fetching, skip")
             return
         }
-        _isFetchingOnline.value = true
         try {
             Log.d("AppSession", "📡 fetchOnlineTemplates start")
             val result = getCatalogueUseCase()

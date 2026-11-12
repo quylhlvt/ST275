@@ -35,6 +35,8 @@ import com.anime.oc.characters.avatar.utils.BlockableFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
 import java.io.File
 
 @AndroidEntryPoint
@@ -244,12 +246,15 @@ class MyPonyActivity : WhatsappSharingActivity<ActivityMyPonyBinding, MyPonyView
                 // ✅ Chỉ dùng 1 nguồn duy nhất cho avatar
                 launch {
                     appSession.customizedCharacters.collect { customized ->
-                        val list = customized
-                            .filter {
-                                it.imageSave.isNotEmpty() && File(it.imageSave).exists()
-                            }
-                            .sortedByDescending { it.createdAt } // ← dùng createdAt đã fix
-                            .map { MyAlbumModel(path = it.imageSave, idEdit = it.id, type = 1) }
+                        // File.exists() là disk I/O — chạy ở IO để không chặn main thread khi mở màn.
+                        val list = withContext(Dispatchers.IO) {
+                            customized
+                                .filter {
+                                    it.imageSave.isNotEmpty() && File(it.imageSave).exists()
+                                }
+                                .sortedByDescending { it.createdAt } // ← dùng createdAt đã fix
+                                .map { MyAlbumModel(path = it.imageSave, idEdit = it.id, type = 1) }
+                        }
 
                         myAvatarAdapter.submitList(list)
                         if (isAvatarTab.value) updateEmptyState(list.isEmpty())
