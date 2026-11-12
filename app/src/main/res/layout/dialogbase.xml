@@ -18,24 +18,6 @@
             android:clipToPadding="false"
             android:layout_marginHorizontal="@dimen/dimension_15">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:strokeWidth="@dimen/dimension_3"
-                    app:strokeColor="@color/app_color"
-                    app:cardBackgroundColor="@color/app_color2"
-                    app:cardCornerRadius="@dimen/dimension_15">
-                      <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:strokeWidth="@dimen/dimension_0"
-                          android:layout_marginHorizontal="@dimen/dimension_3"
-                          android:layout_marginTop="@dimen/dimension_3"
-                          android:layout_marginBottom="@dimen/dimension_8"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/dimension_12">
-
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/contrainColor"
@@ -49,43 +31,60 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
-
-
+                    <View
+                            android:id="@+id/view2"
+                            android:layout_width="@dimen/dimension_0"
+                            android:layout_height="@dimen/dimension_0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintDimensionRatio="3.12:0.4"/>
+                    <View
+                            android:id="@+id/view3"
+                            android:layout_width="@dimen/dimension_0"
+                            android:layout_height="@dimen/dimension_0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintDimensionRatio="3.12:0.2"/>
+                    <View android:layout_width="@dimen/dimension_0"
+                          android:layout_height="@dimen/dimension_0"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          android:background="@drawable/bg_16_cosplay"
+                          app:layout_constraintBottom_toBottomOf="parent"
+                          app:layout_constraintTop_toBottomOf="@+id/view3"/>
                     <TextView
-                        android:id="@+id/tvTitle"
-                        style="@style/single_marquee"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintDimensionRatio="3.22:0.6"
-                        android:fontFamily="@font/pacifico_regular"
-                        android:gravity="center"
-                        android:background="@color/app_color8"
+                            android:layout_width="@dimen/dimension_0"
+                            android:layout_height="@dimen/dimension_0"
+                            app:layout_constraintDimensionRatio="1.56:0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/view2"
+                            app:layout_constraintBottom_toBottomOf="@+id/view2"
+                            android:textSize="@dimen/text_size_24"
+                            android:fontFamily="@font/fluffy_cat"
+                            android:elevation="@dimen/dimension_8"
+                            android:text="@string/instruction"
+                            android:id="@+id/tvTitle"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:background="@drawable/bg_instruction"/>
 
-                        android:paddingHorizontal="@dimen/dimension_5"
-                        android:text="@string/loading"
-                        app:outerStrokeColor="@color/app_color"
-                        app:outerStrokeWidth="@dimen/dimension_5"
-                        android:paddingBottom="@dimen/dimension_5"
-                        android:textColor="@color/app_color"
-                        android:textSize="@dimen/text_size_28"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
 
-                        />
                     <TextView
                         android:id="@+id/txtContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimension_40"
                         android:layout_marginVertical="@dimen/dimension_25"
-                        android:fontFamily="@font/pacifico_regular"
+                        android:fontFamily="@font/finger_paint_regular"
                         android:gravity="center"
                         android:text="@string/haven_t_saved_it_yet_do_you_want_to_exit"
-                        android:textSize="@dimen/text_size_20"
+                        android:textSize="@dimen/text_size_14"
                         app:layout_constraintBottom_toTopOf="@+id/progressBar"
                         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-                        android:textColor="@color/app_color2"
+                        android:textColor="@color/black4"
                         />
 
                     <ProgressBar
@@ -148,8 +147,7 @@
                                 app:layout_constraintEnd_toStartOf="@+id/btnNo"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:strokeColor="@color/app_color2"
-                                app:strokeWidth="@dimen/dimension_1">
+                       >
 
                                 <TextView
                                     android:id="@+id/txtYes"
@@ -157,14 +155,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginHorizontal="@dimen/dimension_2"
-                                    android:fontFamily="@font/pacifico_regular"
+                                    android:fontFamily="@font/finger_paint_regular"
                                     android:gravity="center"
                                     android:text="@string/yes"
-                                    android:paddingBottom="@dimen/dimension_3"
-                                    android:textColor="@color/app_color"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/text_size_16"
-                                    app:outerStrokeColor="@color/app_color"
-                                    app:outerStrokeWidth="@dimen/dimension_3" />
+                                   />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -188,14 +184,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginHorizontal="@dimen/dimension_2"
-                                    android:fontFamily="@font/pacifico_regular"
+                                    android:fontFamily="@font/finger_paint_regular"
                                     android:gravity="center"
-                                    android:paddingBottom="@dimen/dimension_3"
                                     android:text="@string/no"
-                                    android:textColor="@color/app_color"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/text_size_16"
-                                    app:outerStrokeColor="@color/app_color"
-                                    app:outerStrokeWidth="@dimen/dimension_3" />
+                                />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -204,7 +198,7 @@
                                 android:layout_width="@dimen/dimension_0"
                                 android:layout_height="@dimen/dimension_0"
                                 android:layout_marginHorizontal="@dimen/dimension_90"
-                                android:background="@drawable/btn_dialog_base"
+                                android:background="@drawable/btn_dialog_base2"
                                 app:layout_constraintDimensionRatio="1.28:0.44"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -219,13 +213,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:paddingBottom="@dimen/dimension_3"
-                                    android:fontFamily="@font/pacifico_regular"
+                                    android:fontFamily="@font/finger_paint_regular"
                                     android:gravity="center"
                                     android:text="@string/ok"
-                                    android:textColor="@color/app_color"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/text_size_16"
-                                    app:outerStrokeColor="@color/app_color"
-                                    app:outerStrokeWidth="@dimen/dimension_3" />
+                                    />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -235,8 +228,6 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                      </com.google.android.material.card.MaterialCardView>
-                </com.google.android.material.card.MaterialCardView>
 
 
 

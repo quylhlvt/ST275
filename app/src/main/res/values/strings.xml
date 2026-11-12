@@ -2,9 +2,9 @@
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Next</string>
     <string name="language">Language</string>
-    <string name="title_1">\u00A0Turn Your Ideas into Anime Magic\u00A0</string>
-    <string name="title_2">\u00A0Amazing OC? Loading...\u00A0</string>
-    <string name="title_3">\u00A0Ready to Create Something Adorable?\u00A0</string>
+    <string name="title_1">\u00A0Create Your Own Cat Avatar\u00A0</string>
+    <string name="title_2">\u00A0Customize Every Little Detail\u00A0</string>
+    <string name="title_3">\u00A0Make Your Cat Unique\u00A0</string>
     <string name="not_select_lang">Please select a language</string>
     <string name="pony_maker">Anime Maker</string>
     <string name="cat_random">Anime Random</string>
@@ -82,7 +82,7 @@
     <string name="no_internet">No internet</string>
     <string name="internet">Internet</string>
     <string name="please_connect_to_the_internet_to_download_more_data">Please connect to the internet to download more data</string>
-    <string name="unstable_connection_please_check_your_network_connection">Unstable connection, please check your network connection</string>
+    <string name="unstable_connection_please_check_your_network_connection">Please check your connection and try again.</string>
     <string name="ok">Ok</string>
     <string name="please_wait_a_few_seconds_for_data_to_load">Please wait a few seconds for data to load.</string>
     <string name="create_package_name">Create Package Name</string>
@@ -97,7 +97,9 @@
     <string name="edit">Edit</string>
     <string name="done">Done</string>
     <string name="please_wait">Please wait...</string>
-    <string name="watch_a_short_ad_to_generate_a_random_anime">Watch a short ad to generate a Random Anime</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Watch a short ad to generate a random character?</string>
     <string name="play">Play</string>
     <string name="click_the_random_button_below_to_see_what_your_character_is">Click the random button below to see what your character is!</string>
+    <string name="watch_ad">Watch Ad</string>
+    <string name="this_action_may_contain_advertising">This action can contain ads</string>
 </resources>

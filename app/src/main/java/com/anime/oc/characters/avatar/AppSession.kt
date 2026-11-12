@@ -3,22 +3,14 @@ package com.anime.oc.characters.avatar
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
-import com.anime.oc.characters.avatar.data.datalocal.api.AppAssetUrls
 import com.anime.oc.characters.avatar.data.datalocal.manager.AppDataManager
-import com.anime.oc.characters.avatar.data.model.addcharacter.SpeechCategoryModel
-import com.anime.oc.characters.avatar.data.model.addcharacter.StickerCategoryModel
 import com.anime.oc.characters.avatar.data.model.custom.CustomModel
 import com.anime.oc.characters.avatar.data.model.custom.SelectionIndex
 import com.anime.oc.characters.avatar.data.usecase.GetCatalogueUseCase
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -27,16 +19,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.HttpURLConnection
 import java.net.URL
-import java.util.Collections
 import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import kotlin.text.isEmpty
-import kotlin.text.orEmpty
 
 @Singleton
 class AppSession @Inject constructor(
@@ -64,10 +52,11 @@ class AppSession @Inject constructor(
     private val _bgStickerReady = MutableStateFlow(false)
     val bgStickerReady: StateFlow<Boolean> = _bgStickerReady.asStateFlow()
     private val _bgLoading = MutableStateFlow(false)
-    private val _stickerCategories = MutableStateFlow<List<StickerCategoryModel>>(emptyList())
-    val stickerCategories: StateFlow<List<StickerCategoryModel>> = _stickerCategories.asStateFlow()
-    private val _speechCategories = MutableStateFlow<List<SpeechCategoryModel>>(emptyList())
-    val speechCategories: StateFlow<List<SpeechCategoryModel>> = _speechCategories.asStateFlow()
+    var bgQuantity: Int = 0
+        private set
+    var stickerQuantity: Int = 0
+        private set
+    val bgBaseUrl = "https://lvtglobal.tech/public/app/ST229_CatAvatarCatMaker/bg"
     var cosplayBitmap: Bitmap? = null
     var userResultBitmap: Bitmap? = null
     var customizeBitmap: Bitmap? = null
@@ -98,73 +87,6 @@ class AppSession @Inject constructor(
         loadInitialData()
     }
 
-
-    private suspend fun loadUrlList(baseUrl: String, ext: String): List<String> {
-        val results = java.util.Collections.synchronizedMap(mutableMapOf<Int, String>())
-        var shouldStop = false
-        var start = 1
-
-        while (!shouldStop) {
-            val end = start + 9
-            coroutineScope {
-                (start..end).map { i ->
-                    async(Dispatchers.IO) {
-                        if (shouldStop) return@async
-                        val url = "$baseUrl$i.$ext"
-                        try {
-                            val connection = java.net.URL(url).openConnection() as java.net.HttpURLConnection
-                            connection.requestMethod = "HEAD"
-                            connection.connectTimeout = 5000
-                            connection.readTimeout = 5000
-                            val code = connection.responseCode
-                            connection.disconnect()
-                            if (code == 403 || code == 404) shouldStop = true
-                            else results[i] = url
-                        } catch (e: Exception) {
-                            shouldStop = true
-                        }
-                    }
-                }.awaitAll()
-            }
-            start += 10
-        }
-        return results.toSortedMap().values.toList()
-    }
-
-    private data class BgConfig(
-        @SerializedName("background")
-        val background: List<CategoryConfig> = emptyList(),
-        @SerializedName("sticker")
-        val sticker: List<CategoryConfig> = emptyList(),
-        @SerializedName("speech bubble")
-        val speechBubble: List<CategoryConfig> = emptyList()
-    )
-
-    private data class CategoryConfig(
-        @SerializedName("category")
-        val category: String = "",
-        @SerializedName("quantity")
-        val quantity: Int = 0
-    )
-
-    private fun loadBgConfig(): Pair<BgConfig, String> =
-        AppAssetUrls.loadWithFallback("${AppAssetUrls.PRIMARY}bg/bg.json") { url ->
-            val connection = URL(url).openConnection() as HttpURLConnection
-            try {
-                connection.connectTimeout = 10_000
-                connection.readTimeout = 10_000
-                val config = connection.inputStream.bufferedReader().use { reader ->
-                    Gson().fromJson(reader, BgConfig::class.java)
-                }
-                checkNotNull(config) { "Empty background config" }
-                check((config.background + config.sticker + config.speechBubble).any { it.quantity > 0 }) {
-                    "Background config has no images"
-                }
-                config to url.removeSuffix("bg/bg.json")
-            } finally {
-                connection.disconnect()
-            }
-        }
     // ✅ Fix — gọi đúng hàm đã có
     fun preloadBackgroundsAndStickers() {
         if (_bgStickerReady.value) return
@@ -179,55 +101,20 @@ class AppSession @Inject constructor(
             _bgLoading.value = true
             _bgStickerReady.value = false
             try {
-                coroutineScope {
-                    val (config, assetBaseUrl) = loadBgConfig()
-                    val backgrounds = config.background
-                        .filter { it.quantity > 0 }
-                        .flatMap { item ->
-                            val categoryPath = item.category
-                                .trim()
-                                .takeIf { it.isNotEmpty() }
-                                ?.let { "/$it" }
-                                .orEmpty()
-                            (1..item.quantity).map { index ->
-                                "${assetBaseUrl}bg/background$categoryPath/$index.png"
-                            }
-                        }
-                    val stickerCategories = config.sticker
-                        .filter { it.category.isNotBlank() && it.quantity > 0 }
-                        .mapIndexed { index, item ->
-                            StickerCategoryModel(
-                                category = item.category,
-                                quantity = item.quantity,
-                                isSelected = index == 0,
-                                assetBaseUrl = assetBaseUrl
-                            )
-                        }
-                    val stickers = stickerCategories.firstOrNull()?.imageUrls().orEmpty()
-                    val speechCategories = config.speechBubble
-                        .filter { it.category.isNotBlank() && it.quantity > 0 }
-                        .map { item ->
-                            SpeechCategoryModel(
-                                category = item.category,
-                                quantity = item.quantity,
-                                assetBaseUrl = assetBaseUrl
-                            )
-                        }
-                    val speech = speechCategories.flatMap { it.imageUrls() }
-
-                    if (backgrounds.isEmpty() && stickers.isEmpty() && speech.isEmpty()) {
-                        Log.w("AppSession", "⚠️ Empty result, mark as failed")
-                        _bgStickerFailed.value = true
-                        return@coroutineScope
-                    }
-
-                    appDataManager.updateBackgroundsStickersAndSpeech(backgrounds, stickers, speech)
-                    _stickerCategories.value = stickerCategories
-                    _speechCategories.value = speechCategories
-                    _bgStickerFailed.value = false
-                    _bgStickerReady.value = true
-                    Log.d("AppSession", "✅ bgs=${backgrounds.size} stickers=${stickers.size}")
+                val json = URL("$bgBaseUrl/bg.json").readText()
+                val jsonObject = org.json.JSONObject(json)
+                bgQuantity = jsonObject.getJSONArray("Background")
+                    .getJSONObject(0)
+                    .getInt("quantity")
+                stickerQuantity = jsonObject.getJSONArray("Sticker")
+                    .getJSONObject(0)
+                    .getInt("quantity")
+                check(bgQuantity > 0 && stickerQuantity > 0) {
+                    "Background or sticker quantity is empty"
                 }
+                _bgStickerFailed.value = false
+                _bgStickerReady.value = true
+                Log.d("AppSession", "✅ backgrounds=$bgQuantity stickers=$stickerQuantity")
             } catch (e: Exception) {
                 Log.e("AppSession", "❌ loadBgSticker: ${e.message}")
                 _bgStickerFailed.value = true

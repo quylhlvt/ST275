@@ -40,14 +40,14 @@ class PagerIntroViewHolder(
         binding.run {
 //            if (adapterPosition == 1) {
 //                // Page 0 — hiện 2 dòng, không marquee
-                tvContent.ellipsize = null
-                tvContent.isSingleLine = false
+//                tvContent.ellipsize = null
+//                tvContent.isSingleLine = false
 //            } else {
                 // Page 1, 2 — chạy chữ marquee
 //                tvContent.maxLines = 1
 //                tvContent.isSingleLine = true
 //                tvContent.ellipsize = TextUtils.TruncateAt.MARQUEE
-//                tvContent.isSelected = true
+                tvContent.isSelected = true
 //            }
             tvContent.text = root.context.strings(pager.content)
             imvImage.setImageResource(pager.image)

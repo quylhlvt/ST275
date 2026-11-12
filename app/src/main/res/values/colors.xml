@@ -34,8 +34,8 @@
     <color name="app_color8">#803500</color>
     <color name="app_color9">#FFE1CC</color>
     <color name="app_color10">#FFE5CC</color>
-    <color name="app_color11">#CC0088</color>
-    <color name="app_color12">#4400CC</color>
+    <color name="app_color11">#CC341500</color>
+    <color name="app_color12">#99B25324</color>
     <color name="app_color13">#80D4FF</color>
     <color name="color_bg_item">#FF8795</color>
     <color name="shadown_green">#6F9E1E</color>
@@ -51,8 +51,8 @@
     <color name="stroke_forcus_1">#7EFEFD</color>
     <color name="stroke_forcus_2">#F5A8F6</color>
     <color name="color_content_dialog">#991F2F4F</color>
-    <color name="color_draw">#0C55A2</color>
-    <color name="color_draw_unselect">#4D4F97E2</color>
+    <color name="color_draw">#CC6419</color>
+    <color name="color_draw_unselect">#6BCC6419</color>
 
     <color name="color_1">#E2D2D2</color>
     <color name="color_2">#DCD5FF</color>

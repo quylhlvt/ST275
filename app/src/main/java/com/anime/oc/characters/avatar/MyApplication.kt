@@ -11,6 +11,7 @@ import java.io.File
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        isTablet = resources.configuration.smallestScreenWidthDp >= TABLET_MIN_WIDTH_DP
         // Fragment navigation must wait for the interstitial to close. The SDK's
         // default navigates while its full-screen/loading windows still own input.
 //        Admob.getInstance().setOpenActivityAfterShowInterAds(false)
@@ -23,5 +24,10 @@ class MyApplication : Application() {
         Log.d("MyApplication", "MMKV initialized at: ${mmkvDir.absolutePath}")
     }
 
+    companion object {
+        private const val TABLET_MIN_WIDTH_DP = 600
 
+        var isTablet: Boolean = false
+            private set
+    }
 }

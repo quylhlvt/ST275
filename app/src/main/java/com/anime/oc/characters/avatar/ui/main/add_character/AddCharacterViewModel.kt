@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.anime.oc.characters.avatar.core.custom.Draw
 import com.anime.oc.characters.avatar.core.custom.DrawableDraw
 import com.anime.oc.characters.avatar.data.model.addcharacter.SelectedAddModel
-import com.anime.oc.characters.avatar.data.model.addcharacter.SpeechCategoryModel
-import com.anime.oc.characters.avatar.data.model.addcharacter.StickerCategoryModel
 import com.anime.oc.characters.avatar.utils.DataLocal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -30,8 +28,6 @@ class AddCharacterViewModel @Inject constructor(
 
     // ========== Adapter Lists ==========
     var backgroundImageList: ArrayList<SelectedAddModel> = arrayListOf()
-    var stickerCategoryList: ArrayList<StickerCategoryModel> = arrayListOf()
-    var speechCategoryList: ArrayList<SpeechCategoryModel> = arrayListOf()
     var backgroundColorList: ArrayList<SelectedAddModel> = arrayListOf()
     var stickerList: ArrayList<SelectedAddModel> = arrayListOf()
     var speechList: ArrayList<SelectedAddModel> = arrayListOf()
@@ -114,15 +110,9 @@ class AddCharacterViewModel @Inject constructor(
 
         stickerList.clear()
         stickerList.addAll(stickers.map { SelectedAddModel(path = it) })
-        stickerCategoryList.indexOfFirst { it.isSelected }
-            .takeIf { it >= 0 }
-            ?.let(::selectStickerCategory)
 
         speechList.clear()
         speechList.addAll(speeches.map { SelectedAddModel(path = it) })
-        speechCategoryList.indexOfFirst { it.isSelected }
-            .takeIf { it >= 0 }
-            ?.let(::selectSpeechCategory)
 
         textFontList.clear()
         textFontList.addAll(DataLocal.getTextFontDefault())
@@ -134,52 +124,15 @@ class AddCharacterViewModel @Inject constructor(
 
     }
 
-    fun setStickerCategories(categories: List<StickerCategoryModel>) {
-        val selectedCategory = stickerCategoryList
-            .firstOrNull { it.isSelected }
-            ?.category
-
-        // Keep category state local to this screen. Reusing the model instances
-        // from AppSession made a previous selection leak into a new
-        // AddCharacter screen, so the first category was no longer focused.
-        stickerCategoryList = categories.mapIndexed { index, category ->
-            category.copy(
-                isSelected = selectedCategory
-                    ?.let { it == category.category }
-                    ?: (index == 0)
-            )
-        }.toCollection(ArrayList())
-
-        val selectedPosition = stickerCategoryList.indexOfFirst { it.isSelected }
-        if (selectedPosition >= 0) {
-            selectStickerCategory(selectedPosition)
-        } else {
-            stickerList.clear()
-        }
-    }
-
-    fun selectStickerCategory(position: Int) {
-        stickerCategoryList.forEachIndexed { index, item ->
-            item.isSelected = index == position
-        }
-        stickerList = stickerCategoryList.getOrNull(position)
-            ?.imageUrls()
-            .orEmpty()
-            .map { SelectedAddModel(path = it) }
-            .toCollection(ArrayList())
-    }
-
-    fun setSpeechCategories(categories: List<SpeechCategoryModel>) {
-        val selected = speechCategoryList.firstOrNull { it.isSelected }?.category
-        speechCategoryList = categories.mapIndexed { index, category ->
-            category.copy(isSelected = selected?.let { it == category.category } ?: (index == 0))
-        }.toCollection(ArrayList())
-    }
-
-    fun selectSpeechCategory(position: Int) {
-        speechCategoryList.forEachIndexed { index, item -> item.isSelected = index == position }
-        speechList = speechCategoryList.getOrNull(position)?.imageUrls().orEmpty()
-            .map { SelectedAddModel(path = it) }.toCollection(ArrayList())
+    fun loadDataFromQuantity(
+        bgQuantity: Int,
+        stickerQuantity: Int,
+        bgBaseUrl: String,
+        speeches: List<String>
+    ) {
+        val backgrounds = (1..bgQuantity).map { "$bgBaseUrl/Background/$it.png" }
+        val stickers = (1..stickerQuantity).map { "$bgBaseUrl/Sticker/$it.png" }
+        loadDataFromMainViewModel(backgrounds, stickers, speeches)
     }
 
     // ========== Selection helpers ==========
@@ -206,8 +159,8 @@ class AddCharacterViewModel @Inject constructor(
     }
 
     private companion object {
-        const val ADD_BACKGROUND_POSITION = 0
-        const val NONE_BACKGROUND_POSITION = 1
+        const val ADD_BACKGROUND_POSITION = 1
+        const val NONE_BACKGROUND_POSITION = 0
     }
 
     fun updateTextFontSelected(position: Int) {
@@ -278,8 +231,6 @@ class AddCharacterViewModel @Inject constructor(
 
     fun clearAllData() {
         backgroundImageList.clear()
-        stickerCategoryList.clear()
-        speechCategoryList.clear()
         backgroundColorList.clear()
         stickerList.clear()
         speechList.clear()

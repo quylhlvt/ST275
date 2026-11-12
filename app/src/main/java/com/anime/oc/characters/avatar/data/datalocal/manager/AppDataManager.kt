@@ -526,7 +526,10 @@ class AppDataManager @Inject constructor(
     }
 
     private suspend fun loadSpeechs() {
-        _speechs.value = emptyList()
+        _speechs.value = (context.assets.list("speech") ?: emptyArray())
+            .filter { it.endsWith(".png", ignoreCase = true) }
+            .sortedBy { it.substringBeforeLast('.').toIntOrNull() ?: Int.MAX_VALUE }
+            .map { "$ASSET_PREFIX/speech/$it" }
     }
 
     // ── MY DESIGNS ────────────────────────────────────────────────────────────

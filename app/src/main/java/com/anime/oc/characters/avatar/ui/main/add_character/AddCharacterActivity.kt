@@ -39,7 +39,8 @@ import com.anime.oc.characters.avatar.core.dialog.DialogSpeech
 import com.anime.oc.characters.avatar.core.navigation.Screen
 import com.anime.oc.characters.avatar.core.helper.BitmapHelper
 import com.anime.oc.characters.avatar.ui.main.add_character.adapter.BackgroundColorAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import com.anime.oc.characters.avatar.MyApplication
 import com.anime.oc.characters.avatar.core.custom.DrawView
 import com.anime.oc.characters.avatar.data.datalocal.manager.CharacterImageManager
 import com.anime.oc.characters.avatar.ui.main.add_character.adapter.BackgroundImageAdapter
@@ -165,30 +166,13 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
                     }
                 }
                 launch {
-                    appSession.stickerCategories.collectLatest { categories ->
-                        if (categories.isNotEmpty()) {
-                            viewModel.setStickerCategories(categories)
-                            stickerAdapter.submitList(viewModel.stickerList)
-                        }
-                    }
-                }
-                launch {
-                    appSession.speechCategories.collectLatest { categories ->
-                        if (categories.isNotEmpty()) {
-                            viewModel.setSpeechCategories(categories)
-                            val selected = viewModel.speechCategoryList.indexOfFirst { it.isSelected }
-                            if (selected >= 0) viewModel.selectSpeechCategory(selected)
-                            speechAdapter.submitList(viewModel.speechList)
-                        }
-                    }
-                }
-                launch {
-                    appSession.backgrounds.collectLatest { bgs ->
-                        if (bgs.isNotEmpty()) {
-                            viewModel.loadDataFromMainViewModel(
-                                bgs,
-                                appSession.stickers.value,
-                                appSession.speechs.value
+                    appSession.bgStickerReady.collectLatest { ready ->
+                        if (ready) {
+                            viewModel.loadDataFromQuantity(
+                                bgQuantity = appSession.bgQuantity,
+                                stickerQuantity = appSession.stickerQuantity,
+                                bgBaseUrl = appSession.bgBaseUrl,
+                                speeches = appSession.speechs.value
                             )
                             backgroundImageAdapter.submitList(viewModel.backgroundImageList)
                             stickerAdapter.submitList(viewModel.stickerList, true)
@@ -445,20 +429,26 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
     }
 
     private fun initRcv() {
+        val editorGridSpanCount =
+            if (MyApplication.isTablet) TABLET_GRID_SPAN_COUNT else PHONE_GRID_SPAN_COUNT
         binding.apply {
             lnlBackground.rcvBackgroundImage.apply {
+                (layoutManager as? GridLayoutManager)?.spanCount = editorGridSpanCount
                 adapter = backgroundImageAdapter; itemAnimator = null
                 setHasFixedSize(true); setItemViewCacheSize(10)
             }
             lnlBackground.rcvBackgroundColor.apply {
+                (layoutManager as? GridLayoutManager)?.spanCount = editorGridSpanCount
                 adapter = backgroundColorAdapter; itemAnimator = null
             }
             rcvSticker.apply {
+                (layoutManager as? GridLayoutManager)?.spanCount = editorGridSpanCount
                 adapter = stickerAdapter; itemAnimator = null
                 setHasFixedSize(true); setItemViewCacheSize(10)
             }
 
             rcvSpeech.apply {
+                (layoutManager as? GridLayoutManager)?.spanCount = editorGridSpanCount
                 adapter = speechAdapter; itemAnimator = null
                 setHasFixedSize(true); setItemViewCacheSize(10)
             }
@@ -474,10 +464,11 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
             // Character/background canvas can be shown immediately. Remote
             // catalogues update their adapters later through observeData();
             // blocking here made Customize -> Background wait up to 15 seconds.
-            viewModel.loadDataFromMainViewModel(
-                appSession.backgrounds.value,
-                appSession.stickers.value,
-                appSession.speechs.value
+            viewModel.loadDataFromQuantity(
+                bgQuantity = appSession.bgQuantity,
+                stickerQuantity = appSession.stickerQuantity,
+                bgBaseUrl = appSession.bgBaseUrl,
+                speeches = appSession.speechs.value
             )
             // Màn hình mới chưa có background: chọn None trong danh sách ảnh.
             // Tab màu không còn mục None nên không chọn item nào ở đó.
@@ -726,10 +717,11 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
             title = getString(R.string.reset),
             onYes = {
                 showLoadingSafe()
-                viewModel.loadDataFromMainViewModel(
-                    appSession.backgrounds.value,
-                    appSession.stickers.value,
-                    appSession.speechs.value
+                viewModel.loadDataFromQuantity(
+                    bgQuantity = appSession.bgQuantity,
+                    stickerQuantity = appSession.stickerQuantity,
+                    bgBaseUrl = appSession.bgBaseUrl,
+                    speeches = appSession.speechs.value
                 )
                 textFontAdapter.submitListReset(viewModel.textFontList)
                 textColorAdapter.submitListReset(viewModel.textColorList)
@@ -827,6 +819,8 @@ class AddCharacterActivity : BaseActivity<ActivityAddCharacterBinding, AddCharac
         const val ADD_BACKGROUND_POSITION = 0
         const val NONE_BACKGROUND_POSITION = 1
         const val CUSTOM_BACKGROUND_COLOR_POSITION = 0
+        const val PHONE_GRID_SPAN_COUNT = 5
+        const val TABLET_GRID_SPAN_COUNT = 7
     }
 
     private fun handleChooseColor(isTextColor: Boolean = false) {

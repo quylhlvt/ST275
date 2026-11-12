@@ -15,8 +15,10 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.oc.characters.avatar.AppSession
+import com.anime.oc.characters.avatar.MyApplication
 import com.anime.oc.characters.avatar.core.base.BackPressHandler
 import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.core.navigation.Screen
@@ -107,8 +109,6 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         super.onRestart()
     }
     override fun initView() {
-        applyTabletLayout()
-
         binding.apply {
             txtReset.isSelected = true
             txtExit.isSelected = true
@@ -125,11 +125,6 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         setupAdapters()
 
         readArgsAndInit()
-    }
-
-    private fun applyTabletLayout() {
-        val isTablet = resources.configuration.smallestScreenWidthDp >= 600
-//        binding.view17.visibility = if (isTablet) View.GONE else View.VISIBLE
     }
 
     // CustomizeActivity.kt - readArgsAndInit() — FIX chính ở đây
@@ -207,6 +202,8 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
             setItemViewCacheSize(8)
         }
         binding.rcvPart.apply {
+            (layoutManager as? GridLayoutManager)?.spanCount =
+                if (MyApplication.isTablet) TABLET_GRID_SPAN_COUNT else PHONE_GRID_SPAN_COUNT
             adapter = adapterPart
             itemAnimator = null
             setHasFixedSize(true)
@@ -324,7 +321,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
                         message = getString(R.string.watch_a_short_ad_to_generate_a_random_anime),
                         title = getString(R.string.random),
                         yesText = getString(R.string.cancel),
-                        noText = getString(R.string.ok),
+                        noText = getString(R.string.watch_ad),
                         onNo = {
 //                            showRewardAds1(
 //                                onRewardSuccess = {
@@ -880,6 +877,8 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
         private const val MAX_TRANSLATION_X_FRACTION = 0.65f
         private const val SCALE_EPSILON = 0.0001f
         private const val TRANSFORM_EPSILON = 0.01f
+        private const val PHONE_GRID_SPAN_COUNT = 5
+        private const val TABLET_GRID_SPAN_COUNT = 7
         const val ARG_TEMPLATE_INDEX = "template_index"
         const val ARG_TEMPLATE_ID = "template_id"
         const val ARG_IS_EDIT = "is_edit"

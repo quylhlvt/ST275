@@ -4,9 +4,9 @@
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Siguiente</string>
     <string name="language">Idioma</string>
-    <string name="title_1">\u00A0Convierte tus ideas en magia anime\u00A0</string>
-    <string name="title_2">\u00A0¿Un OC increíble? Cargando...\u00A0</string>
-    <string name="title_3">\u00A0¿Todo listo para crear algo adorable?\u00A0</string>
+    <string name="title_1">\u00A0Crea tu propio avatar de gato\u00A0</string>
+    <string name="title_2">\u00A0Personaliza hasta el más mínimo detalle\u00A0</string>
+    <string name="title_3">\u00A0Haz que tu gato sea único\u00A0</string>
     <string name="not_select_lang">Por favor selecciona un idioma</string>
     <string name="pony_maker">Creador de anime</string>
 
@@ -79,22 +79,27 @@
     <string name="no_internet">Sin internet</string>
     <string name="internet">Internet</string>
     <string name="please_connect_to_the_internet_to_download_more_data">Conéctate a internet para descargar más datos</string>
-    <string name="unstable_connection_please_check_your_network_connection">Conexión inestable, comprueba tu conexión de red</string>
+    <string name="unstable_connection_please_check_your_network_connection">Comprueba tu conexión e inténtalo de nuevo.</string>
     <string name="ok">Aceptar</string>
     <string name="please_wait_a_few_seconds_for_data_to_load">Espera unos segundos para que se carguen los datos.</string>
     <string name="create_package_name">Crear nombre del paquete</string>
     <string name="enter_your_package_name">Ingresa el nombre del paquete</string>
     <string name="please_enter_your_package_name">¡Por favor ingresa el nombre del paquete!</string>
     <string name="instruction">Instrucciones</string>
-    <string name="tvCosplay1">En el modo Cosplay,</string>
+    <string name="tvCosplay1">Los jugadores reciben una imagen de referencia aleatoria y deben recrear el personaje eligiendo peinados, atuendos, colores y accesorios que coincidan. Cada elección correcta aumenta el porcentaje de puntuación; cuanto más se parezca el personaje a la imagen, mayor será la puntuación final.</string>
 
     <string name="save">Guardar</string>
     <string name="error">Error</string>
+    <string name="save_failed">No se pudo guardar tu creación. Inténtalo de nuevo.</string>
     <string name="errorcontent">Este elemento ya no está disponible.</string>
     <string name="image_not_found">Imagen no encontrada</string><string name="facebook_not_available">Facebook no está instalado o no puede recibir esta imagen</string><string name="instagram_not_available">Instagram no está instalado o no puede recibir esta imagen</string><string name="share_failed">No se pudo compartir la imagen. Inténtalo de nuevo.</string>
     <string name="edit">Editar</string>
     <string name="cat_random">Anime aleatorio</string>
     <string name="done">Listo</string>
     <string name="please_wait">Espera...</string>
-    <string name="watch_a_short_ad_to_generate_a_random_anime">Mira un anuncio corto para generar un personaje de anime aleatorio</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">¿Quieres ver un anuncio corto para generar un personaje aleatorio?</string>
+    <string name="play">Jugar</string>
+    <string name="click_the_random_button_below_to_see_what_your_character_is">¡Pulsa el botón Aleatorio de abajo para ver qué personaje te toca!</string>
+    <string name="watch_ad">Ver anuncio</string>
+    <string name="this_action_may_contain_advertising">Esta acción puede contener anuncios</string>
 </resources>

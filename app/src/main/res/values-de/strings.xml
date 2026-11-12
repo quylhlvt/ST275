@@ -4,9 +4,9 @@
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Weiter</string>
     <string name="language">Sprache</string>
-    <string name="title_1">\u00A0Verwandle deine Ideen in Anime-Magie\u00A0</string>
-    <string name="title_2">\u00A0Fantastischer OC? Wird geladen...\u00A0</string>
-    <string name="title_3">\u00A0Bereit, etwas Niedliches zu erschaffen?\u00A0</string>
+    <string name="title_1">\u00A0Erstelle deinen eigenen Katzenavatar\u00A0</string>
+    <string name="title_2">\u00A0Passe jedes kleine Detail an\u00A0</string>
+    <string name="title_3">\u00A0Mach deine Katze einzigartig\u00A0</string>
     <string name="not_select_lang">Bitte wählen Sie eine Sprache</string>
     <string name="pony_maker">Anime-Ersteller</string>
 
@@ -79,16 +79,17 @@
     <string name="no_internet">Kein Internet</string>
     <string name="internet">Internet</string>
     <string name="please_connect_to_the_internet_to_download_more_data">Bitte mit dem Internet verbinden, um mehr Daten herunterzuladen</string>
-    <string name="unstable_connection_please_check_your_network_connection">Instabile Verbindung, bitte überprüfe deine Netzwerkverbindung</string>
+    <string name="unstable_connection_please_check_your_network_connection">Bitte überprüfe deine Verbindung und versuche es erneut.</string>
     <string name="ok">OK</string>
     <string name="please_wait_a_few_seconds_for_data_to_load">Bitte warte einen Moment, bis die Daten geladen sind.</string>
     <string name="create_package_name">Paketnamen erstellen</string>
     <string name="enter_your_package_name">Paketnamen eingeben</string>
     <string name="please_enter_your_package_name">Bitte gib deinen Paketnamen ein!</string>
     <string name="instruction">Anleitung</string>
-    <string name="tvCosplay1">Im Cosplay-Modus</string>
+    <string name="tvCosplay1">Die Spieler erhalten ein zufälliges Referenzbild und müssen die Figur nachbilden, indem sie passende Frisuren, Outfits, Farben und Accessoires auswählen. Jede richtige Auswahl erhöht die prozentuale Punktzahl. Je ähnlicher die Figur dem Bild ist, desto höher ist die Endpunktzahl.</string>
     <string name="save">Speichern</string>
     <string name="error">Fehler</string>
+    <string name="save_failed">Deine Kreation konnte nicht gespeichert werden. Bitte versuche es erneut.</string>
     <string name="errorcontent">Dieses Element ist nicht mehr verfügbar.</string>
     <string name="image_not_found">Bild nicht gefunden</string>
     <string name="facebook_not_available">Facebook ist nicht installiert oder kann dieses Bild nicht empfangen</string>
@@ -98,5 +99,9 @@
     <string name="cat_random">Anime zufällig</string>
     <string name="done">Fertig</string>
     <string name="please_wait">Bitte warten...</string>
-    <string name="watch_a_short_ad_to_generate_a_random_anime">Sieh dir eine kurze Werbung an, um einen zufälligen Anime-Charakter zu erstellen</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Möchtest du eine kurze Werbung ansehen, um eine zufällige Figur zu erstellen?</string>
+    <string name="play">Spielen</string>
+    <string name="click_the_random_button_below_to_see_what_your_character_is">Tippe unten auf die Zufallstaste, um zu sehen, welche Figur du erhältst!</string>
+    <string name="watch_ad">Werbung ansehen</string>
+    <string name="this_action_may_contain_advertising">Diese Aktion kann Werbung enthalten</string>
 </resources>

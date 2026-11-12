@@ -100,7 +100,6 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
 
     private fun ActivityRandomBinding.setupActionBar() {
         actionBar.apply {
-            tvCenter.select()
             setImageActionBar(btnActionBarLeft, R.drawable.back_app)
 
             setMaterialCardViewActionBar1(
@@ -108,6 +107,7 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
                 tvRightText,
                 getString(R.string.edit)
             )
+            btnActionBarRightText.gone()
         }
     }
 
@@ -246,6 +246,7 @@ class RandomActivity : BaseActivity<ActivityRandomBinding, RandomViewModel>(
 
     private fun showLoading() {
         binding.demoRandom.gone()
+        binding.actionBar.btnActionBarRightText.visible()
         binding.imvImage.apply {
             setImageDrawable(null)
             gone()

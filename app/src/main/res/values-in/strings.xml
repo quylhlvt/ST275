@@ -4,9 +4,9 @@
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Lanjut</string>
     <string name="language">Bahasa</string>
-    <string name="title_1">\u00A0Ubah idemu menjadi keajaiban anime\u00A0</string>
-    <string name="title_2">\u00A0OC keren? Sedang dimuat...\u00A0</string>
-    <string name="title_3">\u00A0Siap membuat sesuatu yang menggemaskan?\u00A0</string>
+    <string name="title_1">\u00A0Buat avatar kucingmu sendiri\u00A0</string>
+    <string name="title_2">\u00A0Sesuaikan setiap detail kecil\u00A0</string>
+    <string name="title_3">\u00A0Jadikan kucingmu unik\u00A0</string>
     <string name="not_select_lang">Silakan pilih bahasa</string>
     <string name="pony_maker">Pembuat Anime</string>
 
@@ -79,21 +79,26 @@
     <string name="no_internet">Tidak ada internet</string>
     <string name="internet">Internet</string>
     <string name="please_connect_to_the_internet_to_download_more_data">Sambungkan ke internet untuk mengunduh lebih banyak data</string>
-    <string name="unstable_connection_please_check_your_network_connection">Koneksi tidak stabil, periksa koneksi jaringan kamu</string>
+    <string name="unstable_connection_please_check_your_network_connection">Periksa koneksi Anda dan coba lagi.</string>
     <string name="ok">Oke</string>
     <string name="please_wait_a_few_seconds_for_data_to_load">Harap tunggu beberapa detik untuk memuat data.</string>
     <string name="create_package_name">Buat nama paket</string>
     <string name="enter_your_package_name">Masukkan nama paket</string>
     <string name="please_enter_your_package_name">Masukkan nama paket!</string>
     <string name="instruction">Instruksi</string>
-    <string name="tvCosplay1">Dalam Mode Cosplay,</string>
+    <string name="tvCosplay1">Pemain menerima gambar referensi acak dan harus membuat ulang karakter dengan memilih gaya rambut, pakaian, warna, dan aksesori yang sesuai. Setiap pilihan yang benar meningkatkan persentase skor. Semakin mirip karakter dengan gambar, semakin tinggi skor akhirnya.</string>
     <string name="save">Simpan</string>
     <string name="error">Kesalahan</string>
+    <string name="save_failed">Kreasi Anda tidak dapat disimpan. Silakan coba lagi.</string>
     <string name="errorcontent">Item ini sudah tidak tersedia.</string>
     <string name="image_not_found">Gambar tidak ditemukan</string><string name="facebook_not_available">Facebook tidak terpasang atau tidak dapat menerima gambar ini</string><string name="instagram_not_available">Instagram tidak terpasang atau tidak dapat menerima gambar ini</string><string name="share_failed">Tidak dapat membagikan gambar. Silakan coba lagi.</string>
     <string name="edit">Edit</string>
     <string name="cat_random">Anime Acak</string>
     <string name="done">Selesai</string>
     <string name="please_wait">Harap tunggu...</string>
-    <string name="watch_a_short_ad_to_generate_a_random_anime">Tonton iklan singkat untuk membuat karakter anime acak</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Ingin menonton iklan singkat untuk membuat karakter acak?</string>
+    <string name="play">Main</string>
+    <string name="click_the_random_button_below_to_see_what_your_character_is">Ketuk tombol Acak di bawah untuk melihat karakter yang Anda dapatkan!</string>
+    <string name="watch_ad">Tonton Iklan</string>
+    <string name="this_action_may_contain_advertising">Tindakan ini dapat berisi iklan</string>
 </resources>

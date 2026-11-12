@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
+import com.anime.oc.characters.avatar.MyApplication
 import com.anime.oc.characters.avatar.core.base.BaseActivity
 import com.anime.oc.characters.avatar.core.navigation.Screen
 import com.anime.oc.characters.avatar.data.model.custom.BodyPartModel
@@ -219,7 +221,11 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
     private fun setupAdapters() {
         binding.rcvNav.adapter = adapterNav
         binding.rcvColor.adapter = adapterColor
-        binding.rcvPart.adapter = adapterPart
+        binding.rcvPart.apply {
+            (layoutManager as? GridLayoutManager)?.spanCount =
+                if (MyApplication.isTablet) TABLET_GRID_SPAN_COUNT else PHONE_GRID_SPAN_COUNT
+            adapter = adapterPart
+        }
     }
     private fun navigateToSuccess() {
         if (!isScreenAvailable || isDestroyed) return
@@ -580,6 +586,8 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
     // ── COMPANION ─────────────────────────────────────────────────────────────
 
     companion object {
+        private const val PHONE_GRID_SPAN_COUNT = 5
+        private const val TABLET_GRID_SPAN_COUNT = 7
         const val ARG_TEMPLATE_INDEX = "template_index"
         const val ARG_SELECTIONS = "selections"
 

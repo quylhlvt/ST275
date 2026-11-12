@@ -81,8 +81,8 @@ class BackgroundImageAdapter : BaseAdapter<SelectedAddModel, ItemBackgroundImage
     }
 
     private companion object {
-        const val ADD_BACKGROUND_POSITION = 0
-        const val NONE_BACKGROUND_POSITION = 1
+        const val ADD_BACKGROUND_POSITION = 1
+        const val NONE_BACKGROUND_POSITION = 0
         const val ADD_ITEM_TAG = "background_add_item"
         const val NONE_ITEM_TAG = "background_none_item"
     }

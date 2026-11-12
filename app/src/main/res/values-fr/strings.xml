@@ -4,9 +4,9 @@
     <string name="app_name">Avatar cat maker</string>
     <string name="next">Suivant</string>
     <string name="language">Langue</string>
-    <string name="title_1">\u00A0Transforme tes idées en magie d’anime\u00A0</string>
-    <string name="title_2">\u00A0Un OC incroyable ? Chargement...\u00A0</string>
-    <string name="title_3">\u00A0Envie de créer quelque chose d’adorable ?\u00A0</string>
+    <string name="title_1">\u00A0Créez votre propre avatar de chat\u00A0</string>
+    <string name="title_2">\u00A0Personnalisez chaque petit détail\u00A0</string>
+    <string name="title_3">\u00A0Rendez votre chat unique\u00A0</string>
     <string name="not_select_lang">Veuillez sélectionner une langue</string>
     <string name="pony_maker">Créateur d’anime</string>
 
@@ -79,21 +79,26 @@
     <string name="no_internet">Pas d\'internet</string>
     <string name="internet">Internet</string>
     <string name="please_connect_to_the_internet_to_download_more_data">Veuillez vous connecter à internet pour télécharger plus de données</string>
-    <string name="unstable_connection_please_check_your_network_connection">Connexion instable, veuillez vérifier votre connexion réseau</string>
+    <string name="unstable_connection_please_check_your_network_connection">Vérifiez votre connexion et réessayez.</string>
     <string name="ok">OK</string>
     <string name="please_wait_a_few_seconds_for_data_to_load">Veuillez patienter quelques secondes pour le chargement des données.</string>
     <string name="create_package_name">Créer un nom de package</string>
     <string name="enter_your_package_name">Saisir le nom du package</string>
     <string name="please_enter_your_package_name">Veuillez saisir votre nom de package !</string>
     <string name="instruction">Instructions</string>
-    <string name="tvCosplay1">En mode Cosplay,</string>
+    <string name="tvCosplay1">Les joueurs reçoivent une image de référence aléatoire et doivent recréer le personnage en choisissant les coiffures, les tenues, les couleurs et les accessoires correspondants. Chaque choix correct augmente le pourcentage du score. Plus le personnage ressemble à l’image, plus le score final est élevé.</string>
     <string name="save">Enregistrer</string>
     <string name="error">Erreur</string>
+    <string name="save_failed">Impossible d’enregistrer votre création. Veuillez réessayer.</string>
     <string name="errorcontent">Cet élément n’est plus disponible.</string>
     <string name="image_not_found">Image introuvable</string><string name="facebook_not_available">Facebook n’est pas installé ou ne peut pas recevoir cette image</string><string name="instagram_not_available">Instagram n’est pas installé ou ne peut pas recevoir cette image</string><string name="share_failed">Impossible de partager l’image. Veuillez réessayer.</string>
     <string name="edit">Modifier</string>
     <string name="cat_random">Anime aléatoire</string>
     <string name="done">Terminé</string>
     <string name="please_wait">Veuillez patienter...</string>
-    <string name="watch_a_short_ad_to_generate_a_random_anime">Regardez une courte publicité pour générer un personnage d’anime aléatoire</string>
+    <string name="watch_a_short_ad_to_generate_a_random_anime">Voulez-vous regarder une courte publicité pour générer un personnage aléatoire ?</string>
+    <string name="play">Jouer</string>
+    <string name="click_the_random_button_below_to_see_what_your_character_is">Appuyez sur le bouton Aléatoire ci-dessous pour découvrir votre personnage !</string>
+    <string name="watch_ad">Regarder la publicité</string>
+    <string name="this_action_may_contain_advertising">Cette action peut contenir des publicités</string>
 </resources>

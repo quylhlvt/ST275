@@ -42,7 +42,7 @@ open class DrawView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     FrameLayout(context, attrs, defStyleAttr) {
     companion object {
         private const val MIN_SCALE_PERCENT = 0.6f
-        private const val CHARACTER_CANVAS_FRACTION = 0.95f
+        private const val CHARACTER_CANVAS_FRACTION = 0.9f
     }
     private val initialScaleMap = HashMap<DrawableDraw, Float>()
     private var lastCheckedScale = -1f
