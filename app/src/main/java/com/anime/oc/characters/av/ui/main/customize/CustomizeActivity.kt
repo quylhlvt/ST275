@@ -8,7 +8,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.transition.ChangeBounds
+import android.transition.Fade
+import android.transition.TransitionManager
+import android.transition.TransitionSet
 import android.view.ViewGroup
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
@@ -611,22 +616,26 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
 
     private fun updateColorSectionVisibility(showColors: Boolean, expanded: Boolean) {
         val showPanel = showColors && expanded
+        val panel = binding.frameRandoAll
+        val targetVisibility = if (showPanel) View.VISIBLE else View.GONE
+        if (panel.visibility == targetVisibility) return
 
-        if (showPanel &&
-            (binding.frameRandoAll.visibility != View.VISIBLE || binding.frameRandoAll.alpha != 1f)
-        ) {
-            binding.frameRandoAll.animate().cancel()
-            if (binding.frameRandoAll.visibility != View.VISIBLE) {
-                binding.frameRandoAll.visibility = View.VISIBLE
-                binding.frameRandoAll.alpha = 0f
-            }
-            binding.frameRandoAll.animate().alpha(1f).setDuration(150).start()
-        } else if (!showPanel && binding.frameRandoAll.visibility == View.VISIBLE) {
-            binding.frameRandoAll.animate().cancel()
-            binding.frameRandoAll.animate().alpha(0f).setDuration(150).withEndAction {
-                binding.frameRandoAll.visibility = View.GONE
-            }.start()
+        // Animate the panel fade and the part list (constrained below it) sliding
+        // together, instead of fading first and then snapping the list by 48dp.
+        val sceneRoot = panel.parent as? ViewGroup
+        if (sceneRoot != null && sceneRoot.isLaidOut) {
+            TransitionManager.endTransitions(sceneRoot)
+            val transition = TransitionSet()
+                .setOrdering(TransitionSet.ORDERING_TOGETHER)
+                .addTransition(Fade().addTarget(panel))
+                .addTransition(ChangeBounds().addTarget(panel).addTarget(binding.frameLayer))
+                .setDuration(COLOR_PANEL_ANIM_DURATION)
+                .setInterpolator(FastOutSlowInInterpolator())
+            TransitionManager.beginDelayedTransition(sceneRoot, transition)
         }
+        panel.animate().cancel()
+        panel.alpha = 1f
+        panel.visibility = targetVisibility
     }
 
     private fun buildThumbList(bp: BodyPartModel?, paths: List<String>): List<String> {
@@ -866,6 +875,7 @@ class CustomizeActivity : BaseActivity<ActivityCustomizeBinding, CustomizeViewMo
     }
 
     companion object {
+        private const val COLOR_PANEL_ANIM_DURATION = 220L
         private const val MIN_LAYER_SCALE = 0.3f
         private const val MAX_LAYER_SCALE = 2f
         private const val MAX_TRANSLATION_X_FRACTION = 0.65f

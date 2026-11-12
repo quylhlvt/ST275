@@ -6,10 +6,15 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.transition.ChangeBounds
+import android.transition.Fade
+import android.transition.TransitionManager
+import android.transition.TransitionSet
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -220,7 +225,10 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
 
     private fun setupAdapters() {
         binding.rcvNav.adapter = adapterNav
-        binding.rcvColor.adapter = adapterColor
+        binding.rcvColor.apply {
+            adapter = adapterColor
+            itemAnimator = null
+        }
         binding.rcvPart.apply {
             (layoutManager as? GridLayoutManager)?.spanCount =
                 if (MyApplication.isTablet) TABLET_GRID_SPAN_COUNT else PHONE_GRID_SPAN_COUNT
@@ -449,20 +457,12 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
         val navPos = state.currentNavIndex
 
         if (state.hasMultipleColors) {
-            adapterColor.submitList(state.currentColors)
-            if (navPos < arrShowColor.size && arrShowColor[navPos]) {
-                binding.llColor.animate().alpha(1f).setDuration(150).withStartAction {
-                    binding.llColor.visibility = View.VISIBLE
-                }.start()
-            } else {
-                binding.llColor.animate().alpha(0f).setDuration(150).withEndAction {
-                    binding.llColor.visibility = View.GONE
-                }.start()
+            if (adapterColor.items != state.currentColors) {
+                adapterColor.submitList(state.currentColors)
             }
+            setColorPanelVisible(navPos < arrShowColor.size && arrShowColor[navPos])
         } else {
-            binding.llColor.animate().alpha(0f).setDuration(150).withEndAction {
-                binding.llColor.visibility = View.GONE
-            }.start()
+            setColorPanelVisible(false)
         }
 
         val bp = state.listData.getOrNull(state.currentNavIndex)
@@ -476,6 +476,32 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
                 binding.rcvPart.scrollToPosition(state.currentPathIndex.coerceAtLeast(0))
             }
         }
+    }
+
+    /**
+     * Hides frame_rando_all when the current layer has no color list and shows it
+     * when it does. The panel fades while frameLayer (constrained below it) slides,
+     * so the part list never snaps. Only runs when the visibility actually changes.
+     */
+    private fun setColorPanelVisible(show: Boolean) {
+        val panel = binding.frameRandoAll
+        val targetVisibility = if (show) View.VISIBLE else View.GONE
+        if (panel.visibility == targetVisibility) return
+
+        val sceneRoot = panel.parent as? ViewGroup
+        if (sceneRoot != null && sceneRoot.isLaidOut) {
+            TransitionManager.endTransitions(sceneRoot)
+            val transition = TransitionSet()
+                .setOrdering(TransitionSet.ORDERING_TOGETHER)
+                .addTransition(Fade().addTarget(panel))
+                .addTransition(ChangeBounds().addTarget(panel).addTarget(binding.frameLayer))
+                .setDuration(COLOR_PANEL_ANIM_DURATION)
+                .setInterpolator(FastOutSlowInInterpolator())
+            TransitionManager.beginDelayedTransition(sceneRoot, transition)
+        }
+        panel.animate().cancel()
+        panel.alpha = 1f
+        panel.visibility = targetVisibility
     }
 
     private fun buildThumbList(bp: BodyPartModel?, paths: List<String>): List<String> {
@@ -586,6 +612,7 @@ class ShowActivity : BaseActivity<ActivityShowBinding, ShowViewModel>(
     // ── COMPANION ─────────────────────────────────────────────────────────────
 
     companion object {
+        private const val COLOR_PANEL_ANIM_DURATION = 220L
         private const val PHONE_GRID_SPAN_COUNT = 5
         private const val TABLET_GRID_SPAN_COUNT = 7
         const val ARG_TEMPLATE_INDEX = "template_index"
