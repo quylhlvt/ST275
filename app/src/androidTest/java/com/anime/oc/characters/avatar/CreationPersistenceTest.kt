@@ -1,11 +1,11 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.content.Context
 import android.content.ContextWrapper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.anime.oc.characters.avatar.data.datalocal.manager.AppDataManager
-import com.anime.oc.characters.avatar.data.model.custom.CustomModel
+import com.anime.oc.characters.av.data.datalocal.manager.AppDataManager
+import com.anime.oc.characters.av.data.model.custom.CustomModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

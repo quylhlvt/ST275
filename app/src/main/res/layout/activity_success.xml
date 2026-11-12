@@ -7,7 +7,7 @@
                                                    android:background="@drawable/img_bg_lang"
                                                    android:clipChildren="false"
                                                    android:clipToPadding="false"
-                                                   tools:context="com.anime.oc.characters.avatar.ui.main.success.SuccessActivity">
+                                                   tools:context="com.anime.oc.characters.av.ui.main.success.SuccessActivity">
 
 
     <FrameLayout

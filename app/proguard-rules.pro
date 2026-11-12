@@ -20,9 +20,9 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.anime.oc.characters.avatar.data.model.api.** { *; }
+-keep class com.anime.oc.characters.av.data.model.api.** { *; }
 # Local JSON must retain field names and constructors across release builds.
--keep class com.anime.oc.characters.avatar.data.model.custom.** { *; }
+-keep class com.anime.oc.characters.av.data.model.custom.** { *; }
 -keep class *.R
 
 -keepclasseswithmembers class **.R$* {
@@ -89,7 +89,7 @@
 -keep class * extends androidx.fragment.app.Fragment { *; }
 -keep class **.*Fragment { *; }
 -keep class androidx.navigation.** { *; }
--keep class com.anime.oc.characters.avatar.ui.** { *; }
+-keep class com.anime.oc.characters.av.ui.** { *; }
 -keep class dagger.hilt.** { *; }
 -keep class * implements dagger.hilt.internal.GeneratedComponent { *; }
 -dontwarn dagger.hilt.**

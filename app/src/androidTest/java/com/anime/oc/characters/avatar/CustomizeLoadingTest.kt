@@ -1,4 +1,4 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -9,12 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.anime.oc.characters.avatar.data.model.custom.BodyPartModel
-import com.anime.oc.characters.avatar.data.model.custom.ColorModel
-import com.anime.oc.characters.avatar.data.model.custom.CustomModel
-import com.anime.oc.characters.avatar.ui.main.customize.CustomizeActivity
-import com.anime.oc.characters.avatar.ui.main.customize.CustomizeViewModel
-import com.anime.oc.characters.avatar.ui.main.home.HomeActivity
+import com.anime.oc.characters.av.data.model.custom.BodyPartModel
+import com.anime.oc.characters.av.data.model.custom.ColorModel
+import com.anime.oc.characters.av.data.model.custom.CustomModel
+import com.anime.oc.characters.av.ui.main.customize.CustomizeActivity
+import com.anime.oc.characters.av.ui.main.customize.CustomizeViewModel
+import com.anime.oc.characters.av.ui.main.home.HomeActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource

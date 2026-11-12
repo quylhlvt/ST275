@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_color4"
-    tools:context="com.anime.oc.characters.avatar.ui.main.customize.CustomizeActivity">
+    tools:context="com.anime.oc.characters.av.ui.main.customize.CustomizeActivity">
 
     <FrameLayout
         android:id="@+id/layoutActionBar"
@@ -253,7 +253,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimension_0"
             app:layout_constraintBottom_toTopOf="@+id/constraintNav"
-            app:layout_constraintHeight_percent="0.265">
+            app:layout_constraintHeight_percent="0.27">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvPart"

@@ -1,4 +1,4 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.app.Activity
 import android.content.Context
@@ -12,10 +12,10 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.anime.oc.characters.avatar.ui.language.LanguageActivity
-import com.anime.oc.characters.avatar.ui.language.LanguageAdapter
-import com.anime.oc.characters.avatar.ui.main.home.HomeActivity
-import com.anime.oc.characters.avatar.ui.main.setting.SettingActivity
+import com.anime.oc.characters.av.ui.language.LanguageActivity
+import com.anime.oc.characters.av.ui.language.LanguageAdapter
+import com.anime.oc.characters.av.ui.main.home.HomeActivity
+import com.anime.oc.characters.av.ui.main.setting.SettingActivity
 import com.lvt.ads.util.Admob
 import org.junit.Assert.*
 import org.junit.Test

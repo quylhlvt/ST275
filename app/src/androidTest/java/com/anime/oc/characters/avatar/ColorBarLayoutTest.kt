@@ -1,4 +1,4 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,9 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.anime.oc.characters.avatar.data.model.custom.ColorModel
-import com.anime.oc.characters.avatar.databinding.ActivityCustomizeBinding
-import com.anime.oc.characters.avatar.ui.main.customize.ColorAdapter
+import com.anime.oc.characters.av.data.model.custom.ColorModel
+import com.anime.oc.characters.av.databinding.ActivityCustomizeBinding
+import com.anime.oc.characters.av.ui.main.customize.ColorAdapter
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

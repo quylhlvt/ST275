@@ -1,7 +1,7 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
-import com.anime.oc.characters.avatar.ui.onboarding.permission.PermissionState
-import com.anime.oc.characters.avatar.ui.onboarding.permission.PermissionViewModel
+import com.anime.oc.characters.av.ui.onboarding.permission.PermissionState
+import com.anime.oc.characters.av.ui.onboarding.permission.PermissionViewModel
 import org.junit.Assert.*
 import org.junit.Test
 

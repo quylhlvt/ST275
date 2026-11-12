@@ -1,17 +1,17 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.anime.oc.characters.avatar.core.extention.EXTRA_FROM_SETTINGS
-import com.anime.oc.characters.avatar.core.extention.openScreen
-import com.anime.oc.characters.avatar.core.extention.popBack
-import com.anime.oc.characters.avatar.core.navigation.Screen
-import com.anime.oc.characters.avatar.ui.language.LanguageActivity
-import com.anime.oc.characters.avatar.ui.main.home.HomeActivity
-import com.anime.oc.characters.avatar.ui.main.setting.SettingActivity
+import com.anime.oc.characters.av.core.extention.EXTRA_FROM_SETTINGS
+import com.anime.oc.characters.av.core.extention.openScreen
+import com.anime.oc.characters.av.core.extention.popBack
+import com.anime.oc.characters.av.core.navigation.Screen
+import com.anime.oc.characters.av.ui.language.LanguageActivity
+import com.anime.oc.characters.av.ui.main.home.HomeActivity
+import com.anime.oc.characters.av.ui.main.setting.SettingActivity
 import com.lvt.ads.util.Admob
 import org.junit.Assert.*
 import org.junit.Before

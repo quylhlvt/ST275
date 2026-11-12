@@ -1,14 +1,14 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
-import com.anime.oc.characters.avatar.core.extention.itemEventName
-import com.anime.oc.characters.avatar.core.extention.withCleanListPath
-import com.anime.oc.characters.avatar.data.datalocal.api.ApiTemplateMapper
-import com.anime.oc.characters.avatar.data.datalocal.api.X10
-import com.anime.oc.characters.avatar.data.model.custom.BodyPartModel
-import com.anime.oc.characters.avatar.data.model.custom.CustomModel
-import com.anime.oc.characters.avatar.data.model.custom.CustomizedCharacterDto
-import com.anime.oc.characters.avatar.data.model.custom.toDto
-import com.anime.oc.characters.avatar.data.model.custom.toModel
+import com.anime.oc.characters.av.core.extention.itemEventName
+import com.anime.oc.characters.av.core.extention.withCleanListPath
+import com.anime.oc.characters.av.data.datalocal.api.ApiTemplateMapper
+import com.anime.oc.characters.av.data.datalocal.api.X10
+import com.anime.oc.characters.av.data.model.custom.BodyPartModel
+import com.anime.oc.characters.av.data.model.custom.CustomModel
+import com.anime.oc.characters.av.data.model.custom.CustomizedCharacterDto
+import com.anime.oc.characters.av.data.model.custom.toDto
+import com.anime.oc.characters.av.data.model.custom.toModel
 import com.google.gson.Gson
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull

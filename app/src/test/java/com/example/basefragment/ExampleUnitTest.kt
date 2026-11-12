@@ -1,4 +1,4 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import org.junit.Test
 

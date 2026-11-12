@@ -1,4 +1,4 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -12,14 +12,14 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.anime.oc.characters.avatar.data.model.custom.BodyPartModel
-import com.anime.oc.characters.avatar.data.model.custom.ColorModel
-import com.anime.oc.characters.avatar.data.model.custom.CustomModel
-import com.anime.oc.characters.avatar.data.model.custom.SelectionIndex
-import com.anime.oc.characters.avatar.ui.main.customize.ColorAdapter
-import com.anime.oc.characters.avatar.ui.main.customize.CustomizeActivity
-import com.anime.oc.characters.avatar.ui.main.customize.CustomizeViewModel
-import com.anime.oc.characters.avatar.ui.main.home.HomeActivity
+import com.anime.oc.characters.av.data.model.custom.BodyPartModel
+import com.anime.oc.characters.av.data.model.custom.ColorModel
+import com.anime.oc.characters.av.data.model.custom.CustomModel
+import com.anime.oc.characters.av.data.model.custom.SelectionIndex
+import com.anime.oc.characters.av.ui.main.customize.ColorAdapter
+import com.anime.oc.characters.av.ui.main.customize.CustomizeActivity
+import com.anime.oc.characters.av.ui.main.customize.CustomizeViewModel
+import com.anime.oc.characters.av.ui.main.home.HomeActivity
 import com.lvt.ads.util.Admob
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking

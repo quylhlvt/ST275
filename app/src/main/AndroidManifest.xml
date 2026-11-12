@@ -18,7 +18,7 @@
     </queries>
 
     <application
-            android:name="com.anime.oc.characters.avatar.MyApplication"
+            android:name="com.anime.oc.characters.av.MyApplication"
             android:allowBackup="true"
             android:networkSecurityConfig="@xml/network_security_config"
             android:dataExtractionRules="@xml/data_extraction_rules"
@@ -46,7 +46,7 @@
                 android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"
                 android:value="true"/>
         <activity
-                android:name="com.anime.oc.characters.avatar.MainActivity"
+                android:name="com.anime.oc.characters.av.MainActivity"
                 android:screenOrientation="portrait"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize|stateHidden"
@@ -57,52 +57,52 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.anime.oc.characters.avatar.ui.language.LanguageActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.language.LanguageActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.add_character.AddCharacterActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.add_character.AddCharacterActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.cosplay.CosplayActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.cosplay.CosplayActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.createPony.ChoosePonyActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.createPony.ChoosePonyActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.customize.CustomizeActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.customize.CustomizeActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.home.HomeActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.home.HomeActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.myPony.MyPonyActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.myPony.MyPonyActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.random.RandomActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.random.RandomActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.setting.SettingActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.setting.SettingActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.show.ShowActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.show.ShowActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.success.SuccessActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.success.SuccessActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.successcosplay.SuccessCosplayActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.successcosplay.SuccessCosplayActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.main.view.ViewActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.main.view.ViewActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.onboarding.intro.IntroActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.onboarding.intro.IntroActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.onboarding.permission.PermissionActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.onboarding.permission.PermissionActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.anime.oc.characters.avatar.ui.onboarding.splash.SplashActivity"
+        <activity android:name="com.anime.oc.characters.av.ui.onboarding.splash.SplashActivity"
                   android:exported="false" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize|stateHidden"/>
         <provider
@@ -115,8 +115,8 @@
                     android:resource="@xml/provider"/>
         </provider>
         <provider
-                android:name="com.anime.oc.characters.avatar.utils.share.whatsapp.StickerContentProvider"
-                android:authorities="com.anime.oc.characters.avatar.utils.share.whatsapp.StickerContentProvider"
+                android:name="com.anime.oc.characters.av.utils.share.whatsapp.StickerContentProvider"
+                android:authorities="com.anime.oc.characters.av.utils.share.whatsapp.StickerContentProvider"
                 android:exported="true"
                 android:readPermission="com.whatsapp.sticker.READ"/>
     </application>

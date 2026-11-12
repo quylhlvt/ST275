@@ -1,11 +1,11 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.anime.oc.characters.avatar.core.custom.DrawableDraw
-import com.anime.oc.characters.avatar.core.custom.DrawView
+import com.anime.oc.characters.av.core.custom.DrawableDraw
+import com.anime.oc.characters.av.core.custom.DrawView
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

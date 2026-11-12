@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@color/app_color4"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context="com.anime.oc.characters.avatar.ui.main.random.RandomActivity">
+        tools:context="com.anime.oc.characters.av.ui.main.random.RandomActivity">
 
 
     <FrameLayout

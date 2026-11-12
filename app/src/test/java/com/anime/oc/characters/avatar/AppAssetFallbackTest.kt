@@ -1,8 +1,8 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
-import com.anime.oc.characters.avatar.data.datalocal.api.AppAssetUrls
-import com.anime.oc.characters.avatar.data.model.addcharacter.SpeechCategoryModel
-import com.anime.oc.characters.avatar.data.model.addcharacter.StickerCategoryModel
+import com.anime.oc.characters.av.data.datalocal.api.AppAssetUrls
+import com.anime.oc.characters.av.data.model.addcharacter.SpeechCategoryModel
+import com.anime.oc.characters.av.data.model.addcharacter.StickerCategoryModel
 import org.junit.Assert.*
 import org.junit.Test
 import java.io.IOException

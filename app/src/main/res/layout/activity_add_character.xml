@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app_color4"
-        tools:context="com.anime.oc.characters.avatar.ui.main.add_character.AddCharacterActivity">
+        tools:context="com.anime.oc.characters.av.ui.main.add_character.AddCharacterActivity">
 
     <!--    flGetText-->
     <FrameLayout
@@ -123,7 +123,7 @@
                                     android:scaleType="centerCrop"/>
 
                             <!--        drawView-->
-                            <com.anime.oc.characters.avatar.core.custom.DrawView
+                            <com.anime.oc.characters.av.core.custom.DrawView
                                     android:id="@+id/drawView"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"

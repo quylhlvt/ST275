@@ -1,4 +1,4 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
 import android.app.Activity
 import android.content.Intent
@@ -12,9 +12,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
-import com.anime.oc.characters.avatar.ui.main.home.HomeActivity
-import com.anime.oc.characters.avatar.ui.main.myPony.MyPonyActivity
-import com.anime.oc.characters.avatar.ui.main.success.SuccessActivity
+import com.anime.oc.characters.av.ui.main.home.HomeActivity
+import com.anime.oc.characters.av.ui.main.myPony.MyPonyActivity
+import com.anime.oc.characters.av.ui.main.success.SuccessActivity
 import com.lvt.ads.util.Admob
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

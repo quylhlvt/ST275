@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/img_bg_lang"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.anime.oc.characters.avatar.ui.main.createPony.ChoosePonyActivity">
+    tools:context="com.anime.oc.characters.av.ui.main.createPony.ChoosePonyActivity">
 
     <FrameLayout
         android:id="@+id/layoutActionBar"

@@ -9,13 +9,13 @@ plugins {
 }
 
 android {
-    namespace 'com.anime.oc.characters.avatar'
+    namespace 'com.anime.oc.characters.av'
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId "com.anime.oc.characters.avatar"
+        applicationId "com.anime.oc.characters.av"
         minSdk 24
         targetSdk 36
         versionCode 6

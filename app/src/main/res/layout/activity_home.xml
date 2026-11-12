@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img_bg_lang"
-    tools:context="com.anime.oc.characters.avatar.ui.main.home.HomeActivity">
+    tools:context="com.anime.oc.characters.av.ui.main.home.HomeActivity">
     <!--    layoutActionBar-->
     <FrameLayout
         android:id="@+id/layoutActionBar"

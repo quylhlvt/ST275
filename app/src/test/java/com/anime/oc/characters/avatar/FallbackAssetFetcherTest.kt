@@ -1,6 +1,6 @@
-package com.anime.oc.characters.avatar
+package com.anime.oc.characters.av
 
-import com.anime.oc.characters.avatar.utils.FallbackAssetFetcher
+import com.anime.oc.characters.av.utils.FallbackAssetFetcher
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.data.DataFetcher

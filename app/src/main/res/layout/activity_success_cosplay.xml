@@ -7,7 +7,7 @@
     android:background="@color/app_color4"
     android:clipChildren="false"
     android:clipToPadding="false"
-    tools:context="com.anime.oc.characters.avatar.ui.main.successcosplay.SuccessCosplayActivity">
+    tools:context="com.anime.oc.characters.av.ui.main.successcosplay.SuccessCosplayActivity">
 
 
     <FrameLayout

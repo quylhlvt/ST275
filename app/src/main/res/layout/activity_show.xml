@@ -8,7 +8,7 @@
         android:background="@color/app_color4"
         android:clipChildren="false"
         android:clipToPadding="false"
-        tools:context="com.anime.oc.characters.avatar.ui.main.show.ShowActivity">
+        tools:context="com.anime.oc.characters.av.ui.main.show.ShowActivity">
 
 
 
